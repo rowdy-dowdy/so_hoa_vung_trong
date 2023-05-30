@@ -14,9 +14,18 @@ class ActionPage extends ConsumerStatefulWidget {
 }
 
 class _ActionPageState extends ConsumerState<ActionPage> {
+  static const list = <Map>[
+    { "icon": CupertinoIcons.add, "label": 'Nguyên vật liệu', "color": Color(0xFFDB685B), "path": '/' },
+    { "icon": CupertinoIcons.add, "label": 'Loại cây trồng', "color": Color(0xFFDDAA33), "path": '/' },
+    { "icon": CupertinoIcons.add, "label": 'Công việc - Tình trạng', "color": Color(0xFF44803F), "path": '/' },
+    { "icon": CupertinoIcons.bolt_circle, "label": 'Tra cứu', "color": Color(0xFF146152), "path": '/' },
+    { "icon": CupertinoIcons.add, "label": 'Đất - Cơ sở', "color": Color(0xff284F8F), "path": '/' },
+    { "icon": CupertinoIcons.add, "label": 'Thiết bị - Máy móc', "color": Color(0xff592F64), "path": '/' }
+  ];
 
   @override
   Widget build(BuildContext context) {
+    // return Container();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Danh mục"),
@@ -31,24 +40,25 @@ class _ActionPageState extends ConsumerState<ActionPage> {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           crossAxisCount: 2,
-          itemCount: 6,
+          itemCount: list.length,
           mainAxisSpacing: 20,
           crossAxisSpacing: 20,
           itemBuilder: (context, index) {
             return AspectRatio(
               aspectRatio: 1/1,
               child: Container(
+                padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: primary,
+                  color: list[index]['color'],
                   borderRadius: BorderRadius.circular(6)
                 ),
-                child: const Column(
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Icon(CupertinoIcons.bolt_circle, size: 30, color: Colors.white,),
+                    Icon(list[index]['icon'], size: 30, color: Colors.white,),
                     SizedBox(height: 5,),
-                    Text("Tra cứu", style: TextStyle(fontSize: 16, color: Colors.white),)
+                    Text(list[index]['label'], style: const TextStyle(fontSize: 16, color: Colors.white), textAlign: TextAlign.center,)
                   ],
                 ),
               ),

@@ -13,7 +13,7 @@ import 'package:so_hoa_vung_trong/pages/action/ActionPage.dart';
 import 'package:so_hoa_vung_trong/pages/expert/ExpertPage.dart';
 import 'package:so_hoa_vung_trong/pages/home/diary/DiaryEditPage.dart';
 import 'package:so_hoa_vung_trong/pages/home/diary/DiaryPage.dart';
-import 'package:so_hoa_vung_trong/pages/search/SearchSettings.dart';
+import 'package:so_hoa_vung_trong/pages/home/search/SearchSettings.dart';
 import 'package:so_hoa_vung_trong/pages/settings/SettingsEditPage.dart';
 import 'package:so_hoa_vung_trong/pages/settings/SettingsPage.dart';
 
