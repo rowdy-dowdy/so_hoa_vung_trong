@@ -22,22 +22,22 @@ final appThemeProvider = Provider<AppTheme>((ref) {
     ),
     useMaterial3: true,
     scaffoldBackgroundColor: const Color(0xfff0f2f5),
-    // appBarTheme: const AppBarTheme(
-    //   color: primary,
-    //   surfaceTintColor: Colors.transparent,
-    //   scrolledUnderElevation: 0,
-    //   elevation: 0,
-    //   centerTitle: true,
-    //   titleTextStyle:  TextStyle(
-    //     color: Colors.white,
-    //     fontSize: 16, 
-    //     fontWeight: FontWeight.w600
-    //   ),
-    //   iconTheme: IconThemeData(
-    //     size: 20,
-    //     color: Colors.white
-    //   ),
-    // ),
+    appBarTheme: const AppBarTheme(
+      color: Colors.white,
+      surfaceTintColor: Colors.transparent,
+      scrolledUnderElevation: 0,
+      elevation: 0,
+      centerTitle: true,
+      titleTextStyle:  TextStyle(
+        color: primary,
+        fontSize: 16, 
+        fontWeight: FontWeight.w600
+      ),
+      iconTheme: IconThemeData(
+        size: 20,
+        color: primary
+      ),
+    ),
     primaryColor: primary,
     colorScheme: const ColorScheme.light().copyWith(
       primary: primary,

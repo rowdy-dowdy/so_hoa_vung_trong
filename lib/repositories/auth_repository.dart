@@ -76,47 +76,46 @@ class AuthRepository {
     }
   }
 
-  Future<UserModel?> fetchDatauser() async {
-    try {
-      // var url = Uri.https(BASE_URL, '/api/Authentication/Authenticate');
-      // var response = await http.post(url, body: {
-      //   "username": identity,
-      //   "password": password
-      // });
+  // Future<UserModel?> fetchDatauser() async {
+  //   try {
+  //     // var url = Uri.https(BASE_URL, '/api/Authentication/Authenticate');
+  //     // var response = await http.post(url, body: {
+  //     //   "username": identity,
+  //     //   "password": password
+  //     // });
 
-      Response response = await dio.post('/api/odata/ApplicationUser');
+  //     Response response = await dio.post('/api/odata/ApplicationUser');
 
-      UserModel user = UserModel.fromMap(response.data['user']);
+  //     UserModel user = UserModel.fromMap(response.data['user']);
 
-      return user;
+  //     return user;
 
-    } catch (e) {
-      print(e);
-      return null;
-    }
-  }
+  //   } catch (e) {
+  //     print(e);
+  //     return null;
+  //   }
+  // }
 
   Future<UserData?> signInWithPassword(String identity, String password, bool rememberMe) async {
     try {
-      print(1);
-      await Future.delayed(const Duration(seconds: 2));
       Response response = await dio.post('/api/Authentication/Authenticate', data: {
         "userName": identity,
         "password": password
       });
 
-      dio.options.headers['Authorization'] = "Bearer ${response.data}";
+      dio.options.headers['Authorization'] = "Bearer ${response.data['token']}";
 
       final prefs = await ref.read(sharedPrefsProvider.future);
 
       if (rememberMe) {
         await prefs.setString('token', response.data['token']);
+        await prefs.setString('id', response.data['token']);
       }
       await prefs.setString('landing', 'true');
 
-      UserModel user = UserModel.fromMap(response.data);
+      UserModel user = UserModel.fromMap(response.data['user']);
 
-      return UserData(user: user, token: response.data);
+      return UserData(user: user, token: response.data['token']);
 
     } catch (e) {
       print(e);

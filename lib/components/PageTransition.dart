@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 bool oldMainLocation = true; 
-final List<String> listMainLocation = ["/student", "/student/study", "/student/settings", 
-  "/teacher", "/teacher/study", "/teacher/settings"];
+final List<String> listMainLocation = ["/", "/expert", "/settings", "/action"];
 
 dynamic buildPageWithDefaultTransition<T>({
   required BuildContext context, 

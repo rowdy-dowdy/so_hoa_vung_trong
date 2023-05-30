@@ -8,8 +8,23 @@
     "method": "POST",
     "sortNum": 0,
     "created": "2023-05-29T09:08:22.302Z",
-    "modified": "2023-05-29T09:08:54.628Z",
-    "headers": [],
+    "modified": "2023-05-30T10:36:01.048Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      },
+      {
+        "name": "Content-Type",
+        "value": "application/json"
+      }
+    ],
     "params": [],
     "body": {
       "type": "json",
@@ -23,11 +38,11 @@
     "colId": "history",
     "containerId": "",
     "name": "https://app.kennatech.vn/mobileapp/api/odata/ApplicationUser",
-    "url": "https://app.kennatech.vn/mobileapp/api/odata/ApplicationUser",
+    "url": "https://app.kennatech.vn/mobileapp/api/odata",
     "method": "GET",
     "sortNum": 0,
     "created": "2023-05-29T09:09:33.006Z",
-    "modified": "2023-05-29T09:09:33.006Z",
+    "modified": "2023-05-30T10:35:23.925Z",
     "headers": [],
     "params": [],
     "auth": {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
+import 'package:so_hoa_vung_trong/utils/colors.dart';
 
 class LoadingPage extends ConsumerWidget {
   const LoadingPage({super.key});
@@ -9,7 +10,7 @@ class LoadingPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: Container(
-        color: Color.fromARGB(255, 113, 154, 230),
+        color: primary,
         child: Center(
           child: SizedBox(
             width: 300,
