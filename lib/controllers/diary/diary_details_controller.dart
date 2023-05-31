@@ -34,6 +34,6 @@ final diaryDetailsControllerProvider = StateNotifierProvider.family<DiaryNotifie
   return DiaryNotifier(ref, Oid);
 });
 
-final diaryLogProvider = FutureProvider.family<>((ref) async {
-  return ;
-});
+// final diaryLogProvider = FutureProvider.family<>((ref) async {
+//   return ;
+// });

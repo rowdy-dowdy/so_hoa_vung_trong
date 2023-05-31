@@ -171,7 +171,7 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                                   )
                                 ),
                                 margin: EdgeInsets.only(
-                                  left: index == 0 ? 12 : 0,
+                                  right: index == diaryData.data.length ? 12 : 0,
                                 ),
                                 child: Container(
                                   padding: const EdgeInsets.all(8),
