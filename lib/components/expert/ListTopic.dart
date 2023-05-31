@@ -44,35 +44,38 @@ class _ListTopicState extends ConsumerState<ListTopic> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
-                                Row(
-                                  children: [
-                                    Container(
-                                      width: 40,
-                                      height: 40,
-                                      decoration: const BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        image: DecorationImage(
-                                          image: AssetImage("assets/img/user.png"),
-                                          fit: BoxFit.fill,
-                                        )
+                                InkWell(
+                                  onTap: () => context.go('/expert/topic/1'),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 40,
+                                        height: 40,
+                                        decoration: const BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          image: DecorationImage(
+                                            image: AssetImage("assets/img/user.png"),
+                                            fit: BoxFit.fill,
+                                          )
+                                        ),
                                       ),
-                                    ),
-                                    const SizedBox(width: 10,),
-                                    const Expanded(
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text("Nguyễn Việt Hùng", style: TextStyle(
-                                            fontWeight: FontWeight.w500
-                                          ),),
-                                          Text("5 ngày trước", style: TextStyle(
-                                            fontSize: 12,
-                                            color: grey
-                                          ),)
-                                        ],
-                                      ),
-                                    )
-                                  ],
+                                      const SizedBox(width: 10,),
+                                      const Expanded(
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Nguyễn Việt Hùng", style: TextStyle(
+                                              fontWeight: FontWeight.w500
+                                            ),),
+                                            Text("5 ngày trước", style: TextStyle(
+                                              fontSize: 12,
+                                              color: grey
+                                            ),)
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
                                 const SizedBox(height: 10,),
                                 ExpandedText(text: "lofsda f 321321 lofsda f 321321 lofsda f 321321 lofsda f 321321 lofsda f 321321 lofsda f 321321 lofsda f 321321 lofsda f 321321 lofsda f 321321 lofsda f 321321 lofsda f 321321 lofsda f 321321",),
@@ -82,9 +85,12 @@ class _ListTopicState extends ConsumerState<ListTopic> {
                           const SizedBox(height: 10,),
                           CachedNetworkImage( 
                             imageUrl: "https://cdn.tgdd.vn/Files/2020/01/04/1229938/cach-nau-nui-thit-bo-nhanh-day-nang-luong-cho-bua-sang-202202231241209373.jpg",
-                            imageBuilder: (context, imageProvider) => Image(
-                              image: imageProvider, 
-                              fit: BoxFit.cover
+                            imageBuilder: (context, imageProvider) => Hero(
+                              tag: 'topic-${i}',
+                              child: Image(
+                                image: imageProvider, 
+                                fit: BoxFit.cover
+                              ),
                             ),
                             placeholder: (context, url) => Container(
                               height: 200,
@@ -104,7 +110,10 @@ class _ListTopicState extends ConsumerState<ListTopic> {
                                 const SizedBox(width: 10,),
                                 const Text("5 thảo luận"),
                                 const Spacer(),
-                                TextButton(onPressed: () {}, child: Text("Tham gia Thảo luận"))
+                                TextButton(
+                                  onPressed: () => context.go('/expert/topic/1'), 
+                                  child: Text("Tham gia Thảo luận")
+                                )
                               ],
                             ),
                           )

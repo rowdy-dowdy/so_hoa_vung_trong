@@ -1,46 +1,47 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
+import 'dart:typed_data';
 
 class UserModel {
-  final String id;
-  final String username;
-  final String email;
-  final String name;
-  final String avatar;
-  final DateTime created;
-  final DateTime updated;
+  final String Oid;
+  final String? Ten;
+  final int? SoThanhVien;
+  final String? DiaChi;
+  final String? SDT;
+  final String? DiaChiEmail;
+  final Uint8List? Avatar;
   
   UserModel({
-    required this.id,
-    required this.username,
-    required this.email,
-    required this.name,
-    required this.avatar,
-    required this.created,
-    required this.updated,
+    required this.Oid,
+    this.Ten,
+    this.SoThanhVien,
+    this.DiaChi,
+    this.SDT,
+    this.DiaChiEmail,
+    this.Avatar,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
-      'username': username,
-      'email': email,
-      'name': name,
-      'avatar': avatar,
-      'created': created.millisecondsSinceEpoch,
-      'updated': updated.millisecondsSinceEpoch,
+      'Oid': Oid,
+      'Ten': Ten,
+      'SoThanhVien': SoThanhVien,
+      'DiaChi': DiaChi,
+      'SDT': SDT,
+      'DiaChiEmail': DiaChiEmail,
+      'Avatar': Avatar.toString(),
     };
   }
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
-      id: map['id'] as String,
-      username: map['username'] as String,
-      email: map['email'] as String,
-      name: map['name'] as String,
-      avatar: map['avatar'] as String,
-      created: DateTime.fromMillisecondsSinceEpoch(map['created'] as int),
-      updated: DateTime.fromMillisecondsSinceEpoch(map['updated'] as int),
+      Oid: map['Oid'] as String,
+      Ten: map['Ten'] != null ? map['Ten'] as String : null,
+      SoThanhVien: map['SoThanhVien'] != null ? map['SoThanhVien'] as int : null,
+      DiaChi: map['DiaChi'] != null ? map['DiaChi'] as String : null,
+      SDT: map['SDT'] != null ? map['SDT'] as String : null,
+      DiaChiEmail: map['DiaChiEmail'] != null ? map['DiaChiEmail'] as String : null,
+      Avatar: base64Decode(map['Avatar'] as String),
     );
   }
 

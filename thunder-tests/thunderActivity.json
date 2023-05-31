@@ -8,7 +8,7 @@
     "method": "POST",
     "sortNum": 0,
     "created": "2023-05-29T09:08:22.302Z",
-    "modified": "2023-05-30T10:36:01.048Z",
+    "modified": "2023-05-31T02:22:27.855Z",
     "headers": [
       {
         "name": "Accept",
@@ -28,44 +28,134 @@
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"userName\": \"admin\",\n  \"password\": \"\"\n}",
+      "raw": "{\n  \"userName\": \"nguyenvana\",\n  \"password\": \"\"\n}",
       "form": []
     },
     "tests": []
   },
   {
-    "_id": "0d57eacc-b9bc-4e5e-981d-bd013f803595",
+    "_id": "18d446e9-975e-4c0d-89b5-8a27a00ac822",
     "colId": "history",
     "containerId": "",
-    "name": "https://app.kennatech.vn/mobileapp/api/odata/ApplicationUser",
-    "url": "https://app.kennatech.vn/mobileapp/api/odata",
+    "name": "User Info",
+    "url": "https://app.kennatech.vn/mobileapp/api/odata/ApplicationUser(25b14b84-a59d-4410-9c54-4c2d3ccbca19)",
     "method": "GET",
     "sortNum": 0,
-    "created": "2023-05-29T09:09:33.006Z",
-    "modified": "2023-05-30T10:35:23.925Z",
-    "headers": [],
+    "created": "2023-05-29T09:08:22.302Z",
+    "modified": "2023-05-31T03:49:34.468Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      },
+      {
+        "name": "Content-Type",
+        "value": "application/json"
+      }
+    ],
     "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"userName\": \"nguyenvana\",\n  \"password\": \"\"\n}",
+      "form": []
+    },
     "auth": {
       "type": "bearer",
-      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjYxNTBiNDFhLWRhZTItNGMyMi1iYzNjLWU1NzJkY2FlOWVhMyIsIlhhZlNlY3VyaXR5QXV0aFBhc3NlZCI6IlhhZlNlY3VyaXR5QXV0aFBhc3NlZCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJBZG1pbiIsIlhhZlNlY3VyaXR5IjoiWGFmU2VjdXJpdHkiLCJYYWZMb2dvblBhcmFtcyI6InExWXFMVTR0OGt2TVRWV3lVa3BNeWMzTVU5SlJLa2dzTGk3UEwwb0JDaW5WQWdBPSIsImV4cCI6MTY4NTMzMzMzMn0.KIZodmKFynLXyouJgudmcaffC8tXVyTjbG2JQEtn-ic"
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjI1YjE0Yjg0LWE1OWQtNDQxMC05YzU0LTRjMmQzY2NiY2ExOSIsIlhhZlNlY3VyaXR5QXV0aFBhc3NlZCI6IlhhZlNlY3VyaXR5QXV0aFBhc3NlZCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJuZ3V5ZW52YW5hIiwiWGFmU2VjdXJpdHkiOiJYYWZTZWN1cml0eSIsIlhhZkxvZ29uUGFyYW1zIjoicTFZcUxVNHQ4a3ZNVFZXeVVzcExMNjFNelN0THpFdFUwbEVxU0N3dUxzOHZTZ0dLSzlVQ0FBPT0iLCJleHAiOjE2ODU0ODE3NDV9.WpgolMZ7fa8uio6GsKIVywyhtk7SOEZ6GJMIBjfg7Qs"
     },
     "tests": []
   },
   {
-    "_id": "904f9e4a-44eb-4d7c-b924-883e751ea305",
+    "_id": "a3842802-ff62-4240-a850-6248cb34a914",
     "colId": "history",
     "containerId": "",
-    "name": "https://app.kennatech.vn/mobileapp/api/odata/ApplicationUserLoginInfo",
-    "url": "https://app.kennatech.vn/mobileapp/api/odata/ApplicationUserLoginInfo",
+    "name": "Nhat ky canh tac",
+    "url": "https://app.kennatech.vn/mobileapp/api/odata/NhatKyCanhTac(5a1e2efb-251c-4c57-a098-29b698edc934)/ChiTietNhatKys/$ref?$select=NgayLamViec",
     "method": "GET",
     "sortNum": 0,
-    "created": "2023-05-29T09:09:59.359Z",
-    "modified": "2023-05-29T09:09:59.359Z",
-    "headers": [],
-    "params": [],
+    "created": "2023-05-29T09:08:22.302Z",
+    "modified": "2023-05-31T10:31:54.194Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      },
+      {
+        "name": "Content-Type",
+        "value": "application/json"
+      }
+    ],
+    "params": [
+      {
+        "name": "$select",
+        "value": "NgayLamViec",
+        "isPath": false
+      }
+    ],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"userName\": \"nguyenvana\",\n  \"password\": \"\"\n}",
+      "form": []
+    },
     "auth": {
       "type": "bearer",
-      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjYxNTBiNDFhLWRhZTItNGMyMi1iYzNjLWU1NzJkY2FlOWVhMyIsIlhhZlNlY3VyaXR5QXV0aFBhc3NlZCI6IlhhZlNlY3VyaXR5QXV0aFBhc3NlZCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJBZG1pbiIsIlhhZlNlY3VyaXR5IjoiWGFmU2VjdXJpdHkiLCJYYWZMb2dvblBhcmFtcyI6InExWXFMVTR0OGt2TVRWV3lVa3BNeWMzTVU5SlJLa2dzTGk3UEwwb0JDaW5WQWdBPSIsImV4cCI6MTY4NTMzMzMzMn0.KIZodmKFynLXyouJgudmcaffC8tXVyTjbG2JQEtn-ic"
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjI1YjE0Yjg0LWE1OWQtNDQxMC05YzU0LTRjMmQzY2NiY2ExOSIsIlhhZlNlY3VyaXR5QXV0aFBhc3NlZCI6IlhhZlNlY3VyaXR5QXV0aFBhc3NlZCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJuZ3V5ZW52YW5hIiwiWGFmU2VjdXJpdHkiOiJYYWZTZWN1cml0eSIsIlhhZkxvZ29uUGFyYW1zIjoicTFZcUxVNHQ4a3ZNVFZXeVVzcExMNjFNelN0THpFdFUwbEVxU0N3dUxzOHZTZ0dLSzlVQ0FBPT0iLCJleHAiOjE2ODU1MDU1ODd9.phJGBdJU1tzGPPgcqtQaU__mwHOmitXqWLMhll7tAlM"
+    },
+    "tests": []
+  },
+  {
+    "_id": "1c77e6f4-0f67-490a-973f-fdd1d9eab427",
+    "colId": "history",
+    "containerId": "",
+    "name": "Nhat ky canh tac Copy",
+    "url": "https://app.kennatech.vn/mobileapp/api/odata/ChiTietNhatKy?$expand=CongViec_TinhTrang,NhatKyCanhTac",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-05-29T09:08:22.302Z",
+    "modified": "2023-05-31T10:29:23.203Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      },
+      {
+        "name": "Content-Type",
+        "value": "application/json"
+      }
+    ],
+    "params": [
+      {
+        "name": "$expand",
+        "value": "CongViec_TinhTrang,NhatKyCanhTac",
+        "isPath": false
+      }
+    ],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"userName\": \"nguyenvana\",\n  \"password\": \"\"\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjI1YjE0Yjg0LWE1OWQtNDQxMC05YzU0LTRjMmQzY2NiY2ExOSIsIlhhZlNlY3VyaXR5QXV0aFBhc3NlZCI6IlhhZlNlY3VyaXR5QXV0aFBhc3NlZCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJuZ3V5ZW52YW5hIiwiWGFmU2VjdXJpdHkiOiJYYWZTZWN1cml0eSIsIlhhZkxvZ29uUGFyYW1zIjoicTFZcUxVNHQ4a3ZNVFZXeVVzcExMNjFNelN0THpFdFUwbEVxU0N3dUxzOHZTZ0dLSzlVQ0FBPT0iLCJleHAiOjE2ODU1MDY4NzN9.2gZSyFQjO6OaLKmzGTKfS6DzrdZxybK6_fZ60i6iGWg"
     },
     "tests": []
   }

@@ -122,7 +122,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             hintText: 'Nhập mật khẩu',
                             suffixIcon: IconButton(
                               icon: Icon(showPassword ? Icons.visibility : Icons.visibility_off,
-                                color: Theme.of(context).primaryColorDark,
+                                color: primary,
                               ),
                               onPressed: () {
                                 setState(() {
@@ -139,6 +139,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                               width: 24,
                               height: 24,
                               child: CupertinoCheckbox(
+                                activeColor: primary,
                                 // title: Text("title text"),
                                 value: rememberMe,
                                 onChanged: (newValue) {
@@ -149,8 +150,13 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                 
                               ),
                             ),
-                            const SizedBox(width: 10,),
-                            const Text("Ghi nhớ tôi", style: TextStyle(fontWeight: FontWeight.w500),)
+                            const SizedBox(width: 5,),
+                            const Text("Ghi nhớ tôi", style: TextStyle(fontWeight: FontWeight.w500),),
+                            const Spacer(),
+                            TextButton(
+                              onPressed: () {},
+                              child: const Text("Quên mật khẩu?")
+                            )
                           ],
                         ),
                         const SizedBox(height: 20),

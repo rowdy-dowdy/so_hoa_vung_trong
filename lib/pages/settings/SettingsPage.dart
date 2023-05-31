@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:so_hoa_vung_trong/components/BottomBar.dart';
+import 'package:so_hoa_vung_trong/controllers/auth_controller.dart';
 import 'package:so_hoa_vung_trong/utils/colors.dart';
 
 class SettingsPage extends ConsumerStatefulWidget {
@@ -17,6 +18,11 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final user = ref.watch(authControllerProvider).user;
+    if (user == null) {
+      return Scaffold();
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Thông tin tài khoản"),
@@ -43,8 +49,8 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(6),
                       image: DecorationImage(
-                        image: AssetImage("assets/img/user.png"),
-                        fit: BoxFit.fill,
+                        image: user.Avatar != null ? MemoryImage(user.Avatar!) : const AssetImage("assets/img/user.png") as ImageProvider,
+                        fit: BoxFit.contain,
                       )
                     ),
                   ),
@@ -53,18 +59,18 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Nguyễn Việt Hùng", style: TextStyle(
+                        Text(user.Ten ?? "Chưa cập nhập", style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w500,
                           color: primary
                         ),),
                         const SizedBox(height: 10,),
-                        Text("viet.hung.2898@gmail.com", style: TextStyle(
+                        Text(user.DiaChiEmail ?? "Chưa cập nhập", style: TextStyle(
                           color: Colors.grey[700],
                           fontWeight: FontWeight.w500,
                         ),),
                         const SizedBox(height: 10,),
-                        Text("Quản lý nông trại", style: TextStyle(
+                        const Text("Quản lý nông trại", style: TextStyle(
                           fontWeight: FontWeight.w500,
                         ),)
                       ],
@@ -76,17 +82,27 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
 
             const SizedBox(height: 10,),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(6)
               ),
-              child: Text("Thông tin cá nhân", style: TextStyle(
-                color: Colors.grey[700],
-                fontWeight: FontWeight.w600
-              ),),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text("Thông tin cá nhân", style: TextStyle(
+                      color: Colors.grey[700],
+                      fontWeight: FontWeight.w600
+                    ),),
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(CupertinoIcons.arrowtriangle_down_square)
+                  )
+                ],
+              ),
             ),
-            const SizedBox(height: 5,),
+            const SizedBox(height: 1,),
             Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -107,35 +123,21 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                     color: Colors.red,
                     icon: CupertinoIcons.person_fill,
                     label: "Họ tên",
-                    value: "Chưa cập nhập",
-                  ),
-
-                  InfoWidget(
-                    color: Colors.blue,
-                    icon: CupertinoIcons.person_2_alt,
-                    label: "Giới tính",
-                    value: "Chưa cập nhập",
-                  ),
-
-                  InfoWidget(
-                    color: Colors.orange,
-                    icon: CupertinoIcons.time_solid,
-                    label: "Ngày sinh",
-                    value: DateFormat("dd/MM,yyyy").format(DateTime.now()),
+                    value: user.Ten,
                   ),
 
                   InfoWidget(
                     color: Colors.green,
                     icon: CupertinoIcons.location_fill,
                     label: "Địa chỉ",
-                    value: "Chưa cập nhập",
+                    value: user.DiaChi,
                   ),
 
                   InfoWidget(
                     color: Colors.brown,
                     icon: CupertinoIcons.phone_fill,
                     label: "Số điện thoại liên hệ",
-                    value: "Chưa cập nhập",
+                    value: user.SDT,
                     border: false,
                   )
                 ],

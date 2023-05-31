@@ -2,37 +2,37 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:so_hoa_vung_trong/services/shared_prefs.dart';
 
-class LandingModel {
+class LandingDataModel {
   final bool loading;
   final bool firstRunApp;
-  LandingModel({
+  LandingDataModel({
     required this.loading,
     required this.firstRunApp,
   });
 
-  const LandingModel.unknown()
+  const LandingDataModel.unknown()
     : loading = false,
       firstRunApp = true;
 }
 
-class LandingNotifier extends StateNotifier<LandingModel> {
+class LandingNotifier extends StateNotifier<LandingDataModel> {
   final Ref ref;
-  LandingNotifier(this.ref): super(const LandingModel.unknown()) {
+  LandingNotifier(this.ref): super(const LandingDataModel.unknown()) {
     init();
   }
   
   void init() async {
-    state = LandingModel(loading: true, firstRunApp: true);
+    state = LandingDataModel(loading: true, firstRunApp: true);
     final prefs = await ref.read(sharedPrefsProvider.future);
     String? landing = prefs.getString('landing');
-    state = LandingModel(loading: false, firstRunApp: landing?.isEmpty ?? true);
+    state = LandingDataModel(loading: false, firstRunApp: landing?.isEmpty ?? true);
   }
 
   void gotoLogin() {
-    state = LandingModel(loading: false, firstRunApp: false);
+    state = LandingDataModel(loading: false, firstRunApp: false);
   }
 }
 
-final landingControllerProvider = StateNotifierProvider<LandingNotifier, LandingModel>((ref) {
+final landingControllerProvider = StateNotifierProvider<LandingNotifier, LandingDataModel>((ref) {
   return LandingNotifier(ref);
 });

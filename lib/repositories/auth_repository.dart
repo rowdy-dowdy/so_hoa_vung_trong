@@ -50,51 +50,23 @@ class AuthRepository {
     try {
       final prefs = await ref.read(sharedPrefsProvider.future);
       String? token = await prefs.getString('token');
-      String? type = await prefs.getString('type');
+      String? id = await prefs.getString('id');
 
-      if (token == null || type == null) return null;
+      if (token == null || id == null) return null;
 
-      var url = Uri.https(BASE_URL, '/api/resfeshToken');
-      var response = await http.post(url, headers: {
-        'authorization': "Bearer $token",
-      }, body: {
-        'type': type
-      });
+      dio.options.headers['Authorization'] = "Bearer ${token}";
+      Response response = await dio.get('/api/odata/ApplicationUser($id)');
 
-      if (response.statusCode == 200) {
-        var data = jsonDecode(response.body);
-        var user = UserModel.fromMap(data['user']);
+      UserModel user = UserModel.fromMap(response.data);
+      print(user);
 
-        return UserData(user: user, token: data['token']);
-      } 
-      else {
-        return null;
-      }
+      return UserData(user: user, token: token);
+      
     } catch (e) {
       print(e);
       return null;
     }
   }
-
-  // Future<UserModel?> fetchDatauser() async {
-  //   try {
-  //     // var url = Uri.https(BASE_URL, '/api/Authentication/Authenticate');
-  //     // var response = await http.post(url, body: {
-  //     //   "username": identity,
-  //     //   "password": password
-  //     // });
-
-  //     Response response = await dio.post('/api/odata/ApplicationUser');
-
-  //     UserModel user = UserModel.fromMap(response.data['user']);
-
-  //     return user;
-
-  //   } catch (e) {
-  //     print(e);
-  //     return null;
-  //   }
-  // }
 
   Future<UserData?> signInWithPassword(String identity, String password, bool rememberMe) async {
     try {
@@ -109,11 +81,12 @@ class AuthRepository {
 
       if (rememberMe) {
         await prefs.setString('token', response.data['token']);
-        await prefs.setString('id', response.data['token']);
+        await prefs.setString('id', response.data['user']['Oid']);
       }
-      await prefs.setString('landing', 'true');
+      // await prefs.setString('landing', 'true');
 
       UserModel user = UserModel.fromMap(response.data['user']);
+      print(user);
 
       return UserData(user: user, token: response.data['token']);
 
@@ -137,6 +110,6 @@ class AuthRepository {
 }
 
 final authRepositoryProvider = Provider((ref) {
-  final dio = ref.read(dioProvider);
+  final dio = ref.watch(dioProvider);
   return AuthRepository(ref: ref, dio: dio);
 });

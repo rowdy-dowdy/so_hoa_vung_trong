@@ -7,7 +7,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:tiengviet/tiengviet.dart';
 
 final expertsProvider = FutureProvider<List<dynamic>>((ref) async {
-  await Future.delayed(const Duration(seconds: 2));
+  await Future.delayed(const Duration(seconds: 1));
   return [1,2,3,4,5,6,7,8,9,10];
 });
 
@@ -92,11 +92,11 @@ class _ListExpertState extends ConsumerState<ListExpert> {
                           return Column(
                             children: experts.map((item) => 
                               Container(
-                                margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                                margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                padding: const EdgeInsets.all(8),
                                 decoration: BoxDecoration(
                                   color: Colors.white,
-                                  borderRadius: BorderRadius.circular(5)
+                                  borderRadius: BorderRadius.circular(6)
                                 ),
                                 child: Row(children: [
                                   SizedBox(
@@ -127,15 +127,11 @@ class _ListExpertState extends ConsumerState<ListExpert> {
                                         mainAxisAlignment: MainAxisAlignment.start,
                                         children: [
                                           Text("Nguyễn Việt Hùng", style: const TextStyle(
-                                            fontSize: 18,
+                                            fontSize: 16,
                                             fontWeight: FontWeight.w500
                                           ),),
                                           const SizedBox(height: 5,),
-                                          Text("viet.hung.2898@gmail.com", style: const TextStyle(
-                                            // color: Colors.grey[700]!,
-                                            // // fontSize: 18,
-                                            // fontWeight: FontWeight.w500
-                                          ),),
+                                          Text("viet.hung.2898@gmail.com"),
                                         ],
                                       ),
                                     ),

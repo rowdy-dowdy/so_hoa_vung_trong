@@ -40,6 +40,12 @@ String formatTimeToString(DateTime time) {
   return timeago.format(now.subtract(difference), locale: 'vi');
 }
 
+String formatTimeToString2(DateTime? time) {
+  if (time == null) return "";
+
+  return DateFormat("dd/mm/yyyy").format(time);
+}
+
 Future dialogEscape(BuildContext context, String title, String description) {
   return showDialog(
     context: context,

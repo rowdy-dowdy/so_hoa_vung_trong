@@ -53,7 +53,7 @@ class _TimeLineTopState extends ConsumerState<TimeLineTop> {
                   ),
                   SizedBox(width: widget.gap,),
                   Expanded(child: Padding(
-                    padding: const EdgeInsets.only(top: 0, bottom: 3),
+                    padding: const EdgeInsets.only(top: 10, bottom: 13),
                     child: widget.indicators[index])
                   )
                 ],

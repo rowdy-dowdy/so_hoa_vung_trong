@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:so_hoa_vung_trong/controllers/auth_controller.dart';
 import 'package:so_hoa_vung_trong/models/auth_model.dart';
 import 'package:so_hoa_vung_trong/pages/ErrorPage.dart';
+import 'package:so_hoa_vung_trong/pages/expert/topic/TopicDetails.dart';
 import 'package:so_hoa_vung_trong/pages/home/HomePage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:so_hoa_vung_trong/components/PageTransition.dart';
@@ -11,6 +12,7 @@ import 'package:so_hoa_vung_trong/pages/LoadingPage.dart';
 import 'package:so_hoa_vung_trong/pages/LoginPage.dart';
 import 'package:so_hoa_vung_trong/pages/action/ActionPage.dart';
 import 'package:so_hoa_vung_trong/pages/expert/ExpertPage.dart';
+import 'package:so_hoa_vung_trong/pages/home/diary/DiaryAddPage.dart';
 import 'package:so_hoa_vung_trong/pages/home/diary/DiaryEditPage.dart';
 import 'package:so_hoa_vung_trong/pages/home/diary/DiaryPage.dart';
 import 'package:so_hoa_vung_trong/pages/home/search/SearchSettings.dart';
@@ -27,7 +29,7 @@ class RouterNotifier extends ChangeNotifier {
   }
 
   String? _redirectLogin(_, GoRouterState state) {
-    return null;
+    // return null;
     final auth = _ref.read(authControllerProvider);
     
     if (auth.authState == AuthState.initial) return null;
@@ -71,6 +73,11 @@ class RouterNotifier extends ChangeNotifier {
             child: const HomePage(),
           ),
           routes: [
+            GoRoute(
+              name: "diary-add",
+              path: "diary/add",
+              builder: (context, state) => const DiaryAddPage(),
+            ),
             GoRoute(
               name: "diary",
               path: "diary/:id",
@@ -120,6 +127,13 @@ class RouterNotifier extends ChangeNotifier {
             state: state, 
             child: const ExpertPage(),
           ),
+          routes: [
+            GoRoute(
+              name: "topic-details",
+              path: "topic/:id",
+              builder: (context, state) => TopicDetails(id: state.params['id'] ?? ""),
+            ),
+          ]
         ),
         GoRoute(
           name: "search",
@@ -140,7 +154,7 @@ final routerProvider = Provider<GoRouter>((ref) {
   final router = RouterNotifier(ref);
 
   return GoRouter(
-    initialLocation: "/",
+    initialLocation: "/loading",
     debugLogDiagnostics: true,
     refreshListenable: router,
     redirect: router._redirectLogin,
