@@ -29,7 +29,6 @@ class RouterNotifier extends ChangeNotifier {
   }
 
   String? _redirectLogin(_, GoRouterState state) {
-    // return null;
     final auth = _ref.read(authControllerProvider);
     
     if (auth.authState == AuthState.initial) return null;
@@ -130,7 +129,7 @@ class RouterNotifier extends ChangeNotifier {
           routes: [
             GoRoute(
               name: "topic-details",
-              path: "topic/:id",
+              path: ":id",
               builder: (context, state) => TopicDetails(id: state.params['id'] ?? ""),
             ),
           ]

@@ -20,9 +20,9 @@ String toImage(String image) {
   return "https://$BASE_URL/storage/$image";
 }
 
-String formatCurrency(int price) {
+String formatCurrency(int? price) {
   final currencyFormatter = NumberFormat.currency(locale: 'vi');
-  return currencyFormatter.format(price);
+  return currencyFormatter.format(price ?? 0);
 }
 
 String formatCurrencyDouble(double price) {
@@ -40,10 +40,10 @@ String formatTimeToString(DateTime time) {
   return timeago.format(now.subtract(difference), locale: 'vi');
 }
 
-String formatTimeToString2(DateTime? time) {
-  if (time == null) return "";
+String formatTimeToString2(DateTime? time, [String text = ""]) {
+  if (time == null) return text;
 
-  return DateFormat("dd/mm/yyyy").format(time);
+  return DateFormat("dd/MM/yyyy").format(time);
 }
 
 Future dialogEscape(BuildContext context, String title, String description) {

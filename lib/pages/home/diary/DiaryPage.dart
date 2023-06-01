@@ -23,6 +23,7 @@ class _DiaryStatePage extends ConsumerState<DiaryPage> {
   @override
   Widget build(BuildContext context) {
     final diaryData = ref.watch(diaryDetailsControllerProvider(widget.id));
+    final diaryLog = ref.watch(diaryLogProvider(widget.id));
     return Scaffold(
       appBar: AppBar(
         title: const Text("Nhật ký sản xuất"),
@@ -39,9 +40,8 @@ class _DiaryStatePage extends ConsumerState<DiaryPage> {
       ),
       body: RefreshIndicator(
         onRefresh: () async {
-          await Future.wait([
-            ref.watch(diaryDetailsControllerProvider(widget.id).notifier).loadData(),
-          ]);
+          await ref.watch(diaryDetailsControllerProvider(widget.id).notifier).loadData();
+          ref.invalidate(diaryLogProvider(widget.id));
         },
         child: LayoutBuilder(
           builder: (context, constraints) {
@@ -52,7 +52,7 @@ class _DiaryStatePage extends ConsumerState<DiaryPage> {
             if (diaryData.data == null) {
               return SingleChildScrollView(
                 physics: const AlwaysScrollableScrollPhysics(),
-                child: ConstrainedBox(
+                child: Container(
                   constraints: BoxConstraints(minHeight: constraints.maxHeight),
                   child: const Center(child: Text("Không có dữ liệu nhật ký"),)
                 )
@@ -68,6 +68,7 @@ class _DiaryStatePage extends ConsumerState<DiaryPage> {
                   height: double.infinity,
                   // color: Colors.white,
                   child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
                     // padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -135,7 +136,7 @@ class _DiaryStatePage extends ConsumerState<DiaryPage> {
                                         Expanded(child: Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
-                                            Text(list[index]['label'], style: TextStyle(fontWeight: FontWeight.w500),),
+                                            Text(list[index]['label'], style: const TextStyle(fontWeight: FontWeight.w500),),
                                             Text(list[index]['value'])
                                           ],
                                         ),)
@@ -162,65 +163,75 @@ class _DiaryStatePage extends ConsumerState<DiaryPage> {
                               const SizedBox(height: 10,),
                               // const Divider(height: 1, color: Colors.grey,),
                               // const SizedBox(height: 10,),
-      
-                              TimeLineTop(
-                                children: [
-                                  for(var i = 0; i < 10; i ++) ...[
-                                    Container(
-                                      clipBehavior: Clip.hardEdge,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(4),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey.withOpacity(0.3),
-                                            blurRadius: 2,
-                                            spreadRadius: 1,
-                                            offset: Offset(0, 2), // changes position of shadow
-                                          ),
-                                        ],
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          Expanded(
-                                            child: Container(
-                                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                                              child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: [
-                                                  const Text("Gieo hạt", style: TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Colors.teal
-                                                  ),),
-                                                  const SizedBox(height: 5,),
-                                                  const Text("Lorem fsdjflksa f sdaf asd fsa df")
-                                                ],
+
+                              diaryLog.when(
+                                skipLoadingOnRefresh: false,
+                                data: (data) {
+                                  if (data.isEmpty) {
+                                    return const Text("Không có chi tiết nhật ký nào");
+                                  }
+
+                                  return TimeLineTop(
+                                    indicators: data.map((e) => 
+                                      Text(e.dateToString(), style: const TextStyle(color: primary, fontWeight: FontWeight.w500),),
+                                    ).toList(),
+                                    children: data.map((e) => 
+                                      Container(
+                                        clipBehavior: Clip.hardEdge,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.circular(4),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.grey.withOpacity(0.3),
+                                              blurRadius: 2,
+                                              spreadRadius: 1,
+                                              offset: const Offset(0, 2), // changes position of shadow
+                                            ),
+                                          ],
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                              child: Container(
+                                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text("Tổng giờ làm: ${e.TongGioLamViec ?? '0'}", style: const TextStyle(
+                                                      // fontSize: 16,
+                                                      fontWeight: FontWeight.w500,
+                                                      color: Colors.pink
+                                                    ),),
+                                                    const SizedBox(height: 5,),
+                                                    Text(e.GhiChu ?? "Không có ghi chú")
+                                                  ],
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                          Container(
-                                            padding: const EdgeInsets.symmetric(horizontal: 12),
-                                            color: second,
-                                            child: Center(
-                                              child: Icon(Icons.edit, color: Colors.white,),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ]
-                                ],
-                                indicators: [
-                                  for(var i = 0; i < 10; i ++) ...[
-                                    const Text("18/10/2023", style: TextStyle(color: primary, fontWeight: FontWeight.w500),),
-                                  ]
-                                ],
+                                            Container(
+                                              padding: const EdgeInsets.symmetric(horizontal: 12),
+                                              color: second,
+                                              child: const Center(
+                                                child: Icon(Icons.edit, color: Colors.white,),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      )
+                                    ).toList(),
+                                  );
+                                },
+                                loading: () => const Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Center(child: CircularProgressIndicator(),),
+                                ),
+                                error: (_, __) => const Text("Không thể tải chi tiết nhật ký"),
                               )
                             ],
                           ),
                         ),
-                        Container(height: 65, color: Colors.white,)
+                        Container(height: 65)
                       ],
                     ),
                   ),

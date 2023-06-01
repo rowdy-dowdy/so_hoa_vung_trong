@@ -96,6 +96,7 @@ class _TopicDetailsState extends ConsumerState<TopicDetails> {
       body: LayoutBuilder(
         builder: (context, constraints) {
           return SingleChildScrollView(
+            // physics: const AlwaysScrollableScrollPhysics(),
             controller: scrollController,
             child: ConstrainedBox(
               constraints: BoxConstraints(minHeight: constraints.maxHeight),

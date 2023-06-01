@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:so_hoa_vung_trong/models/diary_log_model.dart';
 import 'package:so_hoa_vung_trong/models/diary_model.dart';
 import 'package:so_hoa_vung_trong/repositories/main_repository.dart';
 
@@ -34,6 +35,6 @@ final diaryDetailsControllerProvider = StateNotifierProvider.family<DiaryNotifie
   return DiaryNotifier(ref, Oid);
 });
 
-// final diaryLogProvider = FutureProvider.family<>((ref) async {
-//   return ;
-// });
+final diaryLogProvider = FutureProvider.family<List<DiaryLogModel>, String>((ref, Oid) async {
+  return ref.read(mainRepositoryProvider).fetchListDiaryLog(Oid);
+});

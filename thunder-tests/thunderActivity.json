@@ -76,11 +76,11 @@
     "colId": "history",
     "containerId": "",
     "name": "Nhat ky canh tac",
-    "url": "https://app.kennatech.vn/mobileapp/api/odata/NhatKyCanhTac(5a1e2efb-251c-4c57-a098-29b698edc934)/ChiTietNhatKys/$ref",
+    "url": "https://app.kennatech.vn/mobileapp/api/odata/NhatKyCanhTac/5a1e2efb-251c-4c57-a098-29b698edc934/ChiTietNhatKys/$ref",
     "method": "GET",
     "sortNum": 0,
     "created": "2023-05-29T09:08:22.302Z",
-    "modified": "2023-05-31T13:29:55.191Z",
+    "modified": "2023-06-01T08:49:15.027Z",
     "headers": [
       {
         "name": "Accept",
@@ -105,7 +105,7 @@
     },
     "auth": {
       "type": "bearer",
-      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjI1YjE0Yjg0LWE1OWQtNDQxMC05YzU0LTRjMmQzY2NiY2ExOSIsIlhhZlNlY3VyaXR5QXV0aFBhc3NlZCI6IlhhZlNlY3VyaXR5QXV0aFBhc3NlZCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJuZ3V5ZW52YW5hIiwiWGFmU2VjdXJpdHkiOiJYYWZTZWN1cml0eSIsIlhhZkxvZ29uUGFyYW1zIjoicTFZcUxVNHQ4a3ZNVFZXeVVzcExMNjFNelN0THpFdFUwbEVxU0N3dUxzOHZTZ0dLSzlVQ0FBPT0iLCJleHAiOjE2ODU1MjE1MjV9._DyQObLv0uSMRZ0Zjt9SucC9ZAh2kOZhAesVB7-V5S0"
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjI1YjE0Yjg0LWE1OWQtNDQxMC05YzU0LTRjMmQzY2NiY2ExOSIsIlhhZlNlY3VyaXR5QXV0aFBhc3NlZCI6IlhhZlNlY3VyaXR5QXV0aFBhc3NlZCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJuZ3V5ZW52YW5hIiwiWGFmU2VjdXJpdHkiOiJYYWZTZWN1cml0eSIsIlhhZkxvZ29uUGFyYW1zIjoicTFZcUxVNHQ4a3ZNVFZXeVVzcExMNjFNelN0THpFdFUwbEVxU0N3dUxzOHZTZ0dLSzlVQ0FBPT0iLCJleHAiOjE2ODU1ODk4ODB9.6u7V5BUuGv_MOJS3gvnTHtAofrVM-v3uYBwnzA18nzM"
     },
     "tests": []
   },
@@ -113,7 +113,7 @@
     "_id": "1c77e6f4-0f67-490a-973f-fdd1d9eab427",
     "colId": "history",
     "containerId": "",
-    "name": "Nhat ky canh tac Copy",
+    "name": "Chi Tiet Nhat ky canh tac",
     "url": "https://app.kennatech.vn/mobileapp/api/odata/ChiTietNhatKy?$expand=CongViec_TinhTrang,NhatKyCanhTac",
     "method": "GET",
     "sortNum": 0,
@@ -150,6 +150,138 @@
     "auth": {
       "type": "bearer",
       "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjI1YjE0Yjg0LWE1OWQtNDQxMC05YzU0LTRjMmQzY2NiY2ExOSIsIlhhZlNlY3VyaXR5QXV0aFBhc3NlZCI6IlhhZlNlY3VyaXR5QXV0aFBhc3NlZCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJuZ3V5ZW52YW5hIiwiWGFmU2VjdXJpdHkiOiJYYWZTZWN1cml0eSIsIlhhZkxvZ29uUGFyYW1zIjoicTFZcUxVNHQ4a3ZNVFZXeVVzcExMNjFNelN0THpFdFUwbEVxU0N3dUxzOHZTZ0dLSzlVQ0FBPT0iLCJleHAiOjE2ODU1MDY4NzN9.2gZSyFQjO6OaLKmzGTKfS6DzrdZxybK6_fZ60i6iGWg"
+    },
+    "tests": []
+  },
+  {
+    "_id": "7402a1ed-7959-4888-83c6-fa9544465188",
+    "colId": "history",
+    "containerId": "",
+    "name": "Nguyen Lieu",
+    "url": "https://app.kennatech.vn/mobileapp/api/odata/NguyenLieu",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-05-29T09:08:22.302Z",
+    "modified": "2023-06-01T03:01:58.788Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      },
+      {
+        "name": "Content-Type",
+        "value": "application/json"
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"userName\": \"nguyenvana\",\n  \"password\": \"\"\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjI1YjE0Yjg0LWE1OWQtNDQxMC05YzU0LTRjMmQzY2NiY2ExOSIsIlhhZlNlY3VyaXR5QXV0aFBhc3NlZCI6IlhhZlNlY3VyaXR5QXV0aFBhc3NlZCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJuZ3V5ZW52YW5hIiwiWGFmU2VjdXJpdHkiOiJYYWZTZWN1cml0eSIsIlhhZkxvZ29uUGFyYW1zIjoicTFZcUxVNHQ4a3ZNVFZXeVVzcExMNjFNelN0THpFdFUwbEVxU0N3dUxzOHZTZ0dLSzlVQ0FBPT0iLCJleHAiOjE2ODU1NjQxNTJ9.7Q66brBBVCYXBr_NaRwyqjEjTQIhYNL9RtcSSb_lDd8"
+    },
+    "tests": []
+  },
+  {
+    "_id": "448cc572-0a4f-4dec-bf4c-a12d7ec2f7c8",
+    "colId": "history",
+    "containerId": "",
+    "name": "Nhat ky canh tac Copy Copy",
+    "url": "https://app.kennatech.vn/mobileapp/api/odata/LoaiCayTrong",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-05-29T09:08:22.302Z",
+    "modified": "2023-06-01T01:50:16.454Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      },
+      {
+        "name": "Content-Type",
+        "value": "application/json"
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"userName\": \"nguyenvana\",\n  \"password\": \"\"\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjI1YjE0Yjg0LWE1OWQtNDQxMC05YzU0LTRjMmQzY2NiY2ExOSIsIlhhZlNlY3VyaXR5QXV0aFBhc3NlZCI6IlhhZlNlY3VyaXR5QXV0aFBhc3NlZCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJuZ3V5ZW52YW5hIiwiWGFmU2VjdXJpdHkiOiJYYWZTZWN1cml0eSIsIlhhZkxvZ29uUGFyYW1zIjoicTFZcUxVNHQ4a3ZNVFZXeVVzcExMNjFNelN0THpFdFUwbEVxU0N3dUxzOHZTZ0dLSzlVQ0FBPT0iLCJleHAiOjE2ODU1NjQxNTJ9.7Q66brBBVCYXBr_NaRwyqjEjTQIhYNL9RtcSSb_lDd8"
+    },
+    "tests": []
+  },
+  {
+    "_id": "46878013-781d-4153-aae2-bf03adfcbb79",
+    "colId": "history",
+    "containerId": "",
+    "name": "Nhat ky canh tac Copy",
+    "url": "https://app.kennatech.vn/mobileapp/api/odata/Ticket?$expand=DanhMucChuDe",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-05-29T09:08:22.302Z",
+    "modified": "2023-06-01T09:48:26.521Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "*/*",
+        "isDisabled": true
+      },
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      },
+      {
+        "name": "Content-Type",
+        "value": "application/json"
+      }
+    ],
+    "params": [
+      {
+        "name": "$expand",
+        "value": "DanhMucChuDe",
+        "isPath": false
+      },
+      {
+        "name": "$filter",
+        "value": "DanhMucChuDe/Oid eq 36213632-015f-4e9f-9009-72e4903ca310",
+        "isDisabled": true,
+        "isPath": false
+      },
+      {
+        "name": "$filter",
+        "value": "contains(tolower(TieuDe), tolower('a'))",
+        "isDisabled": true,
+        "isPath": false
+      }
+    ],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"userName\": \"nguyenvana\",\n  \"password\": \"\"\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjI1YjE0Yjg0LWE1OWQtNDQxMC05YzU0LTRjMmQzY2NiY2ExOSIsIlhhZlNlY3VyaXR5QXV0aFBhc3NlZCI6IlhhZlNlY3VyaXR5QXV0aFBhc3NlZCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJuZ3V5ZW52YW5hIiwiWGFmU2VjdXJpdHkiOiJYYWZTZWN1cml0eSIsIlhhZkxvZ29uUGFyYW1zIjoicTFZcUxVNHQ4a3ZNVFZXeVVzcExMNjFNelN0THpFdFUwbEVxU0N3dUxzOHZTZ0dLSzlVQ0FBPT0iLCJleHAiOjE2ODU1ODk4ODB9.6u7V5BUuGv_MOJS3gvnTHtAofrVM-v3uYBwnzA18nzM"
     },
     "tests": []
   }

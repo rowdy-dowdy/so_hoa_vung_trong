@@ -15,6 +15,7 @@ class _SearchPageState extends ConsumerState<SearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
+        // physics: const AlwaysScrollableScrollPhysics(),
         child: Text("data"),
       ),
       bottomNavigationBar: const BottomBar(),
