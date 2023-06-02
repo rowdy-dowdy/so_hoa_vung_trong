@@ -30,7 +30,10 @@ String formatCurrencyDouble(double price) {
   return currencyFormatter.format(price);
 }
 
-String formatTimeToString(DateTime time) {
+String formatTimeToString(DateTime? time) {
+  if (time == null) {
+    return "";
+  }
   timeago.setLocaleMessages('vi', timeago.ViMessages());
   timeago.setLocaleMessages('vi_short', timeago.ViShortMessages());
   

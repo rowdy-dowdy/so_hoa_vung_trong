@@ -234,11 +234,11 @@
     "colId": "history",
     "containerId": "",
     "name": "Nhat ky canh tac Copy",
-    "url": "https://app.kennatech.vn/mobileapp/api/odata/Ticket?$expand=DanhMucChuDe",
+    "url": "https://app.kennatech.vn/mobileapp/api/odata/Ticket?$expand=DanhMucChuDe,NguoiTao",
     "method": "GET",
     "sortNum": 0,
     "created": "2023-05-29T09:08:22.302Z",
-    "modified": "2023-06-01T09:48:26.521Z",
+    "modified": "2023-06-02T08:26:49.716Z",
     "headers": [
       {
         "name": "Accept",
@@ -258,12 +258,12 @@
     "params": [
       {
         "name": "$expand",
-        "value": "DanhMucChuDe",
+        "value": "DanhMucChuDe,NguoiTao",
         "isPath": false
       },
       {
         "name": "$filter",
-        "value": "DanhMucChuDe/Oid eq 36213632-015f-4e9f-9009-72e4903ca310",
+        "value": "(DanhMucChuDe/Oid eq c815ee4a-8798-4a9c-a193-58d6344662cd) and contains(tolower(TieuDe), tolower('a'))",
         "isDisabled": true,
         "isPath": false
       },
@@ -281,7 +281,7 @@
     },
     "auth": {
       "type": "bearer",
-      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjI1YjE0Yjg0LWE1OWQtNDQxMC05YzU0LTRjMmQzY2NiY2ExOSIsIlhhZlNlY3VyaXR5QXV0aFBhc3NlZCI6IlhhZlNlY3VyaXR5QXV0aFBhc3NlZCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJuZ3V5ZW52YW5hIiwiWGFmU2VjdXJpdHkiOiJYYWZTZWN1cml0eSIsIlhhZkxvZ29uUGFyYW1zIjoicTFZcUxVNHQ4a3ZNVFZXeVVzcExMNjFNelN0THpFdFUwbEVxU0N3dUxzOHZTZ0dLSzlVQ0FBPT0iLCJleHAiOjE2ODU1ODk4ODB9.6u7V5BUuGv_MOJS3gvnTHtAofrVM-v3uYBwnzA18nzM"
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjI1YjE0Yjg0LWE1OWQtNDQxMC05YzU0LTRjMmQzY2NiY2ExOSIsIlhhZlNlY3VyaXR5QXV0aFBhc3NlZCI6IlhhZlNlY3VyaXR5QXV0aFBhc3NlZCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJuZ3V5ZW52YW5hIiwiWGFmU2VjdXJpdHkiOiJYYWZTZWN1cml0eSIsIlhhZkxvZ29uUGFyYW1zIjoicTFZcUxVNHQ4a3ZNVFZXeVVzcExMNjFNelN0THpFdFUwbEVxU0N3dUxzOHZTZ0dLSzlVQ0FBPT0iLCJleHAiOjE4NDM1MTc0OTV9.N0xh2Us7ERMjD0hsonDnTYvD-bvhVwiPBjayjhSpY2A"
     },
     "tests": []
   }

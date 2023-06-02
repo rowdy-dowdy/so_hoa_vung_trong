@@ -118,16 +118,34 @@ class MainRepository {
     }
   }
 
-  Future<List<TopicModel>> fetchTopic([int page = 1, String search = '']) async {
+  Future<List<TopicModel>> fetchTopic({int page = 1, int perPage = 8, String search = '', List<String> categories = const []}) async {
     try {
-      Response response = await dio.get('/api/odata/Ticket?\$expand=DanhMucChuDe&\$filter=DanhMucChuDe/Oid eq 36213632-015f-4e9f-9009-72e4903ca310 and contains(tolower(TieuDe), tolower(\'$search\'))');
+      var skip = (page - 1) * perPage;
+      var take = perPage;
 
-      var uri = Uri(path: '/api/odata/Ticket', queryParameters: {
-        '\$expand': 'DanhMucChuDe',
-        '\$filter': 'DanhMucChuDe/Oid eq 36213632-015f-4e9f-9009-72e4903ca310 and contains(tolower(TieuDe), tolower(\'$search\'))',
+      String filter = "";
+
+      categories.asMap().forEach((index, element) {
+        if (index > 0) {
+          filter += " or ";
+        }
+        filter += "DanhMucChuDe/Oid eq $element";
       });
 
-      print(uri);
+      if (categories.isNotEmpty) {
+        filter = "($filter) and ";
+      }
+
+      filter += 'contains(tolower(TieuDe), tolower(\'$search\'))';
+      
+      var uri = Uri(path: '/api/odata/Ticket', queryParameters: {
+        '\$expand': 'DanhMucChuDe,NguoiTao',
+        '\$filter': filter,
+        '\$skip': "$skip",
+        '\$top': "$take",
+      });
+
+      Response response = await dio.get(uri.toString());
 
       List<TopicModel> data = List<TopicModel>.from((response.data['value'] as List<dynamic>).map<TopicModel>((x) => TopicModel.fromMap(x as Map<String,dynamic>),),);
 
@@ -164,4 +182,4 @@ class MainRepository {
 final mainRepositoryProvider = Provider((ref) {
   final dio = ref.watch(dioProvider);
   return MainRepository(ref: ref, dio: dio);
-});
+}); 

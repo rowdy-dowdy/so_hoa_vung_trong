@@ -29,7 +29,7 @@ class UserModel {
       'DiaChi': DiaChi,
       'SDT': SDT,
       'DiaChiEmail': DiaChiEmail,
-      'Avatar': Avatar.toString(),
+      'Avatar': Avatar?.toString(),
     };
   }
 
@@ -41,7 +41,7 @@ class UserModel {
       DiaChi: map['DiaChi'] != null ? map['DiaChi'] as String : null,
       SDT: map['SDT'] != null ? map['SDT'] as String : null,
       DiaChiEmail: map['DiaChiEmail'] != null ? map['DiaChiEmail'] as String : null,
-      Avatar: base64Decode(map['Avatar'] as String),
+      Avatar: map['Avatar'] != null ? base64Decode(map['Avatar'] as String) : null,
     );
   }
 

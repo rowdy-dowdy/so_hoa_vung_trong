@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:so_hoa_vung_trong/models/topic_category_model.dart';
+import 'package:so_hoa_vung_trong/models/user_model.dart';
 
 class TopicModel {
   final String Oid;
@@ -13,6 +14,7 @@ class TopicModel {
   final DateTime? NgaySua;
   final Uint8List? File;
   final TopicCategoryModel? DanhMucChuDe;
+  final UserModel? NguoiTao;
 
   TopicModel({
     required this.Oid,
@@ -23,6 +25,7 @@ class TopicModel {
     this.NgaySua,
     this.File,
     this.DanhMucChuDe,
+    this.NguoiTao,
   });
 
   Map<String, dynamic> toMap() {
@@ -31,10 +34,11 @@ class TopicModel {
       'TieuDe': TieuDe,
       'NoiDung': NoiDung,
       'TrangThai': TrangThai,
-      'NgayTao': NgayTao?.millisecondsSinceEpoch,
-      'NgaySua': NgaySua?.millisecondsSinceEpoch,
+      'NgayTao': NgayTao?.toString(),
+      'NgaySua': NgaySua?.toString(),
       'File': File?.toString(),
       'DanhMucChuDe': DanhMucChuDe?.toMap(),
+      'NguoiTao': NguoiTao?.toMap(),
     };
   }
 
@@ -44,10 +48,11 @@ class TopicModel {
       TieuDe: map['TieuDe'] != null ? map['TieuDe'] as String : null,
       NoiDung: map['NoiDung'] != null ? map['NoiDung'] as String : null,
       TrangThai: map['TrangThai'] != null ? map['TrangThai'] as bool : null,
-      NgayTao: map['NgayTao'] != null ? DateTime.fromMillisecondsSinceEpoch(map['NgayTao'] as int) : null,
-      NgaySua: map['NgaySua'] != null ? DateTime.fromMillisecondsSinceEpoch(map['NgaySua'] as int) : null,
+      NgayTao: map['NgayTao'] != null ? DateTime.parse(map['NgayTao'] as String) : null,
+      NgaySua: map['NgaySua'] != null ? DateTime.parse(map['NgaySua'] as String) : null,
       File: map['File'] != null ? base64Decode(map['File'] as String) : null,
       DanhMucChuDe: map['DanhMucChuDe'] != null ? TopicCategoryModel.fromMap(map['DanhMucChuDe'] as Map<String,dynamic>) : null,
+      NguoiTao: map['NguoiTao'] != null ? UserModel.fromMap(map['NguoiTao'] as Map<String,dynamic>) : null,
     );
   }
 

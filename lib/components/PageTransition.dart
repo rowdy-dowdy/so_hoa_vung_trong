@@ -11,12 +11,13 @@ dynamic buildPageWithDefaultTransition<T>({
   required Widget child,
 }) {
 
-  bool isAnimation = true;
+  bool? isAnimation = true;
   bool mainLocation = listMainLocation.indexWhere((element) => element == state.location) >= 0;
-
+  print(isAnimation);
   if (mainLocation == true && oldMainLocation == true) {
     isAnimation = false;
   }
+  print(isAnimation);
   oldMainLocation = mainLocation;
 
   if (isAnimation) { 

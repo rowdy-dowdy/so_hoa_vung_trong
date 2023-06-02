@@ -6,6 +6,9 @@ import 'package:go_router/go_router.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:so_hoa_vung_trong/components/BottomBar.dart';
 import 'package:so_hoa_vung_trong/components/ExpandedText.dart';
+import 'package:so_hoa_vung_trong/components/expert/ItemTopic.dart';
+import 'package:so_hoa_vung_trong/components/loading/TopicsLoading.dart';
+import 'package:so_hoa_vung_trong/controllers/expert/topic_controller.dart';
 import 'package:so_hoa_vung_trong/utils/colors.dart';
 
 class ExpertPage extends ConsumerStatefulWidget {
@@ -32,6 +35,7 @@ class _ExpertPageState extends ConsumerState<ExpertPage> with TickerProviderStat
 
   @override
   Widget build(BuildContext context) {
+    final topicsData = ref.watch(topicsControllerProvider);
     return Scaffold(
       appBar: AppBar(
         flexibleSpace: Container(
@@ -104,107 +108,35 @@ class _ExpertPageState extends ConsumerState<ExpertPage> with TickerProviderStat
               builder: (context, constraints) {
                 return RefreshIndicator(
                   onRefresh: () async {
-                    
+                    ref.invalidate(topicsControllerProvider);
                   },
                   child: SingleChildScrollView(
                     physics: const AlwaysScrollableScrollPhysics(),
                     child: ConstrainedBox(
                       constraints: BoxConstraints(minHeight: constraints.maxHeight),
-                      child: Column(
-                        children: [
-                          for(var i = 0; i < 10; i++) ...[
-                            Container(
-                              margin: const EdgeInsets.all(12),
-                              padding: const EdgeInsets.symmetric(vertical: 12),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(6)
-                              ),
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                                      children: [
-                                        InkWell(
-                                          onTap: () => context.go('/expert/1'),
-                                          child: Row(
-                                            children: [
-                                              Container(
-                                                width: 40,
-                                                height: 40,
-                                                decoration: const BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  image: DecorationImage(
-                                                    image: AssetImage("assets/img/user.png"),
-                                                    fit: BoxFit.fill,
-                                                  )
-                                                ),
-                                              ),
-                                              const SizedBox(width: 10,),
-                                              const Expanded(
-                                                child: Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text("Nguyễn Việt Hùng", style: TextStyle(
-                                                      fontWeight: FontWeight.w500
-                                                    ),),
-                                                    Text("5 ngày trước", style: TextStyle(
-                                                      fontSize: 12,
-                                                      color: grey
-                                                    ),)
-                                                  ],
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                        const SizedBox(height: 10,),
-                                        ExpandedText(text: "lofsda f 321321 lofsda f 321321 lofsda f 321321 lofsda f 321321 lofsda f 321321 lofsda f 321321 lofsda f 321321 lofsda f 321321 lofsda f 321321 lofsda f 321321 lofsda f 321321 lofsda f 321321",),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(height: 10,),
-                                  CachedNetworkImage( 
-                                    imageUrl: "https://cdn.tgdd.vn/Files/2020/01/04/1229938/cach-nau-nui-thit-bo-nhanh-day-nang-luong-cho-bua-sang-202202231241209373.jpg",
-                                    imageBuilder: (context, imageProvider) => Hero(
-                                      tag: 'topic-${i}',
-                                      child: Image(
-                                        image: imageProvider, 
-                                        fit: BoxFit.cover
-                                      ),
-                                    ),
-                                    placeholder: (context, url) => Container(
-                                      height: 200,
-                                      child: const Center(child: CircularProgressIndicator())
-                                    ),
-                                    errorWidget: (context, url, error) => const Padding(
-                                      padding: EdgeInsets.all(8.0),
-                                      child: Center(child: Text("Không thể tải lịch học"),),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 10,),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                                    child: Row(
-                                      children: [
-                                        const Icon(CupertinoIcons.chat_bubble_2_fill),
-                                        const SizedBox(width: 10,),
-                                        const Text("5 thảo luận"),
-                                        const Spacer(),
-                                        TextButton(
-                                          onPressed: () => context.go('/expert/topic/1'), 
-                                          child: Text("Tham gia Thảo luận")
-                                        )
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                            )
-                          ]
-                        ],
+                      child: Consumer(
+                        builder: (context, ref, child) {
+                          final topics = topicsData.data;
+
+                          return Column(
+                            children: [
+                              for(var i = 0; i < topics.length; i++) ...[
+                                ItemTopic(topic: topics[i])
+                              ],
+
+                              if (topicsData.loading) ...[
+                                const TopicsLoading()
+                              ],
+
+                              if (topics.isEmpty) ...[
+                                SizedBox(
+                                  height: constraints.maxHeight,
+                                  child: const Center(child: Text("Không có câu hỏi nào"))
+                                )
+                              ]
+                            ],
+                          );
+                        }
                       ),
                     )
                   )

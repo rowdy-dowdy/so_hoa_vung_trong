@@ -22,10 +22,11 @@ class LandingNotifier extends StateNotifier<LandingDataModel> {
   }
   
   void init() async {
-    state = LandingDataModel(loading: true, firstRunApp: true);
-    final prefs = await ref.read(sharedPrefsProvider.future);
-    String? landing = prefs.getString('landing');
-    state = LandingDataModel(loading: false, firstRunApp: landing?.isEmpty ?? true);
+    state = LandingDataModel(loading: false, firstRunApp: true);
+    // state = LandingDataModel(loading: true, firstRunApp: true);
+    // final prefs = await ref.read(sharedPrefsProvider.future);
+    // String? landing = prefs.getString('landing');
+    // state = LandingDataModel(loading: false, firstRunApp: landing?.isEmpty ?? true);
   }
 
   void gotoLogin() {

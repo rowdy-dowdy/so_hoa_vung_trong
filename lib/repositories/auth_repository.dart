@@ -82,11 +82,14 @@ class AuthRepository {
       if (rememberMe) {
         await prefs.setString('token', response.data['token']);
         await prefs.setString('id', response.data['user']['Oid']);
+        // await prefs.setString('id', response.data['user']['oid']);
       }
       // await prefs.setString('landing', 'true');
 
       UserModel user = UserModel.fromMap(response.data['user']);
-      print(user);
+
+      // UserModel user = UserModel(Oid: response.data['user']['oid']);
+
 
       return UserData(user: user, token: response.data['token']);
 

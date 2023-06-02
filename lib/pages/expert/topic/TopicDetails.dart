@@ -5,7 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:so_hoa_vung_trong/controllers/expert/topic_controller.dart';
 import 'package:so_hoa_vung_trong/utils/colors.dart';
+import 'package:so_hoa_vung_trong/utils/utils.dart';
 
 GlobalKey<MessageBottomBarState> globalKey = GlobalKey();
 
@@ -47,6 +49,14 @@ class _TopicDetailsState extends ConsumerState<TopicDetails> {
 
   @override
   Widget build(BuildContext context) {
+    final topic = ref.watch(topicDetailsProvider(widget.id));
+
+    if (topic == null) {
+      return const Scaffold(
+        body: Center(child: Text("Câu hỏi không tồn tại")),
+      );
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
       extendBody: true,
@@ -63,23 +73,23 @@ class _TopicDetailsState extends ConsumerState<TopicDetails> {
             Container(
               width: kTextTabBarHeight * 0.8,
               height: kTextTabBarHeight * 0.8,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
-                  image: AssetImage("assets/img/user.png"),
+                  image: topic.NguoiTao?.Avatar != null ? MemoryImage(topic.NguoiTao!.Avatar!) : const AssetImage("assets/img/user.png") as ImageProvider,
                   fit: BoxFit.fill,
                 )
               ),
             ),
             const SizedBox(width: 10,),
-            const Expanded(
+            Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Nguyễn Việt Hùng", style: TextStyle(
+                  Text(topic.NguoiTao?.Ten ?? "Nông hộ", style: const TextStyle(
                     fontWeight: FontWeight.w500
                   ),),
-                  Text("5 ngày trước", style: TextStyle(
+                  Text(formatTimeToString(topic.NgayTao), style: const TextStyle(
                     fontSize: 12,
                     color: grey
                   ),)
@@ -105,26 +115,17 @@ class _TopicDetailsState extends ConsumerState<TopicDetails> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(12),
-                    child: const Text("data"),
+                    child: Text(topic.NoiDung ?? ""),
                   ),
-                  CachedNetworkImage( 
-                    imageUrl: "https://cdn.tgdd.vn/Files/2020/01/04/1229938/cach-nau-nui-thit-bo-nhanh-day-nang-luong-cho-bua-sang-202202231241209373.jpg",
-                    imageBuilder: (context, imageProvider) => Hero(
-                      tag: 'topic-${0}',
+                  if (topic.File != null) ...[
+                    Hero(
+                      tag: 'topic-${topic.Oid}',
                       child: Image(
-                        image: imageProvider, 
+                        image: MemoryImage(topic.File!), 
                         fit: BoxFit.cover
                       ),
                     ),
-                    placeholder: (context, url) => Container(
-                      height: 200,
-                      child: const Center(child: CircularProgressIndicator())
-                    ),
-                    errorWidget: (context, url, error) => const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Center(child: Text("Không thể tải lịch học"),),
-                    ),
-                  ),
+                  ],
                   Container(
                     margin: const EdgeInsets.all(12),
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),

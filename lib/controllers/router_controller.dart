@@ -126,6 +126,7 @@ class RouterNotifier extends ChangeNotifier {
             state: state, 
             child: const ExpertPage(),
           ),
+          
           routes: [
             GoRoute(
               name: "topic-details",
