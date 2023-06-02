@@ -162,7 +162,7 @@ class MainRepository {
       Response response = await dio.get('/api/odata/Ticket?\$expand=DanhMucChuDe&\$filter=DanhMucChuDe/Oid eq 36213632-015f-4e9f-9009-72e4903ca310 and contains(tolower(TieuDe), tolower(\'$search\'))');
 
       var uri = Uri(path: '/api/odata/Ticket', queryParameters: {
-        '\$expand': 'DanhMucChuDe',
+        '\$expand': 'DanhMucChuDe,HoiThoais',
         '\$filter': 'DanhMucChuDe/Oid eq 36213632-015f-4e9f-9009-72e4903ca310 and contains(tolower(TieuDe), tolower(\'$search\'))',
       });
 
