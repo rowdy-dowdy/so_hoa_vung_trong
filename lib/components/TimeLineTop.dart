@@ -1,5 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:so_hoa_vung_trong/utils/colors.dart';
@@ -34,7 +33,7 @@ class _TimeLineTopState extends ConsumerState<TimeLineTop> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Container(
+                  SizedBox(
                     width: widget.size,
                     child: Column(
                       children: [
@@ -63,7 +62,7 @@ class _TimeLineTopState extends ConsumerState<TimeLineTop> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Container(
+                  SizedBox(
                     width: widget.size,
                     child: Center(
                       child: Container(

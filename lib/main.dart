@@ -2,12 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:so_hoa_vung_trong/services/firebase_cloud_messaging.dart';
 import 'package:so_hoa_vung_trong/services/theme_data.dart';
 import 'package:so_hoa_vung_trong/controllers/router_controller.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
 
 void main() async {
   // WidgetsFlutterBinding.ensureInitialized();

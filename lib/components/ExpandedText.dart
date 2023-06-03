@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ExpandedText extends StatefulWidget {
   final String text;
@@ -34,7 +33,7 @@ class _ExpandedTextState extends State<ExpandedText> {
         TextSpan(text: isExpanded ? widget.text : widget.text.substring(0, 100), style: widget.style),
         if (!isExpanded) ...[
           const TextSpan(text: "... "),
-          TextSpan(text: "Xem thêm", style: TextStyle(color: Colors.blue), recognizer: TapGestureRecognizer()
+          TextSpan(text: "Xem thêm", style: const TextStyle(color: Colors.blue), recognizer: TapGestureRecognizer()
             ..onTap = () => setState(() {
               isExpanded = true;
             })

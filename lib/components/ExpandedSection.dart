@@ -4,7 +4,7 @@ class ExpandedSection extends StatefulWidget {
 
   final Widget child;
   final bool expand;
-  ExpandedSection({this.expand = false, required this.child, super.key});
+  const ExpandedSection({this.expand = false, required this.child, super.key});
 
   @override
   _ExpandedSectionState createState() => _ExpandedSectionState();
@@ -25,7 +25,7 @@ class _ExpandedSectionState extends State<ExpandedSection> with SingleTickerProv
   void prepareAnimations() {
     expandController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 500)
+      duration: const Duration(milliseconds: 500)
     );
     animation = CurvedAnimation(
       parent: expandController,

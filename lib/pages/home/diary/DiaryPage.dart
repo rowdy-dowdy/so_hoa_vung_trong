@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
-import 'package:so_hoa_vung_trong/components/TimeLine.dart';
 import 'package:so_hoa_vung_trong/components/TimeLineTop.dart';
 import 'package:so_hoa_vung_trong/controllers/diary/diary_details_controller.dart';
 import 'package:so_hoa_vung_trong/utils/colors.dart';

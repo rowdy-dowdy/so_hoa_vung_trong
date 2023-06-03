@@ -2,6 +2,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:so_hoa_vung_trong/models/comment_model.dart';
 import 'package:so_hoa_vung_trong/models/topic_category_model.dart';
 import 'package:so_hoa_vung_trong/models/user_model.dart';
 
@@ -15,6 +16,7 @@ class TopicModel {
   final Uint8List? File;
   final TopicCategoryModel? DanhMucChuDe;
   final UserModel? NguoiTao;
+  List<CommentModel> HoiThoais;
 
   TopicModel({
     required this.Oid,
@@ -26,6 +28,7 @@ class TopicModel {
     this.File,
     this.DanhMucChuDe,
     this.NguoiTao,
+    required this.HoiThoais,
   });
 
   Map<String, dynamic> toMap() {
@@ -53,6 +56,7 @@ class TopicModel {
       File: map['File'] != null ? base64Decode(map['File'] as String) : null,
       DanhMucChuDe: map['DanhMucChuDe'] != null ? TopicCategoryModel.fromMap(map['DanhMucChuDe'] as Map<String,dynamic>) : null,
       NguoiTao: map['NguoiTao'] != null ? UserModel.fromMap(map['NguoiTao'] as Map<String,dynamic>) : null,
+      HoiThoais: List<CommentModel>.from((map['HoiThoais'] as List<dynamic>).map<CommentModel>((x) => CommentModel.fromMap(x as Map<String,dynamic>),),),
     );
   }
 

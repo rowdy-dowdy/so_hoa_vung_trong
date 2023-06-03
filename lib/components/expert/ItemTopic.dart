@@ -89,7 +89,7 @@ class _ItemTopicState extends ConsumerState<ItemTopic> {
               children: [
                 const Icon(CupertinoIcons.chat_bubble_2_fill),
                 const SizedBox(width: 10,),
-                const Text("5 thảo luận"),
+                Text("${widget.topic.HoiThoais.length} thảo luận"),
                 const Spacer(),
                 TextButton(
                   onPressed: () => Navigator.of(context).push<void>(

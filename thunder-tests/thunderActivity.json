@@ -234,11 +234,11 @@
     "colId": "history",
     "containerId": "",
     "name": "Nhat ky canh tac Copy",
-    "url": "https://app.kennatech.vn/mobileapp/api/odata/Ticket?$expand=HoiThoais/$count&$select=TieuDe",
+    "url": "https://app.kennatech.vn/mobileapp/api/odata/Ticket?$expand=HoiThoais&$select=TieuDe",
     "method": "GET",
     "sortNum": 0,
     "created": "2023-05-29T09:08:22.302Z",
-    "modified": "2023-06-02T13:16:50.336Z",
+    "modified": "2023-06-03T08:35:57.124Z",
     "headers": [
       {
         "name": "Accept",
@@ -258,7 +258,7 @@
     "params": [
       {
         "name": "$expand",
-        "value": "HoiThoais/$count",
+        "value": "HoiThoais",
         "isPath": false
       },
       {
@@ -270,12 +270,6 @@
       {
         "name": "$filter",
         "value": "contains(tolower(TieuDe), tolower('a'))",
-        "isDisabled": true,
-        "isPath": false
-      },
-      {
-        "name": "$apply",
-        "value": "aggregate(HoiThoais/$count as TotalComments, Oid)",
         "isDisabled": true,
         "isPath": false
       },

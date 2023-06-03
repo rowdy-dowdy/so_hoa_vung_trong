@@ -60,7 +60,7 @@ final appThemeProvider = Provider<AppTheme>((ref) {
     //     // foregroundColor: primary
     //   )
     // ),
-    textTheme: TextTheme(
+    textTheme: const TextTheme(
       // bodyMedium: TextStyle(color: Colors.grey[900]!),
     ),
     // iconTheme: IconThemeData(
@@ -71,43 +71,46 @@ final appThemeProvider = Provider<AppTheme>((ref) {
       floatingLabelStyle: const TextStyle(color: primary),
       border: OutlineInputBorder(
         borderSide: BorderSide(color: Colors.grey[400]!),
+        borderRadius: BorderRadius.circular(6)
       ),
       enabledBorder: OutlineInputBorder(
         borderSide: BorderSide(color: Colors.grey[400]!),
+        borderRadius: BorderRadius.circular(6)
       ),
-      errorBorder: const OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.red),
+      errorBorder: OutlineInputBorder(
+        borderSide: const BorderSide(color: Colors.red),
+        borderRadius: BorderRadius.circular(6)
       ),
       
       isDense: true,
-      contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15.0),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12.0),
     ),
-    tabBarTheme: TabBarTheme(
-      labelPadding: const EdgeInsets.symmetric(horizontal: 0.0),
-      indicatorColor: Colors.transparent,
-      dividerColor: Colors.transparent,
-      indicatorSize: TabBarIndicatorSize.label,
-      indicator: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            spreadRadius: 1,
-            blurRadius: 5,
-            offset: const Offset(0, 1), // changes position of shadow
-          ),
-        ]
-      ),
-      labelColor: primary,
-      unselectedLabelColor: Colors.black,
-    ),
+    // tabBarTheme: TabBarTheme(
+    //   labelPadding: const EdgeInsets.symmetric(horizontal: 0.0),
+    //   indicatorColor: Colors.transparent,
+    //   dividerColor: Colors.transparent,
+    //   indicatorSize: TabBarIndicatorSize.label,
+    //   indicator: BoxDecoration(
+    //     borderRadius: BorderRadius.circular(5),
+    //     color: Colors.white,
+    //     boxShadow: [
+    //       BoxShadow(
+    //         color: Colors.black.withOpacity(0.2),
+    //         spreadRadius: 1,
+    //         blurRadius: 5,
+    //         offset: const Offset(0, 1), // changes position of shadow
+    //       ),
+    //     ]
+    //   ),
+    //   labelColor: primary,
+    //   unselectedLabelColor: Colors.black,
+    // ),
     navigationBarTheme: NavigationBarThemeData(
       indicatorColor: primary,
       labelTextStyle: MaterialStateProperty.all(
         const TextStyle(fontSize: 12, fontWeight: FontWeight.w500)
       ),
       elevation: 0,
-    )
+    ),
   ));
 });

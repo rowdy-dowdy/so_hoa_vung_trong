@@ -49,7 +49,7 @@ class _ListExpertState extends ConsumerState<ListExpert> {
   @override
   Widget build(BuildContext context) {
     final experts = ref.watch(expertsProvider);
-     return Container(
+     return SizedBox(
       height: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -86,7 +86,7 @@ class _ListExpertState extends ConsumerState<ListExpert> {
                           print(experts);
                     
                           if (experts.isEmpty) {
-                            return Center(child: Text("Không có chuyên gia nào"),);
+                            return const Center(child: Text("Không có chuyên gia nào"),);
                           }
                     
                           return Column(
@@ -122,15 +122,15 @@ class _ListExpertState extends ConsumerState<ListExpert> {
                                   Expanded(
                                     child: Container(
                                       constraints: const BoxConstraints(minHeight: 55),
-                                      child: Column(
+                                      child: const Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         mainAxisAlignment: MainAxisAlignment.start,
                                         children: [
-                                          Text("Nguyễn Việt Hùng", style: const TextStyle(
+                                          Text("Nguyễn Việt Hùng", style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w500
                                           ),),
-                                          const SizedBox(height: 5,),
+                                          SizedBox(height: 5,),
                                           Text("viet.hung.2898@gmail.com"),
                                         ],
                                       ),
@@ -184,7 +184,7 @@ class StudentLoadingWidget extends ConsumerWidget {
                 Container(
                   width: 55,
                   height: 55,
-                  decoration: BoxDecoration(color: Colors.grey, shape: BoxShape.circle),
+                  decoration: const BoxDecoration(color: Colors.grey, shape: BoxShape.circle),
                   // color: Colors.grey
                 ),
                 const SizedBox(width: 15,),

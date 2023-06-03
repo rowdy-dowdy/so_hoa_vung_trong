@@ -57,7 +57,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       builder: (context, ref, child) {
         final landing = ref.watch(landingControllerProvider);
 
-        if (landing.loading) return SizedBox();
+        if (landing.loading) return const SizedBox();
 
         if (landing.firstRunApp) {
           return const Landing();

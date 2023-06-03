@@ -33,13 +33,13 @@ class RouterNotifier extends ChangeNotifier {
     
     if (auth.authState == AuthState.initial) return null;
 
-    final areWeLoginIn = loginPages.indexWhere((e) => e == state.subloc);
+    final areWeLoginIn = loginPages.indexWhere((e) => e == state.matchedLocation);
 
     if (auth.authState != AuthState.login) {
       return areWeLoginIn >= 0 ? null : loginPages[0];
     }
 
-    if (areWeLoginIn >= 0 || state.subloc == "/loading") {
+    if (areWeLoginIn >= 0 || state.matchedLocation == "/loading") {
       return '/';
     }
 
@@ -80,12 +80,12 @@ class RouterNotifier extends ChangeNotifier {
             GoRoute(
               name: "diary",
               path: "diary/:id",
-              builder: (context, state) => DiaryPage(id: state.params['id'] ?? ""),
+              builder: (context, state) => DiaryPage(id: state.pathParameters['id'] ?? ""),
               routes: [
                 GoRoute(
                   name: "diary-edit",
                   path: "edit",
-                  builder: (context, state) => DiaryEditPage(id: state.params['id'] ?? ""),
+                  builder: (context, state) => DiaryEditPage(id: state.pathParameters['id'] ?? ""),
                 ),
               ]
             ),
@@ -120,7 +120,7 @@ class RouterNotifier extends ChangeNotifier {
         GoRoute(
           name: "expert",
           path: "/expert",
-          // builder: (context, state) => const HomeStudentPage(),
+          // builder: (context, state) => const ExpertPage(),
           pageBuilder: (context, state) => buildPageWithDefaultTransition(
             context: context, 
             state: state, 
@@ -131,7 +131,7 @@ class RouterNotifier extends ChangeNotifier {
             GoRoute(
               name: "topic-details",
               path: ":id",
-              builder: (context, state) => TopicDetails(id: state.params['id'] ?? ""),
+              builder: (context, state) => TopicDetails(id: state.pathParameters['id'] ?? ""),
             ),
           ]
         ),

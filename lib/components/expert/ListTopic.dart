@@ -86,15 +86,15 @@ class _ListTopicState extends ConsumerState<ListTopic> {
                           CachedNetworkImage( 
                             imageUrl: "https://cdn.tgdd.vn/Files/2020/01/04/1229938/cach-nau-nui-thit-bo-nhanh-day-nang-luong-cho-bua-sang-202202231241209373.jpg",
                             imageBuilder: (context, imageProvider) => Hero(
-                              tag: 'topic-${i}',
+                              tag: 'topic-$i',
                               child: Image(
                                 image: imageProvider, 
                                 fit: BoxFit.cover
                               ),
                             ),
-                            placeholder: (context, url) => Container(
+                            placeholder: (context, url) => const SizedBox(
                               height: 200,
-                              child: const Center(child: CircularProgressIndicator())
+                              child: Center(child: CircularProgressIndicator())
                             ),
                             errorWidget: (context, url, error) => const Padding(
                               padding: EdgeInsets.all(8.0),
@@ -112,7 +112,7 @@ class _ListTopicState extends ConsumerState<ListTopic> {
                                 const Spacer(),
                                 TextButton(
                                   onPressed: () => context.go('/expert/topic/1'), 
-                                  child: Text("Tham gia Thảo luận")
+                                  child: const Text("Tham gia Thảo luận")
                                 )
                               ],
                             ),

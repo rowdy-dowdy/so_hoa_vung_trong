@@ -1,5 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
@@ -49,12 +48,12 @@ class AuthRepository {
     // await Future.delayed(const Duration(seconds: 2));
     try {
       final prefs = await ref.read(sharedPrefsProvider.future);
-      String? token = await prefs.getString('token');
-      String? id = await prefs.getString('id');
+      String? token = prefs.getString('token');
+      String? id = prefs.getString('id');
 
       if (token == null || id == null) return null;
 
-      dio.options.headers['Authorization'] = "Bearer ${token}";
+      dio.options.headers['Authorization'] = "Bearer $token";
       Response response = await dio.get('/api/odata/ApplicationUser($id)');
 
       UserModel user = UserModel.fromMap(response.data);

@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -99,7 +98,7 @@ class _TopicDetailsState extends ConsumerState<TopicDetails> {
           ],
         ),
         leading: IconButton(
-          onPressed: () => context.go('/expert'),
+          onPressed: () => context.pop(),
           icon: const Icon(CupertinoIcons.back),
         ),
       ),
@@ -139,11 +138,11 @@ class _TopicDetailsState extends ConsumerState<TopicDetails> {
                       children: [
                         const Icon(CupertinoIcons.chat_bubble_2_fill),
                         const SizedBox(width: 10,),
-                        const Text("5 thảo luận"),
+                        Text("${topic.HoiThoais.length} thảo luận"),
                         const Spacer(),
                         TextButton(
                           onPressed: () => unitCodeCtrlFocusNode.requestFocus(), 
-                          child: Text("Thảo luận")
+                          child: const Text("Bắt đầu thảo luận")
                         )
                       ],
                     ),
@@ -152,8 +151,9 @@ class _TopicDetailsState extends ConsumerState<TopicDetails> {
                     child: ListView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemCount: 10,
+                      itemCount: topic.HoiThoais.length,
                       itemBuilder: (context, index) {
+                        final comment = topic.HoiThoais[index];
                         return Container(
                           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                           child: Row(
@@ -184,16 +184,16 @@ class _TopicDetailsState extends ConsumerState<TopicDetails> {
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          const Text("Nguyễn Việt Hùng", style: TextStyle(fontWeight: FontWeight.w500),),
-                                          const SizedBox(height: 3,),
-                                          const Text("Nguyễnfsadf sdfsad fasdf sadfsadf asdfasdfdsa sdafsd fasdf ")
+                                          Text("Nguyễn Việt Hùng", style: TextStyle(fontWeight: FontWeight.w500),),
+                                          SizedBox(height: 3,),
+                                          Text(comment.NoiDung ?? "")
                                         ],
                                       ),
                                     ),
                                     const SizedBox(height: 3,),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(horizontal: 8),
-                                      child: const Text("8 phút", style: TextStyle(fontSize: 12, color: grey),),
+                                      child: Text(formatTimeToString(comment.NgayTao), style: const TextStyle(fontSize: 12, color: grey),),
                                     )
                                   ],
                                 ),
@@ -250,7 +250,7 @@ class MessageBottomBarState extends ConsumerState<MessageBottomBar> {
         filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
         child: Container(
           // width: double.infinity,
-          color: Color.fromARGB(255, 215, 214, 221).withOpacity(0.8),
+          color: const Color.fromARGB(255, 215, 214, 221).withOpacity(0.8),
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           child: Row(
             children: [
@@ -263,7 +263,7 @@ class MessageBottomBarState extends ConsumerState<MessageBottomBar> {
                   child: TextField(
                     controller: textMessageController,
                     focusNode: widget.unitCodeCtrlFocusNode,
-                    style: TextStyle(fontSize: 14),
+                    style: const TextStyle(fontSize: 14),
                     onChanged: (value) {
                       if (value.isEmpty && !isTextEmpty) {
                         setState(() {
@@ -279,7 +279,7 @@ class MessageBottomBarState extends ConsumerState<MessageBottomBar> {
                     decoration: const InputDecoration(
                       focusedBorder: InputBorder.none,
                       enabledBorder: InputBorder.none,
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8.0),
+                      contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8.0),
                       hintText: "Nội dung"
                     ),
                   ),

@@ -193,9 +193,67 @@ class NumericalRangeFormatter extends TextInputFormatter {
     if (newValue.text == '') {
       return newValue;
     } else if (double.parse(newValue.text) < min) {
-      return TextEditingValue().copyWith(text: min.toStringAsFixed(2));
+      return const TextEditingValue().copyWith(text: min.toStringAsFixed(2));
     } else {
       return double.parse(newValue.text) > max ? oldValue : newValue;
     }
   }
+}
+
+
+selectDate(BuildContext context) async {
+  final ThemeData theme = Theme.of(context);
+  switch (theme.platform) {
+    case TargetPlatform.android:
+    case TargetPlatform.fuchsia:
+    case TargetPlatform.linux:
+    case TargetPlatform.windows:
+      return buildMaterialDatePicker(context);
+    case TargetPlatform.iOS:
+    case TargetPlatform.macOS:
+      return buildCupertinoDatePicker(context);
+  }
+}
+
+/// This builds material date picker in Android
+buildMaterialDatePicker(BuildContext context) async {
+  late DateTime selectedDate = DateTime.now();
+  final DateTime? picked = await showDatePicker(
+    context: context,
+    locale: const Locale("vi"),
+    initialDate: selectedDate,
+    firstDate: DateTime(1900),
+    lastDate: DateTime(DateTime.now().year + 5),
+  );
+
+  if (picked != null && picked != selectedDate) {
+    return picked;
+  }
+}
+
+/// This builds cupertion date picker in iOS
+buildCupertinoDatePicker(BuildContext context) async {
+  late DateTime selectedDate = DateTime.now();
+  await showCupertinoModalPopup(
+    context: context,
+    builder: (BuildContext builder) {
+      return Container(
+        height: MediaQuery.of(context).copyWith().size.height / 3,
+        color: Colors.white,
+        child: CupertinoDatePicker(
+          mode: CupertinoDatePickerMode.date,
+          onDateTimeChanged: (picked) {
+            if (picked != null && picked != selectedDate) {
+              selectedDate = picked;
+            }
+          },
+          initialDateTime: selectedDate,
+          minimumYear: 1900,
+          maximumYear: DateTime.now().year + 5,
+        ),
+      );
+    }
+  );
+
+  return selectedDate;
 }

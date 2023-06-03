@@ -69,7 +69,7 @@ class _SettingsEditPageState extends ConsumerState<SettingsEditPage> {
                       color: Colors.grey.withOpacity(0.05),
                       spreadRadius: 1,
                       blurRadius: 5,
-                      offset: Offset(0, 1), // changes position of shadow
+                      offset: const Offset(0, 1), // changes position of shadow
                     ),
                   ]
                 ),
@@ -94,7 +94,7 @@ class _SettingsEditPageState extends ConsumerState<SettingsEditPage> {
                     decoration: BoxDecoration(border: Border(
                       bottom: BorderSide(color: Colors.grey[300]!)
                     )),
-                    child: Container(
+                    child: SizedBox(
                       width: double.infinity,
                       child: DropdownButtonFormField(
                         decoration: const InputDecoration(
@@ -120,11 +120,11 @@ class _SettingsEditPageState extends ConsumerState<SettingsEditPage> {
                     decoration: BoxDecoration(border: Border(
                       bottom: BorderSide(color: Colors.grey[300]!)
                     )),
-                    child: TextField(
+                    child: const TextField(
                       // controller: dateController,
                       readOnly: true,
                       // onTap: () => _selectDate(context),
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         hintText: 'Ngày sinh',
                         border: InputBorder.none,
                         enabledBorder: InputBorder.none,
@@ -136,9 +136,9 @@ class _SettingsEditPageState extends ConsumerState<SettingsEditPage> {
                     decoration: BoxDecoration(border: Border(
                       bottom: BorderSide(color: Colors.grey[300]!)
                     )),
-                    child: TextField(
+                    child: const TextField(
                       // controller: addressController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         hintText: 'Địa chỉ',
                         border: InputBorder.none,
                         enabledBorder: InputBorder.none,
@@ -147,9 +147,9 @@ class _SettingsEditPageState extends ConsumerState<SettingsEditPage> {
                     ),
                   ),
                   Container(
-                    child: TextField(
+                    child: const TextField(
                       // controller: phoneController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         hintText: 'Số điện thoại',
                         border: InputBorder.none,
                         enabledBorder: InputBorder.none,
@@ -176,7 +176,7 @@ class _SettingsEditPageState extends ConsumerState<SettingsEditPage> {
                       color: Colors.grey.withOpacity(0.05),
                       spreadRadius: 1,
                       blurRadius: 5,
-                      offset: Offset(0, 1), // changes position of shadow
+                      offset: const Offset(0, 1), // changes position of shadow
                     ),
                   ]
                 ),
@@ -185,9 +185,9 @@ class _SettingsEditPageState extends ConsumerState<SettingsEditPage> {
                     decoration: BoxDecoration(border: Border(
                       bottom: BorderSide(color: Colors.grey[300]!)
                     )),
-                    child: TextField(
+                    child: const TextField(
                       // controller: emailController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         hintText: 'Tài khoản',
                         border: InputBorder.none,
                         enabledBorder: InputBorder.none,
@@ -196,7 +196,7 @@ class _SettingsEditPageState extends ConsumerState<SettingsEditPage> {
                     ),
                   ),
                   Container(
-                    child: TextField(
+                    child: const TextField(
                       // controller: passwordController,
                       // obscureText: !showPassword,
                       decoration: InputDecoration(

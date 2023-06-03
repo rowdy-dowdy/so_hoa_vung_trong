@@ -201,7 +201,7 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
-                                      Text(diary.TenNhatKy ?? "", style: TextStyle(color: Colors.white), overflow: TextOverflow.ellipsis,),
+                                      Text(diary.TenNhatKy ?? "", style: const TextStyle(color: Colors.white), overflow: TextOverflow.ellipsis,),
                                       const SizedBox(height: 2,),
                                       Text(diary.NgayBatDau != null ? DateFormat("dd/MM/yyyy").format(diary.NgayBatDau!) : "", style: const TextStyle(
                                         color: Colors.white,

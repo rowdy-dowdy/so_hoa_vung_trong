@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
 import 'package:so_hoa_vung_trong/components/BottomBar.dart';
 import 'package:so_hoa_vung_trong/controllers/auth_controller.dart';
 import 'package:so_hoa_vung_trong/utils/colors.dart';
@@ -20,7 +19,7 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
   Widget build(BuildContext context) {
     final user = ref.watch(authControllerProvider).user;
     if (user == null) {
-      return Scaffold();
+      return const Scaffold();
     }
 
     return Scaffold(
@@ -113,7 +112,7 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                     color: Colors.grey.withOpacity(0.05),
                     spreadRadius: 1,
                     blurRadius: 5,
-                    offset: Offset(0, 1), // changes position of shadow
+                    offset: const Offset(0, 1), // changes position of shadow
                   ),
                 ]
               ),
@@ -185,7 +184,7 @@ class InfoWidget extends ConsumerWidget {
           Expanded(child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(label, style: TextStyle(
+              Text(label, style: const TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w500
               ),),

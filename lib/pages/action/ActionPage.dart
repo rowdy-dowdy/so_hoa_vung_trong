@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:so_hoa_vung_trong/components/BottomBar.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:so_hoa_vung_trong/utils/colors.dart';
 
 class ActionPage extends ConsumerStatefulWidget {
   const ActionPage({super.key});
@@ -59,7 +58,7 @@ class _ActionPageState extends ConsumerState<ActionPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Icon(list[index]['icon'], size: 30, color: Colors.white,),
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                     Text(list[index]['label'], style: const TextStyle(fontSize: 16, color: Colors.white), textAlign: TextAlign.center,)
                   ],
                 ),
