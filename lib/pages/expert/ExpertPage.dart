@@ -44,6 +44,9 @@ class _ExpertPageState extends ConsumerState<ExpertPage> with TickerProviderStat
           ),
         ),
         title: const Text("Trao đổi với chuyên gia", style: TextStyle(color: Colors.white),),
+        actions: [
+          IconButton(onPressed: () {}, icon: const Icon(CupertinoIcons.add_circled, color: Colors.white,))
+        ],
       ),
       body: Column(
         children: [

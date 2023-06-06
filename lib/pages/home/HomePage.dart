@@ -8,6 +8,7 @@ import 'package:so_hoa_vung_trong/components/Logo.dart';
 import 'package:so_hoa_vung_trong/components/loading/HomeListLoading.dart';
 import 'package:so_hoa_vung_trong/controllers/diary/diary_controller.dart';
 import 'package:so_hoa_vung_trong/controllers/home_controller.dart';
+import 'package:so_hoa_vung_trong/pages/home/nguyen-lieu/NguyenLieuDetailsPage.dart';
 import 'package:so_hoa_vung_trong/utils/colors.dart';
 import 'package:so_hoa_vung_trong/utils/utils.dart';
 
@@ -32,7 +33,7 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
   Widget build(BuildContext context) {
     // final size = MediaQuery.of(context).size;
     final diaryData = ref.watch(diaryControllerProvider);
-    final nguyenLieuData = ref.watch(listNguyenLieuProvider);
+    final nguyenLieuData = ref.watch(nguyenLieuControllerProvider);
     final phanBonData = ref.watch(listPhanBonProvider);
     final thietBiData = ref.watch(listThietBiProvider);
     final thuocData = ref.watch(listThuocProvider);
@@ -65,7 +66,7 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
           return RefreshIndicator(
             onRefresh: () async {
               ref.invalidate(diaryControllerProvider);
-              ref.invalidate(listNguyenLieuProvider);
+              ref.invalidate(nguyenLieuControllerProvider);
               ref.invalidate(listPhanBonProvider);
               ref.invalidate(listThietBiProvider);
               ref.invalidate(listThuocProvider);
@@ -224,87 +225,86 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                       padding: const EdgeInsets.only(left: 12, right:12, top: 10),
                       child: const Text("Nguyên vật liệu", style: TextStyle(fontWeight: FontWeight.w500),),
                     ),
-                    nguyenLieuData.when(
-                      skipLoadingOnRefresh: false,
-                      data: (data) {
-                        if (data.isEmpty) {
-                          return Container(
-                            color: Colors.white,
-                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                            child: const Text("Không có nguyên liệu nào")
-                          );
-                        }
+                    Consumer(builder: (context, ref, child) {
+                      if (nguyenLieuData.loading) {
+                        return const HomeListLoading();
+                      }
 
+                      if (nguyenLieuData.data.isEmpty) {
                         return Container(
-                          width: double.infinity,
-                          height: 200,
                           color: Colors.white,
-                          padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 12),
-                          child: ListView.separated(
-                            itemCount: data.length,
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            separatorBuilder: (context, index) => const SizedBox(width: 10,),
-                            itemBuilder: (context, index) {
-                              final item = data[index];
-                              return InkWell(
-                                // onTap: () => context.go('/${item.Oid}'),
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                          child: const Text("Không có nguyên liệu nào")
+                        );
+                      }
+
+                      return Container(
+                        width: double.infinity,
+                        height: 200,
+                        color: Colors.white,
+                        padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 12),
+                        child: ListView.separated(
+                          itemCount: nguyenLieuData.data.length,
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          separatorBuilder: (context, index) => const SizedBox(width: 10,),
+                          itemBuilder: (context, index) {
+                            final item = nguyenLieuData.data[index];
+                            return InkWell(
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => NguyenLieuDetailsPage(Oid: item.Oid,)),
+                              ),
+                              child: Container(
+                                width: 140,
+                                decoration: BoxDecoration(
+                                  color: primary.withOpacity(0.7),
+                                  borderRadius: BorderRadius.circular(6),
+                                  image: DecorationImage(
+                                    image: item.HinhAnh != null ? MemoryImage(item.HinhAnh!) : const AssetImage("assets/img/nguyen_lieu.jpg") as ImageProvider,
+                                    fit: BoxFit.cover
+                                  )
+                                ),
+                                margin: EdgeInsets.only(
+                                  left: index == 0 ? 12 : 0,
+                                  right: index == diaryData.data.length ? 12 : 0,
+                                ),
                                 child: Container(
-                                  width: 140,
+                                  padding: const EdgeInsets.all(8),
                                   decoration: BoxDecoration(
-                                    color: primary.withOpacity(0.7),
                                     borderRadius: BorderRadius.circular(6),
-                                    image: DecorationImage(
-                                      image: item.HinhAnh != null ? MemoryImage(item.HinhAnh!) : const AssetImage("assets/img/nguyen_lieu.jpg") as ImageProvider,
-                                      fit: BoxFit.cover
+                                    gradient: LinearGradient(
+                                      begin: Alignment.bottomCenter,
+                                      end: Alignment.topCenter,
+                                      colors: [
+                                        Colors.black.withOpacity(0.8),
+                                        Colors.black.withOpacity(0.6),
+                                        Colors.black.withOpacity(0.2),
+                                        Colors.black.withOpacity(0),
+                                        Colors.black.withOpacity(0),
+                                      ],
                                     )
                                   ),
-                                  margin: EdgeInsets.only(
-                                    left: index == 0 ? 12 : 0,
-                                    right: index == diaryData.data.length ? 12 : 0,
-                                  ),
-                                  child: Container(
-                                    padding: const EdgeInsets.all(8),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(6),
-                                      gradient: LinearGradient(
-                                        begin: Alignment.bottomCenter,
-                                        end: Alignment.topCenter,
-                                        colors: [
-                                          Colors.black.withOpacity(0.8),
-                                          Colors.black.withOpacity(0.6),
-                                          Colors.black.withOpacity(0.2),
-                                          Colors.black.withOpacity(0),
-                                          Colors.black.withOpacity(0),
-                                        ],
-                                      )
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Text(item.TenNguyenLieu?? "", style: const TextStyle(color: Colors.white), overflow: TextOverflow.ellipsis,),
-                                        const SizedBox(height: 2,),
-                                        Text(formatCurrency(item.Gia), style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 12
-                                        ),),
-                                      ],
-                                    ),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Text(item.TenNguyenLieu?? "", style: const TextStyle(color: Colors.white), overflow: TextOverflow.ellipsis,),
+                                      const SizedBox(height: 2,),
+                                      Text(formatCurrency(item.Gia), style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 12
+                                      ),),
+                                    ],
                                   ),
                                 ),
-                              );
-                            },
-                          ),
-                        );
-                      },
-                      loading: () => const HomeListLoading(),
-                      error: (_, __) => Container(
-                        color: Colors.white,
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                        child: const Text("Không thể tải nguyên liệu")
-                      )
-                    ),
+                              ),
+                            );
+                          },
+                        ),
+                      );
+
+                    },),
                     
                     const SizedBox(height: 10,),
 

@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:so_hoa_vung_trong/models/comment_model.dart';
 import 'package:so_hoa_vung_trong/models/topic_model.dart';
 import 'package:so_hoa_vung_trong/repositories/main_repository.dart';
 import 'package:collection/collection.dart';
@@ -26,6 +27,22 @@ class TopicsNotifier extends StateNotifier<TopicData> {
     state = state.addTopics(data);
   }
 
+  Future<bool> createComment({required String TopicOid, required String NoiDung}) async {
+    CommentModel? data = await ref.read(mainRepositoryProvider).createComment(TopicOid: TopicOid, NoiDung: NoiDung);
+
+    if (data != null) {
+      state = state.createComment(TopicOid, data);
+      return true;
+    }
+
+    return false;
+  }
+
+  TopicModel? getTopic(String Oid) {
+    TopicModel? topic = state.data.firstWhereOrNull((element) => element.Oid == Oid);
+    return topic;
+  }
+
   Future refresh() async {
     
   }
@@ -33,10 +50,6 @@ class TopicsNotifier extends StateNotifier<TopicData> {
 
 final topicsControllerProvider = StateNotifierProvider<TopicsNotifier, TopicData>((ref) {
   return TopicsNotifier(ref);
-});
-
-final topicDetailsProvider = Provider.family<TopicModel?, String>((ref, Oid) {
-  return ref.watch(topicsControllerProvider).data.firstWhereOrNull((element) => element.Oid == Oid);
 });
 
 class TopicData {
@@ -82,6 +95,16 @@ class TopicData {
     }
     else {
       currentPage += currentPage;
+    }
+
+    return TopicData(loading: false, currentPage: currentPage, perPage: perPage, isLastPage: isLastPage, data: data);
+  }
+
+  TopicData createComment (String TopicOid, CommentModel comment) {
+    int topicIndex = data.indexWhere((element) => element.Oid == TopicOid);
+
+    if (topicIndex >= 0) {
+      data[topicIndex].HoiThoais.add(comment);
     }
 
     return TopicData(loading: false, currentPage: currentPage, perPage: perPage, isLastPage: isLastPage, data: data);

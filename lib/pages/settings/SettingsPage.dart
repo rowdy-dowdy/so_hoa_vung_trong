@@ -142,6 +142,17 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                 ],
               )
             ),
+            const SizedBox(height: 20,),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: ElevatedButton(
+                onPressed: () {}, 
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.redAccent,
+                ),
+                child: const Text("Đăng xuất")
+              )
+            )
           ],
         )
       ),

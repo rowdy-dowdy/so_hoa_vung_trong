@@ -29,7 +29,7 @@ class UserModel {
       'DiaChi': DiaChi,
       'SDT': SDT,
       'DiaChiEmail': DiaChiEmail,
-      'Avatar': Avatar?.toString(),
+      'Avatar': Avatar != null ? base64Encode(Avatar!) : null,
     };
   }
 

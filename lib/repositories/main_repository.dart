@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:so_hoa_vung_trong/controllers/auth_controller.dart';
+import 'package:so_hoa_vung_trong/models/comment_model.dart';
 import 'package:so_hoa_vung_trong/models/diary_log_model.dart';
 import 'package:so_hoa_vung_trong/models/diary_model.dart';
 import 'package:so_hoa_vung_trong/models/nguyen_lieu.dart';
@@ -139,10 +141,11 @@ class MainRepository {
       filter += 'contains(tolower(TieuDe), tolower(\'$search\'))';
       
       var uri = Uri(path: '/api/odata/Ticket', queryParameters: {
-        '\$expand': 'DanhMucChuDe,NguoiTao,HoiThoais',
+        '\$expand': 'DanhMucChuDe,NguoiTao',
         '\$filter': filter,
         '\$skip': "$skip",
         '\$top': "$take",
+        '\$orderby': 'Oid'
       });
 
       Response response = await dio.get(uri.toString());
@@ -175,6 +178,55 @@ class MainRepository {
     } catch (e) {
       print(e);
       return [];
+    }
+  }
+
+  Future<List<CommentModel>> fetchComments({required String TopicOid}) async {
+    try {
+      var uri = Uri(path: '/api/odata/HoiThoai', queryParameters: {
+        '\$expand': 'NguoiTao',
+        '\$filter': 'Ticket/Oid eq $TopicOid',
+      });
+
+      Response response = await dio.get(uri.toString());
+
+      List<CommentModel> data = List<CommentModel>.from((response.data['value'] as List<dynamic>).map<CommentModel>((x) => CommentModel.fromMap(x as Map<String,dynamic>),),);
+
+      return data;
+
+    } catch (e) {
+      print(e);
+      return [];
+    }
+  }
+
+  Future<CommentModel?> createComment({required String TopicOid, required String NoiDung}) async {
+    try {
+      final currentUser = ref.watch(authControllerProvider).user;
+      if (currentUser == null) return null;
+
+      var uri = Uri(path: '/api/odata/HoiThoai');
+
+      Response response = await dio.post(uri.toString(), data: {
+        "NoiDung": NoiDung,
+        "NguoiTao": {
+          "Oid": currentUser.Oid
+        },
+        "Ticket": {
+          "Oid": TopicOid
+        }
+      });
+
+      CommentModel data = CommentModel.fromMap({
+        ...response.data,
+        'NguoiTao': currentUser.toMap()
+      });
+
+      return data;
+
+    } catch (e) {
+      print(e);
+      return null;
     }
   }
 }

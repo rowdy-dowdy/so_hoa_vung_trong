@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:so_hoa_vung_trong/components/ExpandedText.dart';
+import 'package:so_hoa_vung_trong/components/loading/CommentLoading.dart';
+import 'package:so_hoa_vung_trong/controllers/expert/comment_controller.dart';
 import 'package:so_hoa_vung_trong/models/topic_model.dart';
 import 'package:so_hoa_vung_trong/pages/expert/topic/TopicDetails.dart';
 import 'package:so_hoa_vung_trong/utils/colors.dart';
@@ -35,7 +37,10 @@ class _ItemTopicState extends ConsumerState<ItemTopic> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 InkWell(
-                  onTap: () => context.go('/expert/${widget.topic.Oid}'),
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => TopicDetails(id: widget.topic.Oid,)),
+                  ),
                   child: Row(
                     children: [
                       Container(
@@ -89,16 +94,21 @@ class _ItemTopicState extends ConsumerState<ItemTopic> {
               children: [
                 const Icon(CupertinoIcons.chat_bubble_2_fill),
                 const SizedBox(width: 10,),
-                Text("${widget.topic.HoiThoais.length} thảo luận"),
+                Consumer(
+                  builder: (context, ref, child) {
+                    final commentsData = ref.watch(commentsControllerProvider(widget.topic.Oid));
+                    if (commentsData.loading) {
+                      return const CommentCountLoading();
+                    }
+                    return Text("${commentsData.data.length} thảo luận");
+                  }
+                ),
                 const Spacer(),
                 TextButton(
-                  onPressed: () => Navigator.of(context).push<void>(
-                    MaterialPageRoute(
-                      builder: (context) => TopicDetails(
-                        id: widget.topic.Oid,
-                      ),
-                    ),
-                  ), 
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => TopicDetails(id: widget.topic.Oid,)),
+                  ),
                   child: const Text("Tham gia Thảo luận")
                 )
               ],

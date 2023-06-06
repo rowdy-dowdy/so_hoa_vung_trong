@@ -234,11 +234,11 @@
     "colId": "history",
     "containerId": "",
     "name": "Nhat ky canh tac Copy",
-    "url": "https://app.kennatech.vn/mobileapp/api/odata/Ticket?$expand=HoiThoais&$select=TieuDe",
+    "url": "https://app.kennatech.vn/mobileapp/api/odata/HoiThoai?$filter=(Ticket/Oid eq 04f497d7-459d-4763-8f38-3e2fc32d4ebe)&$expand=NguoiTao",
     "method": "GET",
     "sortNum": 0,
     "created": "2023-05-29T09:08:22.302Z",
-    "modified": "2023-06-03T08:35:57.124Z",
+    "modified": "2023-06-06T06:56:29.257Z",
     "headers": [
       {
         "name": "Accept",
@@ -257,14 +257,8 @@
     ],
     "params": [
       {
-        "name": "$expand",
-        "value": "HoiThoais",
-        "isPath": false
-      },
-      {
         "name": "$filter",
-        "value": "(DanhMucChuDe/Oid eq c815ee4a-8798-4a9c-a193-58d6344662cd) and contains(tolower(TieuDe), tolower('a'))",
-        "isDisabled": true,
+        "value": "(Ticket/Oid eq 04f497d7-459d-4763-8f38-3e2fc32d4ebe)",
         "isPath": false
       },
       {
@@ -274,14 +268,14 @@
         "isPath": false
       },
       {
-        "name": "$select",
-        "value": "TieuDe",
+        "name": "$expand",
+        "value": "NguoiTao",
         "isPath": false
       }
     ],
     "body": {
       "type": "json",
-      "raw": "{\n  \"userName\": \"nguyenvana\",\n  \"password\": \"\"\n}",
+      "raw": "{\n\n  \"NoiDung\": \"fsadf\",\n  \"NguoiTao\": {\n    \"Oid\": \"25b14b84-a59d-4410-9c54-4c2d3ccbca19\"\n  },\n  \"Ticket\": {\n    \"Oid\": \"04f497d7-459d-4763-8f38-3e2fc32d4ebe\"\n  }\n}",
       "form": []
     },
     "auth": {

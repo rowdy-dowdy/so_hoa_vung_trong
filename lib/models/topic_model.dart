@@ -2,6 +2,8 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart';
+
 import 'package:so_hoa_vung_trong/models/comment_model.dart';
 import 'package:so_hoa_vung_trong/models/topic_category_model.dart';
 import 'package:so_hoa_vung_trong/models/user_model.dart';
@@ -56,11 +58,42 @@ class TopicModel {
       File: map['File'] != null ? base64Decode(map['File'] as String) : null,
       DanhMucChuDe: map['DanhMucChuDe'] != null ? TopicCategoryModel.fromMap(map['DanhMucChuDe'] as Map<String,dynamic>) : null,
       NguoiTao: map['NguoiTao'] != null ? UserModel.fromMap(map['NguoiTao'] as Map<String,dynamic>) : null,
-      HoiThoais: List<CommentModel>.from((map['HoiThoais'] as List<dynamic>).map<CommentModel>((x) => CommentModel.fromMap(x as Map<String,dynamic>),),),
+      HoiThoais: map['HoiThoais'] != null ? List<CommentModel>.from((map['HoiThoais'] as List<dynamic>).map<CommentModel>((x) => CommentModel.fromMap(x as Map<String,dynamic>),),) : [],
     );
   }
 
   String toJson() => json.encode(toMap());
 
   factory TopicModel.fromJson(String source) => TopicModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  bool operator ==(covariant TopicModel other) {
+    if (identical(this, other)) return true;
+  
+    return 
+      other.Oid == Oid &&
+      other.TieuDe == TieuDe &&
+      other.NoiDung == NoiDung &&
+      other.TrangThai == TrangThai &&
+      other.NgayTao == NgayTao &&
+      other.NgaySua == NgaySua &&
+      other.File == File &&
+      other.DanhMucChuDe == DanhMucChuDe &&
+      other.NguoiTao == NguoiTao &&
+      listEquals(other.HoiThoais, HoiThoais);
+  }
+
+  @override
+  int get hashCode {
+    return Oid.hashCode ^
+      TieuDe.hashCode ^
+      NoiDung.hashCode ^
+      TrangThai.hashCode ^
+      NgayTao.hashCode ^
+      NgaySua.hashCode ^
+      File.hashCode ^
+      DanhMucChuDe.hashCode ^
+      NguoiTao.hashCode ^
+      HoiThoais.hashCode;
+  }
 }
