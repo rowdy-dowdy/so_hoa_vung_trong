@@ -64,6 +64,7 @@ class RouterNotifier extends ChangeNotifier {
       builder: (context, state, child) => child,
       routes: [
         GoRoute(
+
           name: "home",
           path: "/",
           // builder: (context, state) => const HomeStudentPage(),
@@ -138,7 +139,12 @@ class RouterNotifier extends ChangeNotifier {
             GoRoute(
               name: "topic-details",
               path: ":id",
-              builder: (context, state) => TopicDetails(id: state.pathParameters['id'] ?? ""),
+              pageBuilder: (context, state) => MaterialPage<void>(
+                key: state.pageKey,
+                restorationId: state.pageKey.value,
+                child: TopicDetails(id: state.pathParameters['id'] ?? ""),
+              ),
+              // builder: (context, state) => TopicDetails(id: state.pathParameters['id'] ?? ""),
             ),
           ]
         ),

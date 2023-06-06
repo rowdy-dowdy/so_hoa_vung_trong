@@ -37,9 +37,11 @@ class _ItemTopicState extends ConsumerState<ItemTopic> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 InkWell(
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => TopicDetails(id: widget.topic.Oid,)),
+                  // onTap: () => context.go('/expert/${widget.topic.Oid}'),
+                  onTap: () => Navigator.of(context).push(
+                    CupertinoPageRoute(
+                      builder: (context) => TopicDetails(id: widget.topic.Oid)
+                    ),
                   ),
                   child: Row(
                     children: [
@@ -107,7 +109,7 @@ class _ItemTopicState extends ConsumerState<ItemTopic> {
                 TextButton(
                   onPressed: () => Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => TopicDetails(id: widget.topic.Oid,)),
+                    CupertinoPageRoute(builder: (context) => TopicDetails(id: widget.topic.Oid,)),
                   ),
                   child: const Text("Tham gia Thảo luận")
                 )
@@ -118,4 +120,23 @@ class _ItemTopicState extends ConsumerState<ItemTopic> {
       ),
     );
   }
+}
+
+class MyPageRoute<T> extends PageRouteBuilder<T> {
+  final Widget child;
+  
+  MyPageRoute({required this.child})
+    : super(
+      pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+        return child;
+    },
+    transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+      return CupertinoPageTransition(
+        child: child,
+        linearTransition: false,
+        primaryRouteAnimation: animation,
+        secondaryRouteAnimation: secondaryAnimation,
+      );
+    }
+  );
 }

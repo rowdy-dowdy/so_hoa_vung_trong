@@ -10,7 +10,7 @@ dynamic buildPageWithDefaultTransition<T>({
   required GoRouterState state, 
   required Widget child,
 }) {
-
+  
   bool isAnimation = state.name == oldMainName;
   oldMainName = state.name ?? "";
 
