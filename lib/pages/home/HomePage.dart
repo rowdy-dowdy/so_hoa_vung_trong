@@ -118,7 +118,7 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                                     ),
                                   ),
                                   TextButton.icon(
-                                    onPressed: () => context.go('/diary/add'), 
+                                    onPressed: () => context.go('/diary/edit-add'), 
                                     icon: const Icon(CupertinoIcons.add, color: Colors.white,),
                                     label: const Text("Thêm mới", style: TextStyle(color: Colors.white),),
                                   ),
@@ -142,7 +142,7 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                           itemBuilder: (context, index) {
                             if (index == 0) {
                               return InkWell(
-                                onTap: () => context.go('/diary/add'),
+                                onTap: () => context.go('/diary/edit-add'),
                                 child: Container(
                                   width: 140,
                                   decoration: BoxDecoration(

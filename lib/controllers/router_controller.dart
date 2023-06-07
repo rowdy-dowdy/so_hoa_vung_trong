@@ -12,9 +12,9 @@ import 'package:so_hoa_vung_trong/pages/LoadingPage.dart';
 import 'package:so_hoa_vung_trong/pages/LoginPage.dart';
 import 'package:so_hoa_vung_trong/pages/action/ActionPage.dart';
 import 'package:so_hoa_vung_trong/pages/expert/ExpertPage.dart';
-import 'package:so_hoa_vung_trong/pages/home/diary/DiaryAddPage.dart';
-import 'package:so_hoa_vung_trong/pages/home/diary/DiaryEditPage.dart';
+import 'package:so_hoa_vung_trong/pages/home/diary/DiaryEditAddPage.dart';
 import 'package:so_hoa_vung_trong/pages/home/diary/DiaryPage.dart';
+import 'package:so_hoa_vung_trong/pages/home/diary/diaryLog/DiaryLogEditAddPage.dart';
 import 'package:so_hoa_vung_trong/pages/home/nguyen-lieu/NguyenLieuDetailsPage.dart';
 import 'package:so_hoa_vung_trong/pages/home/search/SearchSettings.dart';
 import 'package:so_hoa_vung_trong/pages/settings/SettingsEditPage.dart';
@@ -75,9 +75,9 @@ class RouterNotifier extends ChangeNotifier {
           ),
           routes: [
             GoRoute(
-              name: "diary-add",
-              path: "diary/add",
-              builder: (context, state) => const DiaryAddPage(),
+              name: "diary-edit-add",
+              path: "diary/edit-add",
+              builder: (context, state) => DiaryEditAddPage(Oid: state.queryParameters['Oid'] ?? ""),
             ),
             GoRoute(
               name: "diary",
@@ -85,9 +85,9 @@ class RouterNotifier extends ChangeNotifier {
               builder: (context, state) => DiaryPage(id: state.pathParameters['id'] ?? ""),
               routes: [
                 GoRoute(
-                  name: "diary-edit",
-                  path: "edit",
-                  builder: (context, state) => DiaryEditPage(id: state.pathParameters['id'] ?? ""),
+                  name: "diary-log-edit-add",
+                  path: "edit-add",
+                  builder: (context, state) => DiaryLogEditAddPage(Oid: state.queryParameters['Oid'] ?? ""),
                 ),
               ]
             ),

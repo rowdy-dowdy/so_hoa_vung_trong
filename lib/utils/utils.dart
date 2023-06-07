@@ -201,39 +201,39 @@ class NumericalRangeFormatter extends TextInputFormatter {
 }
 
 
-selectDate(BuildContext context) async {
+selectDate(BuildContext context, [DateTime? initialDate]) async {
+  initialDate ??= DateTime.now();
   final ThemeData theme = Theme.of(context);
   switch (theme.platform) {
     case TargetPlatform.android:
     case TargetPlatform.fuchsia:
     case TargetPlatform.linux:
     case TargetPlatform.windows:
-      return buildMaterialDatePicker(context);
+      return buildMaterialDatePicker(context, initialDate);
     case TargetPlatform.iOS:
     case TargetPlatform.macOS:
-      return buildCupertinoDatePicker(context);
+      return buildCupertinoDatePicker(context, initialDate);
   }
 }
 
 /// This builds material date picker in Android
-buildMaterialDatePicker(BuildContext context) async {
-  late DateTime selectedDate = DateTime.now();
+buildMaterialDatePicker(BuildContext context, DateTime initialDate) async {
   final DateTime? picked = await showDatePicker(
     context: context,
     locale: const Locale("vi"),
-    initialDate: selectedDate,
+    initialDate: initialDate,
     firstDate: DateTime(1900),
     lastDate: DateTime(DateTime.now().year + 5),
   );
 
-  if (picked != null && picked != selectedDate) {
+  if (picked != null && picked != initialDate) {
     return picked;
   }
 }
 
 /// This builds cupertion date picker in iOS
-buildCupertinoDatePicker(BuildContext context) async {
-  late DateTime selectedDate = DateTime.now();
+buildCupertinoDatePicker(BuildContext context, DateTime initialDate) async {
+  DateTime? picked = initialDate;
   await showCupertinoModalPopup(
     context: context,
     builder: (BuildContext builder) {
@@ -242,12 +242,12 @@ buildCupertinoDatePicker(BuildContext context) async {
         color: Colors.white,
         child: CupertinoDatePicker(
           mode: CupertinoDatePickerMode.date,
-          onDateTimeChanged: (picked) {
-            if (picked != null && picked != selectedDate) {
-              selectedDate = picked;
+          onDateTimeChanged: (date) {
+            if (date != initialDate) {
+              picked = date;
             }
           },
-          initialDateTime: selectedDate,
+          initialDateTime: initialDate,
           minimumYear: 1900,
           maximumYear: DateTime.now().year + 5,
         ),
@@ -255,5 +255,5 @@ buildCupertinoDatePicker(BuildContext context) async {
     }
   );
 
-  return selectedDate;
+  return picked;
 }

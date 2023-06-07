@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:so_hoa_vung_trong/controllers/auth_controller.dart';
 import 'package:so_hoa_vung_trong/models/comment_model.dart';
+import 'package:so_hoa_vung_trong/models/dat_model.dart';
 import 'package:so_hoa_vung_trong/models/diary_log_model.dart';
 import 'package:so_hoa_vung_trong/models/diary_model.dart';
 import 'package:so_hoa_vung_trong/models/nguyen_lieu.dart';
@@ -38,7 +39,7 @@ class MainRepository {
 
   Future<DiaryModel?> fetchDiaryById(String Oid) async {
     try {
-      Response response = await dio.get('/api/odata/NhatKyCanhTac/$Oid');
+      Response response = await dio.get('/api/odata/NhatKyCanhTac/$Oid?\$expand=Dat_CoSos');
 
       DiaryModel data = DiaryModel.fromMap(response.data);
 
@@ -111,6 +112,20 @@ class MainRepository {
       Response response = await dio.get('/api/odata/ThuocBVTV');
 
       List<ThuocModel> data = List<ThuocModel>.from((response.data['value'] as List<dynamic>).map<ThuocModel>((x) => ThuocModel.fromMap(x as Map<String,dynamic>),),);
+
+      return data;
+
+    } catch (e) {
+      print(e);
+      return [];
+    }
+  }
+
+  Future<List<DatModel>> fetchListDat() async {
+    try {
+      Response response = await dio.get('/api/odata/Dat_CoSo');
+
+      List<DatModel> data = List<DatModel>.from((response.data['value'] as List<dynamic>).map<DatModel>((x) => DatModel.fromMap(x as Map<String,dynamic>),),);
 
       return data;
 

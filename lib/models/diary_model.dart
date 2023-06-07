@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:so_hoa_vung_trong/models/dat_model.dart';
+
 enum DonViEnum {
   tan('tan'),
   ta('ta'),
@@ -12,7 +14,7 @@ enum DonViEnum {
 }
 
 extension ConvertCall on String {
-  DonViEnum toEnum() {
+  DonViEnum toDonViEnum() {
     switch (this) {
       case 'tan':
         return DonViEnum.tan;
@@ -41,6 +43,7 @@ class DiaryModel {
   final String? SanLuong;
   final DonViEnum? DonViSanLuong;
   final String? GhiChu;
+  final List<DatModel> Dat_CoSos;
 
   DiaryModel({
     required this.Oid,
@@ -55,6 +58,7 @@ class DiaryModel {
     this.SanLuong,
     this.DonViSanLuong,
     this.GhiChu,
+    required this.Dat_CoSos,
   });
 
   Map<String, dynamic> toMap() {
@@ -71,6 +75,7 @@ class DiaryModel {
       'SanLuong': SanLuong,
       'DonViSanLuong': DonViSanLuong?.type,
       'GhiChu': GhiChu,
+      'Dat_CoSos': Dat_CoSos.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -86,8 +91,9 @@ class DiaryModel {
       Nam: map['Nam'] != null ? map['Nam'] as String : null,
       TrangThai: map['TrangThai'] != null ? map['TrangThai'] as String : null,
       SanLuong: map['SanLuong'] != null ? map['SanLuong'] as String : null,
-      DonViSanLuong: map['DonViSanLuong'] != null ? (map['DonViSanLuong'] as String).toEnum() : null,
+      DonViSanLuong: map['DonViSanLuong'] != null ? (map['DonViSanLuong'] as String).toDonViEnum() : null,
       GhiChu: map['GhiChu'] != null ? map['GhiChu'] as String : null,
+      Dat_CoSos: map['Dat_CoSos'] != null ? List<DatModel>.from((map['Dat_CoSos'] as List<dynamic>).map<DatModel>((x) => DatModel.fromMap(x as Map<String,dynamic>),),) : [],
     );
   }
 
@@ -96,21 +102,25 @@ class DiaryModel {
   factory DiaryModel.fromJson(String source) => DiaryModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   String getSanLuong() {
-    return "$SanLuong ${donViToString()}";
+    return "$SanLuong ${donViToString(DonViSanLuong)}";
   }
 
-  String donViToString() {
-    switch (DonViSanLuong) {
-      case DonViEnum.tan:
-        return 'Tấn';
-      case DonViEnum.ta:
-        return 'Tạ';
-      case DonViEnum.yen:
-        return 'yến';
-      case DonViEnum.kg:
-        return 'Kg';
-      default:
-        return '';
-    }
+  int getDienTich() {
+    return Dat_CoSos.fold(0, (previousValue, element) => previousValue + (element.DienTich ?? 0));
+  }
+}
+
+String donViToString(DonViEnum? DonViSanLuong) {
+  switch (DonViSanLuong) {
+    case DonViEnum.tan:
+      return 'Tấn';
+    case DonViEnum.ta:
+      return 'Tạ';
+    case DonViEnum.yen:
+      return 'yến';
+    case DonViEnum.kg:
+      return 'Kg';
+    default:
+      return '';
   }
 }

@@ -5,6 +5,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:go_router/go_router.dart';
 import 'package:so_hoa_vung_trong/components/TimeLineTop.dart';
 import 'package:so_hoa_vung_trong/controllers/diary/diary_details_controller.dart';
+import 'package:so_hoa_vung_trong/pages/home/diary/DiaryEditAddPage.dart';
 import 'package:so_hoa_vung_trong/utils/colors.dart';
 import 'package:so_hoa_vung_trong/utils/utils.dart';
 
@@ -17,6 +18,31 @@ class DiaryPage extends ConsumerStatefulWidget {
 }
 
 class _DiaryStatePage extends ConsumerState<DiaryPage> {
+  late ScrollController _scrollController;
+  bool isScroll = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+    _scrollController.addListener(() {
+      if (_scrollController.offset > 5 && !isScroll) {
+        setState(() {
+          isScroll = true;
+        });
+      }
+      else if (_scrollController.offset < 5 && isScroll) {
+        setState(() {
+          isScroll = false;
+        });
+      }
+    });
+  }
+
+  @override void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +51,23 @@ class _DiaryStatePage extends ConsumerState<DiaryPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Nhật ký sản xuất"),
+        shape: isScroll ? Border(
+          bottom: BorderSide(
+            color: Colors.grey[300]!,
+            width: 1
+          )
+        ) : null,
         leading: IconButton(
           onPressed: () => context.go('/'),
           icon: const Icon(CupertinoIcons.back),
         ),
         actions: [
           IconButton(
-            onPressed: () => context.go('/diary/${widget.id}/edit'), 
+            onPressed: () => Navigator.of(context).push(
+              CupertinoPageRoute(
+                builder: (context) => DiaryEditAddPage(Oid: widget.id)
+              )
+            ), 
             icon: const Icon(CupertinoIcons.pencil_ellipsis_rectangle)
           )
         ],
@@ -66,6 +102,7 @@ class _DiaryStatePage extends ConsumerState<DiaryPage> {
                   height: double.infinity,
                   // color: Colors.white,
                   child: SingleChildScrollView(
+                    controller: _scrollController,
                     physics: const AlwaysScrollableScrollPhysics(),
                     // padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                     child: Column(
@@ -115,7 +152,7 @@ class _DiaryStatePage extends ConsumerState<DiaryPage> {
                               final list = <Map>[
                                 { "icon": CupertinoIcons.square_arrow_right, "label": 'Ngày bắt đầu', "value": formatTimeToString2(diary.NgayBatDau)},
                                 { "icon": CupertinoIcons.square_arrow_left, "label": 'Ngày kết thúc', "value": formatTimeToString2(diary.NgayKetThuc)},
-                                { "icon": CupertinoIcons.chart_bar_square, "label": 'Diện tích', "value": "${diary.DatCoSo} m²"},
+                                { "icon": CupertinoIcons.chart_bar_square, "label": 'Diện tích', "value": "${diary.getDienTich()} m²"},
                                 { "icon": CupertinoIcons.square_grid_2x2, "label": 'Sản lượng', "value": diary.getSanLuong()}
                               ];
                               return AlignedGridView.count(
@@ -207,11 +244,14 @@ class _DiaryStatePage extends ConsumerState<DiaryPage> {
                                                 ),
                                               ),
                                             ),
-                                            Container(
-                                              padding: const EdgeInsets.symmetric(horizontal: 12),
-                                              color: second,
-                                              child: const Center(
-                                                child: Icon(Icons.edit, color: Colors.white,),
+                                            InkWell(
+                                              onTap: () => context.go('/diary/${widget.id}/edit-add'),
+                                              child: Container(
+                                                padding: const EdgeInsets.symmetric(horizontal: 12),
+                                                color: second,
+                                                child: const Center(
+                                                  child: Icon(Icons.edit, color: Colors.white,),
+                                                ),
                                               ),
                                             )
                                           ],
@@ -239,7 +279,7 @@ class _DiaryStatePage extends ConsumerState<DiaryPage> {
                   right: 12,
                   left: 12,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () => context.go('/diary/${widget.id}/edit-add'),
                     child: const Text("Thêm mới chi tiết"),
                   ),
                 )

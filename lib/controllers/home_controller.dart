@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:so_hoa_vung_trong/models/dat_model.dart';
 import 'package:so_hoa_vung_trong/models/nguyen_lieu.dart';
 import 'package:so_hoa_vung_trong/models/phan_bon_model.dart';
 import 'package:so_hoa_vung_trong/models/thiet_bi_model.dart';
@@ -22,7 +23,7 @@ final listThuocProvider = FutureProvider<List<ThuocModel>>((ref) async {
   return ref.read(mainRepositoryProvider).fetchListThuoc();
 });
 
-
+// nguyen lieu
 class NguyenLieuDataModel {
   final bool loading;
   List<NguyenLieuModel> data;
@@ -36,9 +37,9 @@ class NguyenLieuDataModel {
       data = [];
 }
 
-class DiaryNotifier extends StateNotifier<NguyenLieuDataModel> {
+class NguyenLieuNotifier extends StateNotifier<NguyenLieuDataModel> {
   final Ref ref;
-  DiaryNotifier(this.ref): super(NguyenLieuDataModel.unknown()) {
+  NguyenLieuNotifier(this.ref): super(NguyenLieuDataModel.unknown()) {
     loadData();
   }
   
@@ -54,6 +55,43 @@ class DiaryNotifier extends StateNotifier<NguyenLieuDataModel> {
   }
 }
 
-final nguyenLieuControllerProvider = StateNotifierProvider<DiaryNotifier, NguyenLieuDataModel>((ref) {
-  return DiaryNotifier(ref);
+final nguyenLieuControllerProvider = StateNotifierProvider<NguyenLieuNotifier, NguyenLieuDataModel>((ref) {
+  return NguyenLieuNotifier(ref);
+});
+
+
+// dat
+class DatDataModel {
+  final bool loading;
+  List<DatModel> data;
+  DatDataModel({
+    required this.loading,
+    required this.data,
+  });
+
+  DatDataModel.unknown()
+    : loading = false,
+      data = [];
+}
+
+class DatNotifier extends StateNotifier<DatDataModel> {
+  final Ref ref;
+  DatNotifier(this.ref): super(DatDataModel.unknown()) {
+    loadData();
+  }
+  
+  Future loadData() async {
+    state = DatDataModel(loading: true, data: []);
+    var data = await ref.read(mainRepositoryProvider).fetchListDat();
+    state = DatDataModel(loading: false, data: data);
+  }
+
+  DatModel? getItem(String Oid) {
+    DatModel? topic = state.data.firstWhereOrNull((element) => element.Oid == Oid);
+    return topic;
+  }
+}
+
+final datControllerProvider = StateNotifierProvider<DatNotifier, DatDataModel>((ref) {
+  return DatNotifier(ref);
 });

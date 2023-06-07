@@ -76,11 +76,11 @@
     "colId": "history",
     "containerId": "",
     "name": "Nhat ky canh tac",
-    "url": "https://app.kennatech.vn/mobileapp/api/odata/NhatKyCanhTac/5a1e2efb-251c-4c57-a098-29b698edc934/ChiTietNhatKys/$ref",
+    "url": "https://app.kennatech.vn/mobileapp/api/odata/CongViec_TinhTrang",
     "method": "GET",
     "sortNum": 0,
     "created": "2023-05-29T09:08:22.302Z",
-    "modified": "2023-06-01T08:49:15.027Z",
+    "modified": "2023-06-07T10:31:35.207Z",
     "headers": [
       {
         "name": "Accept",
@@ -105,7 +105,7 @@
     },
     "auth": {
       "type": "bearer",
-      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjI1YjE0Yjg0LWE1OWQtNDQxMC05YzU0LTRjMmQzY2NiY2ExOSIsIlhhZlNlY3VyaXR5QXV0aFBhc3NlZCI6IlhhZlNlY3VyaXR5QXV0aFBhc3NlZCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJuZ3V5ZW52YW5hIiwiWGFmU2VjdXJpdHkiOiJYYWZTZWN1cml0eSIsIlhhZkxvZ29uUGFyYW1zIjoicTFZcUxVNHQ4a3ZNVFZXeVVzcExMNjFNelN0THpFdFUwbEVxU0N3dUxzOHZTZ0dLSzlVQ0FBPT0iLCJleHAiOjE2ODU1ODk4ODB9.6u7V5BUuGv_MOJS3gvnTHtAofrVM-v3uYBwnzA18nzM"
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjI1YjE0Yjg0LWE1OWQtNDQxMC05YzU0LTRjMmQzY2NiY2ExOSIsIlhhZlNlY3VyaXR5QXV0aFBhc3NlZCI6IlhhZlNlY3VyaXR5QXV0aFBhc3NlZCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJuZ3V5ZW52YW5hIiwiWGFmU2VjdXJpdHkiOiJYYWZTZWN1cml0eSIsIlhhZkxvZ29uUGFyYW1zIjoicTFZcUxVNHQ4a3ZNVFZXeVVzcExMNjFNelN0THpFdFUwbEVxU0N3dUxzOHZTZ0dLSzlVQ0FBPT0iLCJleHAiOjE4NDM1MzYwNTB9.qjgqiZJ3UsR0foWqzzNhifd-b1jrhnSlSBDrnBX6eQk"
     },
     "tests": []
   },
@@ -234,11 +234,11 @@
     "colId": "history",
     "containerId": "",
     "name": "Nhat ky canh tac Copy",
-    "url": "https://app.kennatech.vn/mobileapp/api/odata/HoiThoai?$filter=(Ticket/Oid eq 04f497d7-459d-4763-8f38-3e2fc32d4ebe)&$expand=NguoiTao",
+    "url": "https://app.kennatech.vn/mobileapp/api/odata/Dat_CoSo",
     "method": "GET",
     "sortNum": 0,
     "created": "2023-05-29T09:08:22.302Z",
-    "modified": "2023-06-06T06:56:29.257Z",
+    "modified": "2023-06-07T02:14:33.816Z",
     "headers": [
       {
         "name": "Accept",
@@ -258,18 +258,8 @@
     "params": [
       {
         "name": "$filter",
-        "value": "(Ticket/Oid eq 04f497d7-459d-4763-8f38-3e2fc32d4ebe)",
-        "isPath": false
-      },
-      {
-        "name": "$filter",
         "value": "contains(tolower(TieuDe), tolower('a'))",
         "isDisabled": true,
-        "isPath": false
-      },
-      {
-        "name": "$expand",
-        "value": "NguoiTao",
         "isPath": false
       }
     ],

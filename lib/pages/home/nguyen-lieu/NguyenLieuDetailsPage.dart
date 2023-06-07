@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:so_hoa_vung_trong/controllers/home_controller.dart';
+import 'package:so_hoa_vung_trong/models/nguyen_lieu.dart';
 import 'package:so_hoa_vung_trong/utils/utils.dart';
 
 class NguyenLieuDetailsPage extends ConsumerStatefulWidget {
@@ -146,7 +147,7 @@ class _NguyenLieuDetailsPageState extends ConsumerState<NguyenLieuDetailsPage> {
                         fontSize: 20,
                         fontWeight: FontWeight.w500
                       ),),
-                      Text("${item.DonGia}", style: const TextStyle(
+                      Text(donGiaToString(item.DonGia), style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500
                       ),),

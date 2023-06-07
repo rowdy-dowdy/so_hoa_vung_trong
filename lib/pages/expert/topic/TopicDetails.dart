@@ -43,6 +43,7 @@ class _TopicDetailsState extends ConsumerState<TopicDetails> {
 
   @override void dispose() {
     unitCodeCtrlFocusNode.dispose();
+    scrollController.dispose();
     super.dispose();
   }
 
@@ -235,7 +236,9 @@ class _TopicDetailsState extends ConsumerState<TopicDetails> {
       ),
       bottomNavigationBar: MessageBottomBar(id: widget.id, unitCodeCtrlFocusNode: unitCodeCtrlFocusNode, onChange: () {
         if(scrollController.hasClients){
-          scrollController.animateTo(scrollController.position.maxScrollExtent, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+          Future.delayed(const Duration(microseconds: 300), () {
+            scrollController.animateTo(scrollController.position.maxScrollExtent, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+          });
         }
       },),
     );
