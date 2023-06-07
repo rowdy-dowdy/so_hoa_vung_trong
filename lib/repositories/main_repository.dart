@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:so_hoa_vung_trong/controllers/auth_controller.dart';
 import 'package:so_hoa_vung_trong/models/comment_model.dart';
+import 'package:so_hoa_vung_trong/models/congviec_model.dart';
 import 'package:so_hoa_vung_trong/models/dat_model.dart';
 import 'package:so_hoa_vung_trong/models/diary_log_model.dart';
 import 'package:so_hoa_vung_trong/models/diary_model.dart';
@@ -126,6 +127,20 @@ class MainRepository {
       Response response = await dio.get('/api/odata/Dat_CoSo');
 
       List<DatModel> data = List<DatModel>.from((response.data['value'] as List<dynamic>).map<DatModel>((x) => DatModel.fromMap(x as Map<String,dynamic>),),);
+
+      return data;
+
+    } catch (e) {
+      print(e);
+      return [];
+    }
+  }
+
+  Future<List<CongViecModel>> fetchListCongViec() async {
+    try {
+      Response response = await dio.get('/api/odata/CongViec_TinhTrang');
+
+      List<CongViecModel> data = List<CongViecModel>.from((response.data['value'] as List<dynamic>).map<CongViecModel>((x) => CongViecModel.fromMap(x as Map<String,dynamic>),),);
 
       return data;
 
