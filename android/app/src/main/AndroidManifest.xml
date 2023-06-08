@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.so_hoa_vung_trong">
    <application
-        android:label="so_hoa_vung_trong"
+        android:label="Số Hóa Vùng Trồng"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

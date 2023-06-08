@@ -100,12 +100,9 @@ class AuthRepository {
 
   Future<void> logout() async {
     try {
-      var url = Uri.https(BASE_URL, '/api/logout');
-      await http.post(url);
-
       final prefs = await ref.read(sharedPrefsProvider.future);
-      await prefs.setString('token', "");
-      await prefs.setString('type', "");
+      await prefs.remove('token');
+      await prefs.remove('id');
 
     } catch (e) {}
   }

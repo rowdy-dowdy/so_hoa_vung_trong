@@ -11,6 +11,10 @@
   <key>CFBundleInfoDictionaryVersion</key>
   <string>6.0</string>
   <key>CFBundleName</key>
+	<string>Số Hóa Vùng Trồng</string>
+  <key>CFBundleDisplayName</key>
+	<string>Số Hóa Vùng Trồng</string>
+  <key>CFBundleName</key>
   <string>App</string>
   <key>CFBundlePackageType</key>
   <string>FMWK</string>

@@ -260,7 +260,11 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                           itemBuilder: (context, index) {
                             final item = nguyenLieuData.data[index];
                             return InkWell(
-                              onTap: () => context.go('/nguyen-lieu/${item.Oid}'),
+                              onTap: () => Navigator.of(context).push(
+                                CupertinoPageRoute(
+                                  builder: (context) => NguyenLieuDetailsPage(Oid: item.Oid)
+                                ),
+                              ),
                               child: Container(
                                 width: 140,
                                 decoration: BoxDecoration(

@@ -146,7 +146,7 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
               child: ElevatedButton(
-                onPressed: () {}, 
+                onPressed: () => ref.read(authControllerProvider.notifier).logout(), 
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.redAccent,
                 ),
