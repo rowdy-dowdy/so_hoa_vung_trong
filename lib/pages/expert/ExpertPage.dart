@@ -6,7 +6,22 @@ import 'package:so_hoa_vung_trong/components/BottomBar.dart';
 import 'package:so_hoa_vung_trong/components/expert/ItemTopic.dart';
 import 'package:so_hoa_vung_trong/components/loading/TopicsLoading.dart';
 import 'package:so_hoa_vung_trong/controllers/expert/topic_controller.dart';
+import 'package:so_hoa_vung_trong/models/topic_category_model.dart';
 import 'package:so_hoa_vung_trong/utils/colors.dart';
+
+final searchTextProvider = StateProvider<String>((ref) {
+  return "";
+});
+
+// final listSelectProvider = Provider<List<String>>((ref) {
+//   List<String> list = ref.watch(topicCategoriesProvider).whenData((value) => value).value?.map((e) => e.Oid).toList() ?? [];
+//   return list;
+// });
+
+final listSelectProvider = StateProvider<List<String>>((ref) {
+  List<String> list = ref.watch(topicCategoriesProvider).whenData((value) => value).value?.map((e) => e.Oid).toList() ?? [];
+  return list;
+});
 
 class ExpertPage extends ConsumerStatefulWidget {
   const ExpertPage({super.key});
@@ -15,24 +30,11 @@ class ExpertPage extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _ExpertPageState();
 }
 
-class _ExpertPageState extends ConsumerState<ExpertPage> with TickerProviderStateMixin {
-  late TabController tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    tabController = TabController(length: 2, vsync: this, initialIndex: 0);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    tabController.dispose();
-  }
-
+class _ExpertPageState extends ConsumerState<ExpertPage> {
   @override
   Widget build(BuildContext context) {
     final topicsData = ref.watch(topicsControllerProvider);
+    final topicCategories = ref.watch(topicCategoriesProvider);
     return Scaffold(
       appBar: AppBar(
         flexibleSpace: Container(
@@ -91,10 +93,11 @@ class _ExpertPageState extends ConsumerState<ExpertPage> with TickerProviderStat
                     IconButton(
                       onPressed: () => showCupertinoModalBottomSheet(
                         context: context,
-                        builder: (context) => const ListCategory(items: [
-                          {"label" : "fasdf", "value": true},
-                          {"label" : "fasdf", "value": true}
-                        ]),
+                        builder: (context) => topicCategories.when(
+                          data: (data) => ListCategory(items: data), 
+                          error: (_,__) => const Text("Không thể tải danh mục"), 
+                          loading: () => const Center(child: CircularProgressIndicator())
+                        ),
                       ), 
                       icon: const Icon(Icons.filter_alt_rounded, color: primary,)
                     ),
@@ -151,17 +154,19 @@ class _ExpertPageState extends ConsumerState<ExpertPage> with TickerProviderStat
   }
 }
 
-class ListCategory extends StatefulWidget {
-  final List<Map> items;
+class ListCategory extends ConsumerStatefulWidget {
+  final List<TopicCategoryModel> items;
   const ListCategory({required this.items, super.key});
 
   @override
-  State<ListCategory> createState() => _ListCategoryState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _ListCategoryState();
 }
 
-class _ListCategoryState extends State<ListCategory> {
+class _ListCategoryState extends ConsumerState<ListCategory> {
+
   @override
   Widget build(BuildContext context) {
+    final listSelect = ref.watch(listSelectProvider);
     return Material(
       child: SafeArea(
       top: false,
@@ -174,7 +179,14 @@ class _ListCategoryState extends State<ListCategory> {
             InkWell(
               onTap: () {
                 setState(() {
-                  e['value'] = !e['value'];
+                  int check = listSelect.indexWhere((element) => element == e.Oid);
+
+                  if (check >= 0) {
+                    ref.watch(listSelectProvider.notifier).update((state) => state.where((element) => element != e.Oid).toList());
+                  }
+                  else {
+                    ref.watch(listSelectProvider.notifier).update((state) => [...state, e.Oid]);
+                  }
                 });
               },
               child: Container(
@@ -186,16 +198,12 @@ class _ListCategoryState extends State<ListCategory> {
                       height: 24,
                       child: CupertinoCheckbox(
                         activeColor: primary,
-                        value: e['value'],
-                        onChanged: (newValue) {
-                          // setState(() {
-                          //   e['value'] = newValue ?? false;
-                          // });
-                        },
+                        value: listSelect.indexWhere((element) => element == e.Oid) >= 0,
+                        onChanged: (newValue) {},
                       ),
                     ),
                     const SizedBox(width: 5,),
-                    Text(e['label'], style: const TextStyle(fontWeight: FontWeight.w500),),
+                    Text(e.TenDanhMuc ?? "", style: const TextStyle(fontWeight: FontWeight.w500),),
                   ],
                 ),
               ),

@@ -192,14 +192,7 @@ class MainRepository {
 
   Future<List<TopicCategoryModel>> fetchTopicCategories([int page = 1, String search = '']) async {
     try {
-      Response response = await dio.get('/api/odata/Ticket?\$expand=DanhMucChuDe&\$filter=DanhMucChuDe/Oid eq 36213632-015f-4e9f-9009-72e4903ca310 and contains(tolower(TieuDe), tolower(\'$search\'))');
-
-      var uri = Uri(path: '/api/odata/Ticket', queryParameters: {
-        '\$expand': 'DanhMucChuDe',
-        '\$filter': 'DanhMucChuDe/Oid eq 36213632-015f-4e9f-9009-72e4903ca310 and contains(tolower(TieuDe), tolower(\'$search\'))',
-      });
-
-      print(uri);
+      Response response = await dio.get('/api/odata/DanhMucChuDe');
 
       List<TopicCategoryModel> data = List<TopicCategoryModel>.from((response.data['value'] as List<dynamic>).map<TopicCategoryModel>((x) => TopicCategoryModel.fromMap(x as Map<String,dynamic>),),);
 

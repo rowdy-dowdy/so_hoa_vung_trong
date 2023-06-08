@@ -20,6 +20,14 @@ dynamic buildPageWithDefaultTransition<T>({
       restorationId: state.pageKey.value,
       child: child,
     );
+    // return CustomTransitionPage<T>(
+    //   key: state.pageKey,
+    //   // transitionDuration: const Duration(milliseconds: 100),
+    //   child: child,
+    //   transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+    //     // FadeTransition(opacity: animation, child: child),
+    //     CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, child: child, linearTransition: false)
+    // );
   }
   else {
     return CustomTransitionPage<T>(

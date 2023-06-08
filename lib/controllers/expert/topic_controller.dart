@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:so_hoa_vung_trong/models/comment_model.dart';
+import 'package:so_hoa_vung_trong/models/topic_category_model.dart';
 import 'package:so_hoa_vung_trong/models/topic_model.dart';
 import 'package:so_hoa_vung_trong/repositories/main_repository.dart';
 import 'package:collection/collection.dart';
@@ -50,6 +51,10 @@ class TopicsNotifier extends StateNotifier<TopicData> {
 
 final topicsControllerProvider = StateNotifierProvider<TopicsNotifier, TopicData>((ref) {
   return TopicsNotifier(ref);
+});
+
+final topicCategoriesProvider = FutureProvider<List<TopicCategoryModel>>((ref) async {
+  return ref.read(mainRepositoryProvider).fetchTopicCategories();
 });
 
 class TopicData {
