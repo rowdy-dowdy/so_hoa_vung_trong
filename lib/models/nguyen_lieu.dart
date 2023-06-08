@@ -22,7 +22,7 @@ enum DonGiaEnum {
 }
 
 extension ConvertCall on String {
-  DonGiaEnum toEnum() {
+  DonGiaEnum toDonGiaEnum() {
     switch (this) {
       case 'Cai':
         return DonGiaEnum.Cai;
@@ -87,7 +87,7 @@ class NguyenLieuModel {
       Oid: map['Oid'] as String,
       TenNguyenLieu: map['TenNguyenLieu'] != null ? map['TenNguyenLieu'] as String : null,
       Gia: map['Gia'] != null ? map['Gia'] as int : null,
-      DonGia: map['DonGia'] != null ? (map['DonGia'] as String).toEnum() : null,
+      DonGia: map['DonGia'] != null ? (map['DonGia'] as String).toDonGiaEnum() : null,
       GhiChu: map['GhiChu'] != null ? map['GhiChu'] as String : null,
       HinhAnh: map['HinhAnh'] != null ? base64Decode(map['HinhAnh'] as String) : null,
     );

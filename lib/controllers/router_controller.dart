@@ -16,6 +16,7 @@ import 'package:so_hoa_vung_trong/pages/home/diary/DiaryEditAddPage.dart';
 import 'package:so_hoa_vung_trong/pages/home/diary/DiaryPage.dart';
 import 'package:so_hoa_vung_trong/pages/home/diary/diaryLog/DiaryLogEditAddPage.dart';
 import 'package:so_hoa_vung_trong/pages/home/nguyen-lieu/NguyenLieuDetailsPage.dart';
+import 'package:so_hoa_vung_trong/pages/home/nguyen-lieu/NguyenLieuPage.dart';
 import 'package:so_hoa_vung_trong/pages/home/search/SearchSettings.dart';
 import 'package:so_hoa_vung_trong/pages/settings/SettingsEditPage.dart';
 import 'package:so_hoa_vung_trong/pages/settings/SettingsPage.dart';
@@ -94,8 +95,15 @@ class RouterNotifier extends ChangeNotifier {
 
             GoRoute(
               name: "nguyen-lieu",
-              path: "nguyen-lieu/:id",
-              builder: (context, state) => NguyenLieuDetailsPage(Oid: state.pathParameters['id'] ?? ""),
+              path: "nguyen-lieu",
+              builder: (context, state) => const NguyenLieuPage(),
+              routes: [
+                GoRoute(
+                  name: "nguyen-lieu-details",
+                  path: ":id",
+                  builder: (context, state) => NguyenLieuDetailsPage(Oid: state.pathParameters['id'] ?? ""),
+                ),
+              ]
             ),
           ]
         ),

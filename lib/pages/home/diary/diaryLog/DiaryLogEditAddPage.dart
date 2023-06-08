@@ -5,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:so_hoa_vung_trong/controllers/home_controller.dart';
-import 'package:so_hoa_vung_trong/models/congviec_model.dart';
 import 'package:so_hoa_vung_trong/utils/colors.dart';
 import 'package:so_hoa_vung_trong/utils/utils.dart';
 
@@ -150,9 +149,9 @@ class _DiaryLogEditAddPageState extends ConsumerState<DiaryLogEditAddPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Consumer(builder: (context, ref, child) {
-                        final datCosoData = ref.watch(congViecControllerProvider);
+                        final datCoSoData = ref.watch(congViecControllerProvider);
 
-                        if (datCosoData.loading) {
+                        if (datCoSoData.loading) {
                           return const Center(child: CircularProgressIndicator(),);
                         }
 
@@ -181,7 +180,7 @@ class _DiaryLogEditAddPageState extends ConsumerState<DiaryLogEditAddPage> {
                                   'Chọn công việc',
                                   style: TextStyle(fontSize: 14),
                                 ),
-                                items: datCosoData.data.map((item) {
+                                items: datCoSoData.data.map((item) {
                                   return DropdownMenuItem<String>(
                                     value: item.Oid,
                                     child: Text(
@@ -217,60 +216,60 @@ class _DiaryLogEditAddPageState extends ConsumerState<DiaryLogEditAddPage> {
                                 ),
                               ),
                             ),
-
-                            const SizedBox(height: 20,),
-
-                            const Row(
-                              children: [
-                                Text("Ngày bắt đầu", style: TextStyle(fontWeight: FontWeight.w500),),
-                                SizedBox(width: 3,),
-                                Text("*", style: TextStyle(color: Colors.red),),
-                              ],
-                            ),
-                            const SizedBox(height: 5,),
-                            TextField(
-                              controller: _ngayLamViecController,
-                              readOnly: true,
-                              onTap: () async {
-                                DateTime initialDate;
-                                try {
-                                  initialDate = DateFormat("dd/MM/yyyy").parse(_ngayLamViecController.text);
-                                } catch (e) {
-                                  initialDate = DateTime.now();
-                                }
-                                DateTime? picked = await selectDate(context, initialDate);
-                                
-                                if (picked != null) {
-                                  _ngayLamViecController.text = DateFormat("dd/MM/yyyy").format(picked);
-                                }
-                              },
-                              decoration: const InputDecoration(
-                                hintText: 'Nhập ngày bắt đầu'
-                              ),
-                            ),
-
-                            const SizedBox(height: 20,),
-
-                            const Row(
-                              children: [
-                                Text("Ghi chú", style: TextStyle(fontWeight: FontWeight.w500),),
-                                SizedBox(width: 3,),
-                                Text("*", style: TextStyle(color: Colors.red),),
-                              ],
-                            ),
-                            const SizedBox(height: 5,),
-                            TextField(
-                              controller: _ghiChuController,
-                              keyboardType: TextInputType.multiline,
-                              minLines: 4,
-                              maxLines: null,
-                              decoration: const InputDecoration(
-                                hintText: 'Nhập ghi chú'
-                              ),
-                            ),
                           ],
                         );
-                      },)
+                      },),
+
+                      const SizedBox(height: 20,),
+
+                      const Row(
+                        children: [
+                          Text("Ngày làm việc", style: TextStyle(fontWeight: FontWeight.w500),),
+                          SizedBox(width: 3,),
+                          Text("*", style: TextStyle(color: Colors.red),),
+                        ],
+                      ),
+                      const SizedBox(height: 5,),
+                      TextField(
+                        controller: _ngayLamViecController,
+                        readOnly: true,
+                        onTap: () async {
+                          DateTime initialDate;
+                          try {
+                            initialDate = DateFormat("dd/MM/yyyy").parse(_ngayLamViecController.text);
+                          } catch (e) {
+                            initialDate = DateTime.now();
+                          }
+                          DateTime? picked = await selectDate(context, initialDate);
+                          
+                          if (picked != null) {
+                            _ngayLamViecController.text = DateFormat("dd/MM/yyyy").format(picked);
+                          }
+                        },
+                        decoration: const InputDecoration(
+                          hintText: 'Nhập ngày làm việc'
+                        ),
+                      ),
+
+                      const SizedBox(height: 20,),
+
+                      const Row(
+                        children: [
+                          Text("Ghi chú", style: TextStyle(fontWeight: FontWeight.w500),),
+                          SizedBox(width: 3,),
+                          Text("*", style: TextStyle(color: Colors.red),),
+                        ],
+                      ),
+                      const SizedBox(height: 5,),
+                      TextField(
+                        controller: _ghiChuController,
+                        keyboardType: TextInputType.multiline,
+                        minLines: 4,
+                        maxLines: null,
+                        decoration: const InputDecoration(
+                          hintText: 'Nhập ghi chú'
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -280,7 +279,96 @@ class _DiaryLogEditAddPageState extends ConsumerState<DiaryLogEditAddPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Consumer(builder: (context, ref, child) {
+                        final phanBonData = ref.watch(phanBonControllerProvider);
 
+                        if (phanBonData.loading) {
+                          return const Center(child: CircularProgressIndicator(),);
+                        }
+
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Row(
+                              children: [
+                                Text("Phân bón", style: TextStyle(fontWeight: FontWeight.w500),),
+                                SizedBox(width: 3,),
+                                Text("*", style: TextStyle(color: Colors.red),),
+                              ],
+                            ),
+                            const SizedBox(height: 5,),
+                            DropdownButtonHideUnderline(
+                              child: DropdownButtonFormField2(
+                                isExpanded: true,
+                                decoration: InputDecoration(
+                                  isDense: true,
+                                  contentPadding: const EdgeInsets.symmetric(horizontal: 0, vertical: 12),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                ),
+                                hint: const Text(
+                                  'Chọn phân bón',
+                                  style: TextStyle(fontSize: 14),
+                                ),
+                                items: phanBonData.data.map((item) {
+                                  return DropdownMenuItem<String>(
+                                    value: item.Oid,
+                                    child: Text(
+                                      item.TenPhanBon ?? "",
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                      ),
+                                    )
+                                  );
+                                }).toList(),
+                                validator: (value) {
+                                  if (value == null) {
+                                    return 'Vui lòng chọn phân bón.';
+                                  }
+                                  return null;
+                                },
+                                onChanged: (value) {
+                                  selectCongviec = value.toString();
+                                },
+                                iconStyleData: const IconStyleData(
+                                  icon: Icon(
+                                    Icons.arrow_drop_down,
+                                    color: Colors.black45,
+                                  ),
+                                  iconSize: 20,
+                                ),
+                                // value: selectedCongViecs.isEmpty ? null : selectedCongViecs.last,
+                                dropdownStyleData: DropdownStyleData(
+                                  offset: const Offset(0, -10),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      },),
+
+                      const SizedBox(height: 20,),
+
+                      const Row(
+                        children: [
+                          Text("Lượng sử dụng", style: TextStyle(fontWeight: FontWeight.w500),),
+                          SizedBox(width: 3,),
+                          Text("*", style: TextStyle(color: Colors.red),),
+                        ],
+                      ),
+                      const SizedBox(height: 5,),
+                      TextField(
+                        controller: _luongSuDungPhanController,
+                        enabled: false,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.grey[200]!
+                        ),
+                      ),
                     ]
                   )
                 ),
@@ -290,7 +378,115 @@ class _DiaryLogEditAddPageState extends ConsumerState<DiaryLogEditAddPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Consumer(builder: (context, ref, child) {
+                        final thuocData = ref.watch(thuocControllerProvider);
 
+                        if (thuocData.loading) {
+                          return const Center(child: CircularProgressIndicator(),);
+                        }
+
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Row(
+                              children: [
+                                Text("Sử dụng thuốc", style: TextStyle(fontWeight: FontWeight.w500),),
+                                SizedBox(width: 3,),
+                                Text("*", style: TextStyle(color: Colors.red),),
+                              ],
+                            ),
+                            const SizedBox(height: 5,),
+                            DropdownButtonHideUnderline(
+                              child: DropdownButtonFormField2(
+                                isExpanded: true,
+                                decoration: InputDecoration(
+                                  isDense: true,
+                                  contentPadding: const EdgeInsets.symmetric(horizontal: 0, vertical: 12),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                ),
+                                hint: const Text(
+                                  'Chọn thuốc',
+                                  style: TextStyle(fontSize: 14),
+                                ),
+                                items: thuocData.data.map((item) {
+                                  return DropdownMenuItem<String>(
+                                    value: item.Oid,
+                                    child: Text(
+                                      item.TenThuoc ?? "",
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                      ),
+                                    )
+                                  );
+                                }).toList(),
+                                validator: (value) {
+                                  if (value == null) {
+                                    return 'Vui lòng chọn thuôc.';
+                                  }
+                                  return null;
+                                },
+                                onChanged: (value) {
+                                  selectCongviec = value.toString();
+                                },
+                                iconStyleData: const IconStyleData(
+                                  icon: Icon(
+                                    Icons.arrow_drop_down,
+                                    color: Colors.black45,
+                                  ),
+                                  iconSize: 20,
+                                ),
+                                // value: selectedCongViecs.isEmpty ? null : selectedCongViecs.last,
+                                dropdownStyleData: DropdownStyleData(
+                                  offset: const Offset(0, -10),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      },),
+
+                      const SizedBox(height: 20,),
+
+                      const Row(
+                        children: [
+                          Text("Nồng độ pha loãng", style: TextStyle(fontWeight: FontWeight.w500),),
+                          SizedBox(width: 3,),
+                          Text("*", style: TextStyle(color: Colors.red),),
+                        ],
+                      ),
+                      const SizedBox(height: 5,),
+                      TextField(
+                        controller: _nongDoPhaLoangController,
+                        enabled: false,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.grey[200]!
+                        ),
+                      ),
+
+                      const SizedBox(height: 20,),
+
+                      const Row(
+                        children: [
+                          Text("Lượng sử dụng", style: TextStyle(fontWeight: FontWeight.w500),),
+                          SizedBox(width: 3,),
+                          Text("*", style: TextStyle(color: Colors.red),),
+                        ],
+                      ),
+                      const SizedBox(height: 5,),
+                      TextField(
+                        controller: _luongSuDungThuocController,
+                        enabled: false,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.grey[200]!
+                        ),
+                      ),
                     ]
                   )
                 ),
@@ -300,7 +496,82 @@ class _DiaryLogEditAddPageState extends ConsumerState<DiaryLogEditAddPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      const Row(
+                        children: [
+                          Text("Thời gian bắt đầu", style: TextStyle(fontWeight: FontWeight.w500),),
+                          SizedBox(width: 3,),
+                          Text("*", style: TextStyle(color: Colors.red),),
+                        ],
+                      ),
+                      const SizedBox(height: 5,),
+                      TextField(
+                        controller: _thoiGianBatDauController,
+                        readOnly: true,
+                        onTap: () async {
+                          DateTime initialDate;
+                          try {
+                            initialDate = DateFormat("dd/MM/yyyy HH:mm").parse(_thoiGianBatDauController.text);
+                          } catch (e) {
+                            initialDate = DateTime.now();
+                          }
+                          DateTime? picked = await selectDate(context, initialDate);
+                          
+                          if (picked != null) {
+                            _thoiGianBatDauController.text = DateFormat("dd/MM/yyyy HH:mm").format(picked);
+                          }
+                        },
+                        decoration: const InputDecoration(
+                          hintText: 'Nhập thời gian bắt đầu'
+                        ),
+                      ),
 
+                      const SizedBox(height: 20,),
+
+                      const Row(
+                        children: [
+                          Text("Thời gian kết thúc", style: TextStyle(fontWeight: FontWeight.w500),),
+                          SizedBox(width: 3,),
+                          Text("*", style: TextStyle(color: Colors.red),),
+                        ],
+                      ),
+                      const SizedBox(height: 5,),
+                      TextField(
+                        controller: _thoiGianKetThucController,
+                        readOnly: true,
+                        onTap: () async {
+                          DateTime initialDate;
+                          try {
+                            initialDate = DateFormat("dd/MM/yyyy HH:mm").parse(_thoiGianKetThucController.text);
+                          } catch (e) {
+                            initialDate = DateTime.now();
+                          }
+                          DateTime? picked = await selectDate(context, initialDate, true);
+
+                          print(picked); 
+                          
+                          if (picked != null) {
+                            _thoiGianKetThucController.text = DateFormat("dd/MM/yyyy HH:mm").format(picked);
+                          }
+                        },
+                        decoration: const InputDecoration(
+                          hintText: 'Nhập thời gian kết thúc'
+                        ),
+                      ),
+
+                      const SizedBox(height: 20,),
+
+                      const Row(
+                        children: [
+                          Text("Tổng thời gian", style: TextStyle(fontWeight: FontWeight.w500),),
+                          SizedBox(width: 3,),
+                          Text("*", style: TextStyle(color: Colors.red),),
+                        ],
+                      ),
+                      const SizedBox(height: 5,),
+                      TextField(
+                        controller: _tongThoiGianController,
+                        readOnly: true,
+                      ),
                     ]
                   )
                 ),
@@ -310,7 +581,119 @@ class _DiaryLogEditAddPageState extends ConsumerState<DiaryLogEditAddPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Consumer(builder: (context, ref, child) {
+                        final thietBiData = ref.watch(thietBiControllerProvider);
 
+                        if (thietBiData.loading) {
+                          return const Center(child: CircularProgressIndicator(),);
+                        }
+
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Row(
+                              children: [
+                                Text("Thiết bị máy móc", style: TextStyle(fontWeight: FontWeight.w500),),
+                                SizedBox(width: 3,),
+                                Text("*", style: TextStyle(color: Colors.red),),
+                              ],
+                            ),
+                            const SizedBox(height: 5,),
+                            DropdownButtonHideUnderline(
+                              child: DropdownButtonFormField2(
+                                isExpanded: true,
+                                decoration: InputDecoration(
+                                  isDense: true,
+                                  contentPadding: const EdgeInsets.symmetric(horizontal: 0, vertical: 12),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                ),
+                                hint: const Text(
+                                  'Chọn thiết bị',
+                                  style: TextStyle(fontSize: 14),
+                                ),
+                                items: thietBiData.data.map((item) {
+                                  return DropdownMenuItem<String>(
+                                    value: item.Oid,
+                                    child: Text(
+                                      item.TenThietBi ?? "",
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                      ),
+                                    )
+                                  );
+                                }).toList(),
+                                validator: (value) {
+                                  if (value == null) {
+                                    return 'Vui lòng chọn thiết bị.';
+                                  }
+                                  return null;
+                                },
+                                onChanged: (value) {
+                                  selectCongviec = value.toString();
+                                },
+                                iconStyleData: const IconStyleData(
+                                  icon: Icon(
+                                    Icons.arrow_drop_down,
+                                    color: Colors.black45,
+                                  ),
+                                  iconSize: 20,
+                                ),
+                                // value: selectedCongViecs.isEmpty ? null : selectedCongViecs.last,
+                                dropdownStyleData: DropdownStyleData(
+                                  offset: const Offset(0, -10),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      },),
+
+                      const SizedBox(height: 20,),
+
+                      const Row(
+                        children: [
+                          Text("Nhiên liệu tiêu thụ", style: TextStyle(fontWeight: FontWeight.w500),),
+                          SizedBox(width: 3,),
+                          Text("*", style: TextStyle(color: Colors.red),),
+                        ],
+                      ),
+                      const SizedBox(height: 5,),
+                      TextField(
+                        controller: _nhienLieuTieuThuController,
+                      ),
+
+                      const SizedBox(height: 20,),
+
+                      const Row(
+                        children: [
+                          Text("Sản lượng", style: TextStyle(fontWeight: FontWeight.w500),),
+                          SizedBox(width: 3,),
+                          Text("*", style: TextStyle(color: Colors.red),),
+                        ],
+                      ),
+                      const SizedBox(height: 5,),
+                      TextField(
+                        controller: _sanLuongController,
+                      ),
+
+                      const SizedBox(height: 20,),
+
+                      const Row(
+                        children: [
+                          Text("Tác nhân gây hại", style: TextStyle(fontWeight: FontWeight.w500),),
+                          SizedBox(width: 3,),
+                          Text("*", style: TextStyle(color: Colors.red),),
+                        ],
+                      ),
+                      const SizedBox(height: 5,),
+                      TextField(
+                        controller: _tacNhanGayHaiController,
+                      ),
                     ]
                   )
                 )

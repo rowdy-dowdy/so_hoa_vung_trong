@@ -201,18 +201,36 @@ class NumericalRangeFormatter extends TextInputFormatter {
 }
 
 
-selectDate(BuildContext context, [DateTime? initialDate]) async {
+selectDate(BuildContext context, [DateTime? initialDate, bool selectTime = false]) async {
   initialDate ??= DateTime.now();
   final ThemeData theme = Theme.of(context);
-  switch (theme.platform) {
-    case TargetPlatform.android:
-    case TargetPlatform.fuchsia:
-    case TargetPlatform.linux:
-    case TargetPlatform.windows:
-      return buildMaterialDatePicker(context, initialDate);
-    case TargetPlatform.iOS:
-    case TargetPlatform.macOS:
-      return buildCupertinoDatePicker(context, initialDate);
+
+  // android
+  if (theme.platform != TargetPlatform.iOS && theme.platform != TargetPlatform.macOS) {
+    DateTime? date = await buildMaterialDatePicker(context, initialDate);
+
+    if (date == null) return null;
+
+    TimeOfDay? time;
+
+    if (selectTime) {
+      TimeOfDay? initialTime = TimeOfDay.fromDateTime(initialDate);
+
+      time = await buildMaterialTimePicker(context, initialTime);
+    }
+
+    final dateTime = DateTime(
+      date.year,
+      date.month,
+      date.day,
+      time?.hour ?? 0,
+      time?.minute ?? 0,
+    );
+
+    return dateTime;
+  }
+  else {
+    return buildCupertinoDatePicker(context, initialDate, selectTime);
   }
 }
 
@@ -226,13 +244,21 @@ buildMaterialDatePicker(BuildContext context, DateTime initialDate) async {
     lastDate: DateTime(DateTime.now().year + 5),
   );
 
-  if (picked != null && picked != initialDate) {
-    return picked;
-  }
+  return picked;
+}
+
+buildMaterialTimePicker(BuildContext context, TimeOfDay initialTime) async {
+  final TimeOfDay? picked = await showTimePicker(
+    context: context,
+    // locale: const Locale("vi"),
+    initialTime: initialTime,
+  );
+
+  return picked;
 }
 
 /// This builds cupertion date picker in iOS
-buildCupertinoDatePicker(BuildContext context, DateTime initialDate) async {
+buildCupertinoDatePicker(BuildContext context, DateTime initialDate, bool selectTime) async {
   DateTime? picked = initialDate;
   await showCupertinoModalPopup(
     context: context,
@@ -241,11 +267,9 @@ buildCupertinoDatePicker(BuildContext context, DateTime initialDate) async {
         height: MediaQuery.of(context).copyWith().size.height / 3,
         color: Colors.white,
         child: CupertinoDatePicker(
-          mode: CupertinoDatePickerMode.date,
+          mode: selectTime ? CupertinoDatePickerMode.dateAndTime : CupertinoDatePickerMode.date,
           onDateTimeChanged: (date) {
-            if (date != initialDate) {
-              picked = date;
-            }
+            picked = date;
           },
           initialDateTime: initialDate,
           minimumYear: 1900,

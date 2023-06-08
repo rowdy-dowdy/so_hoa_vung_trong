@@ -11,7 +11,7 @@ enum PhanLoaiDatEnum {
 }
 
 extension ConvertCall on String {
-  PhanLoaiDatEnum toEnum() {
+  PhanLoaiDatEnum toPhanLoaiDatEnum() {
     switch (this) {
       case 'soHuu':
         return PhanLoaiDatEnum.soHuu;
@@ -62,7 +62,7 @@ class DatModel {
       DienTich: map['DienTich'] != null ? map['DienTich'] as int : null,
       DiaDiem: map['DiaDiem'] != null ? map['DiaDiem'] as String : null,
       GhiChu: map['GhiChu'] != null ? map['GhiChu'] as String : null,
-      PhanLoaiDat: map['PhanLoaiDat'] != null ? (map['PhanLoaiDat'] as String).toEnum() : null,
+      PhanLoaiDat: map['PhanLoaiDat'] != null ? (map['PhanLoaiDat'] as String).toPhanLoaiDatEnum() : null,
     );
   }
 

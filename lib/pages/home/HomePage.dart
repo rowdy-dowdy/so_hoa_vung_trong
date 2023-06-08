@@ -223,7 +223,16 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                     Container(
                       color: Colors.white,
                       padding: const EdgeInsets.only(left: 12, right:12, top: 10),
-                      child: const Text("Nguyên vật liệu", style: TextStyle(fontWeight: FontWeight.w500),),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text("Nguyên vật liệu", style: TextStyle(fontWeight: FontWeight.w500),),
+                          TextButton(
+                            onPressed: () => context.go('/nguyen-lieu'), 
+                            child: const Text("Xem thêm")
+                          )
+                        ],
+                      ),
                     ),
                     Consumer(builder: (context, ref, child) {
                       if (nguyenLieuData.loading) {
@@ -244,7 +253,7 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                         color: Colors.white,
                         padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 12),
                         child: ListView.separated(
-                          itemCount: nguyenLieuData.data.length,
+                          itemCount: nguyenLieuData.data.length < 4 ? nguyenLieuData.data.length : 4,
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
                           separatorBuilder: (context, index) => const SizedBox(width: 10,),
@@ -264,7 +273,7 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                                 ),
                                 margin: EdgeInsets.only(
                                   left: index == 0 ? 12 : 0,
-                                  right: index == diaryData.data.length ? 12 : 0,
+                                  right: index == nguyenLieuData.data.length ? 12 : 0,
                                 ),
                                 child: Container(
                                   padding: const EdgeInsets.all(8),
@@ -348,7 +357,7 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                                   ),
                                   margin: EdgeInsets.only(
                                     left: index == 0 ? 12 : 0,
-                                    right: index == diaryData.data.length ? 12 : 0,
+                                    right: index == data.length ? 12 : 0,
                                   ),
                                   child: Container(
                                     padding: const EdgeInsets.all(8),
@@ -438,7 +447,7 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                                   ),
                                   margin: EdgeInsets.only(
                                     left: index == 0 ? 12 : 0,
-                                    right: index == diaryData.data.length ? 12 : 0,
+                                    right: index == data.length ? 12 : 0,
                                   ),
                                   child: Container(
                                     padding: const EdgeInsets.all(8),
@@ -528,7 +537,7 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                                   ),
                                   margin: EdgeInsets.only(
                                     left: index == 0 ? 12 : 0,
-                                    right: index == diaryData.data.length ? 12 : 0,
+                                    right: index == data.length ? 12 : 0,
                                   ),
                                   child: Container(
                                     padding: const EdgeInsets.all(8),

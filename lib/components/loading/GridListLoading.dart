@@ -1,54 +1,48 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shimmer/shimmer.dart';
 
-class HomeListLoading extends ConsumerStatefulWidget {
-  const HomeListLoading({super.key});
+class GridListLoading extends StatefulWidget {
+  const GridListLoading({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _HomeListLoadingState();
+  State<GridListLoading> createState() => _GridListLoadingState();
 }
 
-class _HomeListLoadingState extends ConsumerState<HomeListLoading> {
-
+class _GridListLoadingState extends State<GridListLoading> {
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return Container(
-      width: double.infinity,
-      height: 200,
-      color: Colors.white,
-      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 12),
       child: Shimmer.fromColors(
         baseColor: Colors.grey.shade300,
         highlightColor: Colors.grey.shade100,
         child: Wrap(
-          direction: Axis.vertical,
           runSpacing: 12,
-          children: List.generate(5, (index) {
-            return Padding(
-              padding: EdgeInsets.only(
-                left: index == 0 ? 12 : 0,
-              ),
+          spacing: 12,
+          children: List.generate(8, (index) {
+            return Container(
+              width: (width - 36) / 2,
+              height: 200,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
                     child: Container(
-                      width: 140,
                       decoration: BoxDecoration(
-                        color: Colors.red,
+                        color: Colors.white,
                         borderRadius: BorderRadius.circular(6),
                       ),
                     ),
                   ),
                   const SizedBox(height: 10,),
                   Container(width: 50, height: 15, decoration: BoxDecoration(
-                    color: Colors.red,
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(6)
                   ),),
                   const SizedBox(height: 2,),
                   Container(width: 100, height: 15, decoration: BoxDecoration(
-                    color: Colors.red,
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(6)
                   ),),
                 ],

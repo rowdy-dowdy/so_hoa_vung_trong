@@ -66,12 +66,19 @@ class _NguyenLieuDetailsPageState extends ConsumerState<NguyenLieuDetailsPage> {
               ),
             ),
             actions: [
-              // TextButton(
-              //   onPressed: () => context.go('/teacher/students/edit-add?id=${data.id}'),
-              //   child: const Text("Chỉnh sửa", style: TextStyle(
-              //     color: Colors.white
-              //   ),)
-              // ),
+              InkWell(
+                // onTap: () => context.pop(),
+                child: Container(
+                  width: 30,
+                  height: 30,
+                  margin: const EdgeInsets.only(right: 12),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle
+                  ),
+                  child: const Icon(Icons.edit_document),
+                ),
+              )
             ],
             floating: false,
             pinned: true,

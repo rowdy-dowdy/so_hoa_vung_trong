@@ -508,7 +508,7 @@ class _DiaryEditAddPageState extends ConsumerState<DiaryEditAddPage> {
                                           FilteringTextInputFormatter.digitsOnly
                                         ],
                                         decoration: const InputDecoration(
-                                          hintText: 'Nhập ngày thu hoạch'
+                                          hintText: 'Nhập sản lượng'
                                         ),
                                       ),
                                     ],
