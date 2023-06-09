@@ -9,6 +9,7 @@ import 'package:so_hoa_vung_trong/components/loading/HomeListLoading.dart';
 import 'package:so_hoa_vung_trong/controllers/diary/diary_controller.dart';
 import 'package:so_hoa_vung_trong/controllers/home_controller.dart';
 import 'package:so_hoa_vung_trong/pages/home/nguyen-lieu/NguyenLieuDetailsPage.dart';
+import 'package:so_hoa_vung_trong/pages/home/phan-bon/PhanBonDetailsPage.dart';
 import 'package:so_hoa_vung_trong/utils/colors.dart';
 import 'package:so_hoa_vung_trong/utils/utils.dart';
 
@@ -34,7 +35,7 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
     // final size = MediaQuery.of(context).size;
     final diaryData = ref.watch(diaryControllerProvider);
     final nguyenLieuData = ref.watch(nguyenLieuControllerProvider);
-    final phanBonData = ref.watch(listPhanBonProvider);
+    final phanBonData = ref.watch(phanBonControllerProvider);
     final thietBiData = ref.watch(listThietBiProvider);
     final thuocData = ref.watch(listThuocProvider);
 
@@ -67,7 +68,7 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
             onRefresh: () async {
               ref.invalidate(diaryControllerProvider);
               ref.invalidate(nguyenLieuControllerProvider);
-              ref.invalidate(listPhanBonProvider);
+              ref.invalidate(phanBonControllerProvider);
               ref.invalidate(listThietBiProvider);
               ref.invalidate(listThuocProvider);
             },
@@ -247,13 +248,15 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                         );
                       }
 
+                      final int dataLength = nguyenLieuData.data.length < 4 ? nguyenLieuData.data.length : 4;
+
                       return Container(
                         width: double.infinity,
                         height: 200,
                         color: Colors.white,
                         padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 12),
                         child: ListView.separated(
-                          itemCount: nguyenLieuData.data.length < 4 ? nguyenLieuData.data.length : 4,
+                          itemCount: dataLength,
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
                           separatorBuilder: (context, index) => const SizedBox(width: 10,),
@@ -277,7 +280,7 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                                 ),
                                 margin: EdgeInsets.only(
                                   left: index == 0 ? 12 : 0,
-                                  right: index == nguyenLieuData.data.length ? 12 : 0,
+                                  right: index == (dataLength - 1) ? 12 : 0,
                                 ),
                                 child: Container(
                                   padding: const EdgeInsets.all(8),
@@ -313,7 +316,6 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                           },
                         ),
                       );
-
                     },),
                     
                     const SizedBox(height: 10,),
@@ -322,89 +324,99 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                     Container(
                       color: Colors.white,
                       padding: const EdgeInsets.only(left: 12, right:12, top: 10),
-                      child: const Text("Phân bón", style: TextStyle(fontWeight: FontWeight.w500),),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text("Phân bón", style: TextStyle(fontWeight: FontWeight.w500),),
+                          TextButton(
+                            onPressed: () => context.go('/phan-bon'), 
+                            child: const Text("Xem thêm")
+                          )
+                        ],
+                      ),
                     ),
-                    phanBonData.when(
-                      skipLoadingOnRefresh: false,
-                      data: (data) {
-                        if (data.isEmpty) {
-                          return Container(
-                            color: Colors.white,
-                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                            child: const Text("Không có phân bón nào")
-                          );
-                        }
+                    Consumer(builder: (context, ref, child) {
+                      if (phanBonData.loading) {
+                        return const HomeListLoading();
+                      }
 
+                      if (phanBonData.data.isEmpty) {
                         return Container(
-                          width: double.infinity,
-                          height: 200,
                           color: Colors.white,
-                          padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 12),
-                          child: ListView.separated(
-                            itemCount: data.length,
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            separatorBuilder: (context, index) => const SizedBox(width: 10,),
-                            itemBuilder: (context, index) {
-                              final item = data[index];
-                              return InkWell(
-                                // onTap: () => context.go('/${item.Oid}'),
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                          child: const Text("Không có phân bón nào")
+                        );
+                      }
+
+                      final int dataLength = phanBonData.data.length < 4 ? phanBonData.data.length : 4;
+
+                      return Container(
+                        width: double.infinity,
+                        height: 200,
+                        color: Colors.white,
+                        padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 12),
+                        child: ListView.separated(
+                          itemCount: dataLength,
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          separatorBuilder: (context, index) => const SizedBox(width: 10,),
+                          itemBuilder: (context, index) {
+                            final item = phanBonData.data[index];
+                            return InkWell(
+                              onTap: () => Navigator.of(context).push(
+                                CupertinoPageRoute(
+                                  builder: (context) => PhanBonDetailsPage(Oid: item.Oid)
+                                ),
+                              ),
+                              child: Container(
+                                width: 140,
+                                decoration: BoxDecoration(
+                                  color: primary.withOpacity(0.7),
+                                  borderRadius: BorderRadius.circular(6),
+                                  image: DecorationImage(
+                                    image: item.HinhAnh != null ? MemoryImage(item.HinhAnh!) : const AssetImage("assets/img/phan_bon.jpg") as ImageProvider,
+                                    fit: BoxFit.cover
+                                  )
+                                ),
+                                margin: EdgeInsets.only(
+                                  left: index == 0 ? 12 : 0,
+                                  right: index == (dataLength - 1) ? 12 : 0,
+                                ),
                                 child: Container(
-                                  width: 140,
+                                  padding: const EdgeInsets.all(8),
                                   decoration: BoxDecoration(
-                                    color: primary.withOpacity(0.7),
                                     borderRadius: BorderRadius.circular(6),
-                                    image: DecorationImage(
-                                      image: item.HinhAnh != null ? MemoryImage(item.HinhAnh!) : const AssetImage("assets/img/nguyen_lieu.jpg") as ImageProvider,
-                                      fit: BoxFit.cover
+                                    gradient: LinearGradient(
+                                      begin: Alignment.bottomCenter,
+                                      end: Alignment.topCenter,
+                                      colors: [
+                                        Colors.black.withOpacity(0.8),
+                                        Colors.black.withOpacity(0.6),
+                                        Colors.black.withOpacity(0.2),
+                                        Colors.black.withOpacity(0),
+                                        Colors.black.withOpacity(0),
+                                      ],
                                     )
                                   ),
-                                  margin: EdgeInsets.only(
-                                    left: index == 0 ? 12 : 0,
-                                    right: index == data.length ? 12 : 0,
-                                  ),
-                                  child: Container(
-                                    padding: const EdgeInsets.all(8),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(6),
-                                      gradient: LinearGradient(
-                                        begin: Alignment.bottomCenter,
-                                        end: Alignment.topCenter,
-                                        colors: [
-                                          Colors.black.withOpacity(0.8),
-                                          Colors.black.withOpacity(0.6),
-                                          Colors.black.withOpacity(0.2),
-                                          Colors.black.withOpacity(0),
-                                          Colors.black.withOpacity(0),
-                                        ],
-                                      )
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Text(item.TenPhanBon?? "", style: const TextStyle(color: Colors.white), overflow: TextOverflow.ellipsis,),
-                                        const SizedBox(height: 2,),
-                                        Text(formatCurrency(item.Gia), style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 12
-                                        ),),
-                                      ],
-                                    ),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Text(item.TenPhanBon?? "", style: const TextStyle(color: Colors.white), overflow: TextOverflow.ellipsis,),
+                                      const SizedBox(height: 2,),
+                                      Text(formatCurrency(item.Gia), style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 12
+                                      ),),
+                                    ],
                                   ),
                                 ),
-                              );
-                            },
-                          ),
-                        );
-                      },
-                      loading: () => const HomeListLoading(),
-                      error: (_, __) => Container(
-                        color: Colors.white,
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                        child: const Text("Không thể tải phân bón")
-                      )
-                    ),
+                              ),
+                            );
+                          },
+                        ),
+                      );
+                    },),
 
                     const SizedBox(height: 10,),
                     

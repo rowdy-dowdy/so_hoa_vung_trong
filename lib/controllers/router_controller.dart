@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:so_hoa_vung_trong/controllers/auth_controller.dart';
 import 'package:so_hoa_vung_trong/models/auth_model.dart';
 import 'package:so_hoa_vung_trong/pages/ErrorPage.dart';
+import 'package:so_hoa_vung_trong/pages/expert/topic/TopicAddPage.dart';
 import 'package:so_hoa_vung_trong/pages/expert/topic/TopicDetails.dart';
 import 'package:so_hoa_vung_trong/pages/home/HomePage.dart';
 import 'package:go_router/go_router.dart';
@@ -17,6 +18,8 @@ import 'package:so_hoa_vung_trong/pages/home/diary/DiaryPage.dart';
 import 'package:so_hoa_vung_trong/pages/home/diary/diaryLog/DiaryLogEditAddPage.dart';
 import 'package:so_hoa_vung_trong/pages/home/nguyen-lieu/NguyenLieuDetailsPage.dart';
 import 'package:so_hoa_vung_trong/pages/home/nguyen-lieu/NguyenLieuPage.dart';
+import 'package:so_hoa_vung_trong/pages/home/phan-bon/PhanBonDetailsPage.dart';
+import 'package:so_hoa_vung_trong/pages/home/phan-bon/PhanBonPage.dart';
 import 'package:so_hoa_vung_trong/pages/home/search/SearchSettings.dart';
 import 'package:so_hoa_vung_trong/pages/settings/SettingsEditPage.dart';
 import 'package:so_hoa_vung_trong/pages/settings/SettingsPage.dart';
@@ -65,7 +68,6 @@ class RouterNotifier extends ChangeNotifier {
       builder: (context, state, child) => child,
       routes: [
         GoRoute(
-
           name: "home",
           path: "/",
           // builder: (context, state) => const HomeStudentPage(),
@@ -102,6 +104,19 @@ class RouterNotifier extends ChangeNotifier {
                   name: "nguyen-lieu-details",
                   path: ":id",
                   builder: (context, state) => NguyenLieuDetailsPage(Oid: state.pathParameters['id'] ?? ""),
+                ),
+              ]
+            ),
+
+            GoRoute(
+              name: "phan-bon",
+              path: "phan-bon",
+              builder: (context, state) => const PhanBonPage(),
+              routes: [
+                GoRoute(
+                  name: "phan-bon-details",
+                  path: ":id",
+                  builder: (context, state) => PhanBonDetailsPage(Oid: state.pathParameters['id'] ?? ""),
                 ),
               ]
             ),
@@ -142,17 +157,17 @@ class RouterNotifier extends ChangeNotifier {
             state: state, 
             child: const ExpertPage(),
           ),
-          
           routes: [
+            GoRoute(
+              name: "topic-add",
+              path: "add",
+              builder: (context, state) => const TopicAddPage(),
+            ),
+            
             GoRoute(
               name: "topic-details",
               path: ":id",
-              pageBuilder: (context, state) => MaterialPage<void>(
-                key: state.pageKey,
-                restorationId: state.pageKey.value,
-                child: TopicDetails(id: state.pathParameters['id'] ?? ""),
-              ),
-              // builder: (context, state) => TopicDetails(id: state.pathParameters['id'] ?? ""),
+              builder: (context, state) => TopicDetails(id: state.pathParameters['id'] ?? ""),
             ),
           ]
         ),

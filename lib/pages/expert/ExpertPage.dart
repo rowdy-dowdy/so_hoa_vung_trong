@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:so_hoa_vung_trong/components/BottomBar.dart';
 import 'package:so_hoa_vung_trong/components/expert/ItemTopic.dart';
 import 'package:so_hoa_vung_trong/components/loading/TopicsLoading.dart';
 import 'package:so_hoa_vung_trong/controllers/expert/topic_controller.dart';
 import 'package:so_hoa_vung_trong/models/topic_category_model.dart';
+import 'package:so_hoa_vung_trong/pages/expert/topic/TopicAddPage.dart';
 import 'package:so_hoa_vung_trong/utils/colors.dart';
 
 final searchTextProvider = StateProvider<String>((ref) {
@@ -47,7 +49,12 @@ class _ExpertPageState extends ConsumerState<ExpertPage> {
         ),
         title: const Text("Trao đổi với chuyên gia", style: TextStyle(color: Colors.white),),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(CupertinoIcons.add_circled, color: Colors.white,))
+          IconButton(
+            onPressed: () => Navigator.of(context).push(
+              CupertinoPageRoute(builder: (context) => const TopicAddPage(),)
+            ), 
+            icon: const Icon(CupertinoIcons.add_circled, color: Colors.white,)
+          )
         ],
       ),
       body: Column(

@@ -13,6 +13,15 @@ enum DonViEnum {
   final String type;
 }
 
+enum TrangThaiEnum {
+  DangXyLy('DangXyLy'),
+  DaHoanThanh('DaHoanThanh'),
+  empty('');
+
+  const TrangThaiEnum(this.type);
+  final String type;
+}
+
 extension ConvertCall on String {
   DonViEnum toDonViEnum() {
     switch (this) {
@@ -28,6 +37,17 @@ extension ConvertCall on String {
         return DonViEnum.empty;
     }
   }
+
+  TrangThaiEnum toTrangThaiEnum() {
+    switch (this) {
+      case 'DangXyLy':
+        return TrangThaiEnum.DangXyLy;
+      case 'DaHoanThanh':
+        return TrangThaiEnum.DaHoanThanh;
+      default:
+        return TrangThaiEnum.empty;
+    }
+  }
 }
 
 class DiaryModel {
@@ -39,7 +59,7 @@ class DiaryModel {
   final String? TenNhatKy;
   final String? DatCoSo;
   final String? Nam;
-  final String? TrangThai;
+  final TrangThaiEnum? TrangThai;
   final String? SanLuong;
   final DonViEnum? DonViSanLuong;
   final String? GhiChu;
@@ -71,7 +91,7 @@ class DiaryModel {
       'TenNhatKy': TenNhatKy,
       'DatCoSo': DatCoSo,
       'Nam': Nam,
-      'TrangThai': TrangThai,
+      'TrangThai': TrangThai?.type,
       'SanLuong': SanLuong,
       'DonViSanLuong': DonViSanLuong?.type,
       'GhiChu': GhiChu,
@@ -89,7 +109,7 @@ class DiaryModel {
       TenNhatKy: map['TenNhatKy'] != null ? map['TenNhatKy'] as String : null,
       DatCoSo: map['DatCoSo'] != null ? map['DatCoSo'] as String : null,
       Nam: map['Nam'] != null ? map['Nam'] as String : null,
-      TrangThai: map['TrangThai'] != null ? map['TrangThai'] as String : null,
+      TrangThai: map['TrangThai'] != null ? (map['TrangThai'] as String).toTrangThaiEnum() : null,
       SanLuong: map['SanLuong'] != null ? map['SanLuong'] as String : null,
       DonViSanLuong: map['DonViSanLuong'] != null ? (map['DonViSanLuong'] as String).toDonViEnum() : null,
       GhiChu: map['GhiChu'] != null ? map['GhiChu'] as String : null,
@@ -120,6 +140,17 @@ String donViToString(DonViEnum? DonViSanLuong) {
       return 'yến';
     case DonViEnum.kg:
       return 'Kg';
+    default:
+      return '';
+  }
+}
+
+String trangThaiToString(TrangThaiEnum? TrangThai) {
+  switch (TrangThai) {
+    case TrangThaiEnum.DaHoanThanh:
+      return 'Đã hoàn thành';
+    case TrangThaiEnum.DangXyLy:
+      return 'Đang xử lý';
     default:
       return '';
   }

@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/cupertino.dart';
 
-String oldMainName = "";
+bool oldMainLocation = true; 
+final List<String> listMainLocation = ["/", "/action", "/settings", "/expert"];
 
 dynamic buildPageWithDefaultTransition<T>({
   required BuildContext context, 
@@ -11,8 +12,14 @@ dynamic buildPageWithDefaultTransition<T>({
   required Widget child,
 }) {
   
-  bool isAnimation = state.name == oldMainName;
-  oldMainName = state.name ?? "";
+  bool isAnimation = true;
+  bool mainLocation = listMainLocation.indexWhere((element) => element == state.location) >= 0;
+
+  if (mainLocation == true && oldMainLocation == true) {
+    isAnimation = false;
+  }
+  
+  oldMainLocation = mainLocation;
 
   if (isAnimation) { 
     return MaterialPage<void>(

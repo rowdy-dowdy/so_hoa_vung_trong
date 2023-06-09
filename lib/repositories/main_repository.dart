@@ -180,7 +180,11 @@ class MainRepository {
 
       Response response = await dio.get(uri.toString());
 
+      // print(response.data);
+
       List<TopicModel> data = List<TopicModel>.from((response.data['value'] as List<dynamic>).map<TopicModel>((x) => TopicModel.fromMap(x as Map<String,dynamic>),),);
+
+      print(data);
 
       return data;
 

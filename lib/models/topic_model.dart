@@ -8,6 +8,7 @@ import 'package:so_hoa_vung_trong/models/comment_model.dart';
 import 'package:so_hoa_vung_trong/models/topic_category_model.dart';
 import 'package:so_hoa_vung_trong/models/user_model.dart';
 
+
 class TopicModel {
   final String Oid;
   final String? TieuDe;
@@ -65,35 +66,4 @@ class TopicModel {
   String toJson() => json.encode(toMap());
 
   factory TopicModel.fromJson(String source) => TopicModel.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  @override
-  bool operator ==(covariant TopicModel other) {
-    if (identical(this, other)) return true;
-  
-    return 
-      other.Oid == Oid &&
-      other.TieuDe == TieuDe &&
-      other.NoiDung == NoiDung &&
-      other.TrangThai == TrangThai &&
-      other.NgayTao == NgayTao &&
-      other.NgaySua == NgaySua &&
-      other.File == File &&
-      other.DanhMucChuDe == DanhMucChuDe &&
-      other.NguoiTao == NguoiTao &&
-      listEquals(other.HoiThoais, HoiThoais);
-  }
-
-  @override
-  int get hashCode {
-    return Oid.hashCode ^
-      TieuDe.hashCode ^
-      NoiDung.hashCode ^
-      TrangThai.hashCode ^
-      NgayTao.hashCode ^
-      NgaySua.hashCode ^
-      File.hashCode ^
-      DanhMucChuDe.hashCode ^
-      NguoiTao.hashCode ^
-      HoiThoais.hashCode;
-  }
 }

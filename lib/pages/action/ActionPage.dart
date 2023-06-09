@@ -14,14 +14,14 @@ class ActionPage extends ConsumerStatefulWidget {
 
 class _ActionPageState extends ConsumerState<ActionPage> {
   static const list = <Map>[
-    { "icon": CupertinoIcons.add, "label": 'Phân bón', "color": Color(0xffFF4858), "path": '/' },
-    { "icon": CupertinoIcons.add, "label": 'Thuốc BVTV', "color": Color(0xffBD2A2E), "path": '/' },
-    { "icon": CupertinoIcons.add, "label": 'Nguyên vật liệu', "color": Color.fromARGB(255, 216, 122, 59), "path": '/' },
-    { "icon": CupertinoIcons.add, "label": 'Loại cây trồng', "color": Color(0xFFDDAA33), "path": '/' },
-    { "icon": CupertinoIcons.add, "label": 'Công việc - Tình trạng', "color": Color(0xFF44803F), "path": '/' },
+    { "icon": CupertinoIcons.archivebox_fill, "label": 'Phân bón', "color": Color(0xffFF4858), "path": '/phan-bon' },
+    { "icon": CupertinoIcons.ant, "label": 'Thuốc BVTV', "color": Color(0xffBD2A2E), "path": '/' },
+    { "icon": CupertinoIcons.arrow_3_trianglepath, "label": 'Nguyên vật liệu', "color": Color.fromARGB(255, 216, 122, 59), "path": '/' },
+    { "icon": CupertinoIcons.tree, "label": 'Loại cây trồng', "color": Color(0xFFDDAA33), "path": '/' },
+    { "icon": CupertinoIcons.briefcase_fill, "label": 'Công việc - Tình trạng', "color": Color(0xFF44803F), "path": '/' },
     { "icon": CupertinoIcons.bolt_circle, "label": 'Quy trình sản xuất', "color": Color(0xFF146152), "path": '/' },
-    { "icon": CupertinoIcons.add, "label": 'Đất - Cơ sở', "color": Color(0xff284F8F), "path": '/' },
-    { "icon": CupertinoIcons.add, "label": 'Thiết bị - Máy móc', "color": Color(0xff592F64), "path": '/' },
+    { "icon": CupertinoIcons.arrow_2_circlepath_circle, "label": 'Đất - Cơ sở', "color": Color(0xff284F8F), "path": '/' },
+    { "icon": CupertinoIcons.gamecontroller_fill, "label": 'Thiết bị - Máy móc', "color": Color(0xff592F64), "path": '/' },
   ];
 
   @override
