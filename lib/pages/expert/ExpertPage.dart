@@ -138,7 +138,7 @@ class _ExpertPageState extends ConsumerState<ExpertPage> {
                                 const TopicsLoading()
                               ],
 
-                              if (topics.isEmpty) ...[
+                              if (topics.isEmpty && !topicsData.loading) ...[
                                 SizedBox(
                                   height: constraints.maxHeight,
                                   child: const Center(child: Text("Không có câu hỏi nào"))

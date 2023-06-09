@@ -58,15 +58,15 @@ class FirebaseCloudMessagingService {
 
   Future subscribeToTopic(dynamic user) async {
     // final user = ref.watch(authControllerProvider).user;
-    print("${user.runtimeType} subscribe");
-    await fcm.subscribeToTopic("user-${user.id}");
+    // print("${user.runtimeType} subscribe");
+    // await fcm.subscribeToTopic("user-${user.id}");
   }
 
   Future unsubscribeFromTopic(dynamic user) async {
     // final user = ref.watch(authControllerProvider).user;
-    print("${user.runtimeType} unsubscribe");
+    // print("${user.runtimeType} unsubscribe");
 
-    await fcm.unsubscribeFromTopic("user-${user.id}");
+    // await fcm.unsubscribeFromTopic("user-${user.id}");
   }
 }
 

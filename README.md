@@ -1,3 +1,11 @@
+## create keytool
+- create file key.properties
+  storePassword=U4qsgyFEnRWlaTHSaDXg
+  keyPassword=U4qsgyFEnRWlaTHSaDXg
+  keyAlias=upload
+  storeFile=../app/upload-keystore.jks
+
+- run cmd (add path java)
 keytool -genkey -v -keystore ./android/app/upload-keystore.jks -storetype JKS -keyalg RSA -keysize 2048 -validity 10000 -alias upload
 
 ## create logo android

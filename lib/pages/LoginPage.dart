@@ -64,117 +64,119 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         }
 
         return Scaffold(
-          body: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            constraints: BoxConstraints(
-              minHeight: size.height,
-            ),
-            color: Colors.white,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // const SizedBox(height: 50,),
-                const Text("Chào mừng quay trở lại! 👋", style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600
-                ),),
-                const SizedBox(height: 5,),
-                const Text("Xin chào một lần nữa, bạn có bị bỏ lỡ", style: TextStyle(
-                  color: grey,
-                ),),
-                Expanded(
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 20),
-                        Expanded(
-                          child: Center(
-                            child: SizedBox(
-                              height: 300,
-                              child: Lottie.asset(
-                                'assets/lotties/login.json',
+          body: SafeArea(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              constraints: BoxConstraints(
+                minHeight: size.height,
+              ),
+              color: Colors.white,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // const SizedBox(height: 50,),
+                  const Text("Chào mừng quay trở lại! 👋", style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600
+                  ),),
+                  const SizedBox(height: 5,),
+                  const Text("Xin chào một lần nữa, bạn có bị bỏ lỡ", style: TextStyle(
+                    color: grey,
+                  ),),
+                  Expanded(
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 20),
+                          Expanded(
+                            child: Center(
+                              child: SizedBox(
+                                height: 300,
+                                child: Lottie.asset(
+                                  'assets/lotties/login.json',
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        const SizedBox(height: 20),
-                        const Text("Tài khoản", style: TextStyle(
-                          fontWeight: FontWeight.w500
-                        ),),
-                        const SizedBox(height: 5),
-                        TextField(
-                          controller: emailController,
-                          decoration: const InputDecoration(
-                            hintText: 'Nhập tài khoản của bạn'
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        const Text("Mật khẩu", style: TextStyle(
-                          fontWeight: FontWeight.w500
-                        ),),
-                        const SizedBox(height: 5),
-                        TextField(
-                          controller: passwordController,
-                          obscureText: !showPassword,
-                          decoration: InputDecoration(
-                            hintText: 'Nhập mật khẩu',
-                            suffixIcon: IconButton(
-                              icon: Icon(showPassword ? Icons.visibility : Icons.visibility_off,
-                                color: primary,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  showPassword = !showPassword;
-                                });
-                              },
+                          const SizedBox(height: 20),
+                          const Text("Tài khoản", style: TextStyle(
+                            fontWeight: FontWeight.w500
+                          ),),
+                          const SizedBox(height: 5),
+                          TextField(
+                            controller: emailController,
+                            decoration: const InputDecoration(
+                              hintText: 'Nhập tài khoản của bạn'
                             ),
                           ),
-                        ),
-                        const SizedBox(height: 20),
-                        Row(
-                          children: [
-                            SizedBox(
-                              width: 24,
-                              height: 24,
-                              child: CupertinoCheckbox(
-                                activeColor: primary,
-                                // title: Text("title text"),
-                                value: rememberMe,
-                                onChanged: (newValue) {
+                          const SizedBox(height: 20),
+                          const Text("Mật khẩu", style: TextStyle(
+                            fontWeight: FontWeight.w500
+                          ),),
+                          const SizedBox(height: 5),
+                          TextField(
+                            controller: passwordController,
+                            obscureText: !showPassword,
+                            decoration: InputDecoration(
+                              hintText: 'Nhập mật khẩu',
+                              suffixIcon: IconButton(
+                                icon: Icon(showPassword ? Icons.visibility : Icons.visibility_off,
+                                  color: primary,
+                                ),
+                                onPressed: () {
                                   setState(() {
-                                    rememberMe = newValue ?? false;
+                                    showPassword = !showPassword;
                                   });
                                 },
-                                
                               ),
                             ),
-                            const SizedBox(width: 5,),
-                            const Text("Ghi nhớ tôi", style: TextStyle(fontWeight: FontWeight.w500),),
-                            const Spacer(),
-                            TextButton(
-                              onPressed: () {},
-                              child: const Text("Quên mật khẩu?")
-                            )
-                          ],
-                        ),
-                        const SizedBox(height: 20),
-                        ElevatedButton(
-                          onPressed: loading ? null : signInWithPassword,
-                          child: loading ? const CircularProgressIndicator() : const Text("Login"),
-                        ),
-                        const SizedBox(height: 20),
-                      ],
+                          ),
+                          const SizedBox(height: 20),
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: 24,
+                                height: 24,
+                                child: CupertinoCheckbox(
+                                  activeColor: primary,
+                                  // title: Text("title text"),
+                                  value: rememberMe,
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      rememberMe = newValue ?? false;
+                                    });
+                                  },
+                                  
+                                ),
+                              ),
+                              const SizedBox(width: 5,),
+                              const Text("Ghi nhớ tôi", style: TextStyle(fontWeight: FontWeight.w500),),
+                              const Spacer(),
+                              TextButton(
+                                onPressed: () {},
+                                child: const Text("Quên mật khẩu?")
+                              )
+                            ],
+                          ),
+                          const SizedBox(height: 20),
+                          ElevatedButton(
+                            onPressed: loading ? null : signInWithPassword,
+                            child: loading ? const CircularProgressIndicator() : const Text("Login"),
+                          ),
+                          const SizedBox(height: 20),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  width: double.infinity,
-                  child: Text("Số hóa vùng trồng", textAlign: TextAlign.center, style: TextStyle(color: grey),)
-                ),
-                const SizedBox(height: 20,)
-              ],
+                  const SizedBox(
+                    width: double.infinity,
+                    child: Text("Số hóa vùng trồng", textAlign: TextAlign.center, style: TextStyle(color: grey),)
+                  ),
+                  const SizedBox(height: 20,)
+                ],
+              ),
             ),
           ),
         );

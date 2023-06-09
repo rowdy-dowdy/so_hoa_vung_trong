@@ -42,20 +42,21 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        // toolbarHeight: 120,
-        flexibleSpace: Container(
-          color: Colors.white,
+        titleSpacing: 0,
+        title: Container(
+          // color: Colors.red,
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Logo(),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text(getCurrentDay()),
-                  Text(getCurrentDate())
+                  Text(getCurrentDay(), style: const TextStyle(fontSize: 14),),
+                  Text(getCurrentDate(), style: const TextStyle(fontSize: 14),)
                 ],
               )
             ],
