@@ -22,141 +22,144 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
       return const Scaffold();
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Thông tin tài khoản"),
-        centerTitle: false,
-        actions: [
-          IconButton(
-            onPressed: () => context.go('/settings/edit'), 
-            icon: const Icon(CupertinoIcons.pencil_ellipsis_rectangle)
-          )
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              color: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-              child: Row(
-                children: [
-                  Container(
-                    width: 120,
-                    height: 120,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(6),
-                      image: DecorationImage(
-                        image: user.Avatar != null ? MemoryImage(user.Avatar!) : const AssetImage("assets/img/user.png") as ImageProvider,
-                        fit: BoxFit.contain,
-                      )
-                    ),
-                  ),
-                  const SizedBox(width: 20,),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(user.Ten ?? "Chưa cập nhập", style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                          color: primary
-                        ),),
-                        const SizedBox(height: 10,),
-                        Text(user.DiaChiEmail ?? "Chưa cập nhập", style: TextStyle(
-                          color: Colors.grey[700],
-                          fontWeight: FontWeight.w500,
-                        ),),
-                        const SizedBox(height: 10,),
-                        const Text("Quản lý nông trại", style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                        ),)
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 10,),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(6)
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text("Thông tin cá nhân", style: TextStyle(
-                      color: Colors.grey[700],
-                      fontWeight: FontWeight.w600
-                    ),),
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(CupertinoIcons.arrowtriangle_down_square)
-                  )
-                ],
-              ),
-            ),
-            const SizedBox(height: 1,),
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.05),
-                    spreadRadius: 1,
-                    blurRadius: 5,
-                    offset: const Offset(0, 1), // changes position of shadow
-                  ),
-                ]
-              ),
-              child: Column(
-                children: [
-                  InfoWidget(
-                    color: Colors.red,
-                    icon: CupertinoIcons.person_fill,
-                    label: "Họ tên",
-                    value: user.Ten,
-                  ),
-
-                  InfoWidget(
-                    color: Colors.green,
-                    icon: CupertinoIcons.location_fill,
-                    label: "Địa chỉ",
-                    value: user.DiaChi,
-                  ),
-
-                  InfoWidget(
-                    color: Colors.brown,
-                    icon: CupertinoIcons.phone_fill,
-                    label: "Số điện thoại liên hệ",
-                    value: user.SDT,
-                    border: false,
-                  )
-                ],
-              )
-            ),
-            const SizedBox(height: 20,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: ElevatedButton(
-                onPressed: () => ref.read(authControllerProvider.notifier).logout(), 
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.redAccent,
-                ),
-                child: const Text("Đăng xuất")
-              )
+    return Column(
+      children: [
+        AppBar(
+          title: const Text("Thông tin tài khoản"),
+          centerTitle: false,
+          actions: [
+            IconButton(
+              onPressed: () => context.go('/settings/edit'), 
+              icon: const Icon(CupertinoIcons.pencil_ellipsis_rectangle)
             )
           ],
-        )
-      ),
-      bottomNavigationBar: const BottomBar(),
+        ),
+        Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  color: Colors.white,
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 120,
+                        height: 120,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(6),
+                          image: DecorationImage(
+                            image: user.Avatar != null ? MemoryImage(user.Avatar!) : const AssetImage("assets/img/user.png") as ImageProvider,
+                            fit: BoxFit.contain,
+                          )
+                        ),
+                      ),
+                      const SizedBox(width: 20,),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(user.Ten ?? "Chưa cập nhập", style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                              color: primary
+                            ),),
+                            const SizedBox(height: 10,),
+                            Text(user.DiaChiEmail ?? "Chưa cập nhập", style: TextStyle(
+                              color: Colors.grey[700],
+                              fontWeight: FontWeight.w500,
+                            ),),
+                            const SizedBox(height: 10,),
+                            const Text("Quản lý nông trại", style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                            ),)
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+        
+                const SizedBox(height: 10,),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(6)
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text("Thông tin cá nhân", style: TextStyle(
+                          color: Colors.grey[700],
+                          fontWeight: FontWeight.w600
+                        ),),
+                      ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(CupertinoIcons.arrowtriangle_down_square)
+                      )
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 1,),
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.05),
+                        spreadRadius: 1,
+                        blurRadius: 5,
+                        offset: const Offset(0, 1), // changes position of shadow
+                      ),
+                    ]
+                  ),
+                  child: Column(
+                    children: [
+                      InfoWidget(
+                        color: Colors.red,
+                        icon: CupertinoIcons.person_fill,
+                        label: "Họ tên",
+                        value: user.Ten,
+                      ),
+        
+                      InfoWidget(
+                        color: Colors.green,
+                        icon: CupertinoIcons.location_fill,
+                        label: "Địa chỉ",
+                        value: user.DiaChi,
+                      ),
+        
+                      InfoWidget(
+                        color: Colors.brown,
+                        icon: CupertinoIcons.phone_fill,
+                        label: "Số điện thoại liên hệ",
+                        value: user.SDT,
+                        border: false,
+                      )
+                    ],
+                  )
+                ),
+                const SizedBox(height: 20,),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: ElevatedButton(
+                    onPressed: () => ref.read(authControllerProvider.notifier).logout(), 
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.redAccent,
+                    ),
+                    child: const Text("Đăng xuất")
+                  )
+                )
+              ],
+            )
+          ),
+        ),
+      ],
     );
   }
 }

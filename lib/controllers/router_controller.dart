@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:so_hoa_vung_trong/controllers/auth_controller.dart';
 import 'package:so_hoa_vung_trong/models/auth_model.dart';
 import 'package:so_hoa_vung_trong/pages/ErrorPage.dart';
+import 'package:so_hoa_vung_trong/pages/MainPage.dart';
 import 'package:so_hoa_vung_trong/pages/expert/topic/TopicAddPage.dart';
 import 'package:so_hoa_vung_trong/pages/expert/topic/TopicDetails.dart';
 import 'package:so_hoa_vung_trong/pages/home/HomePage.dart';
@@ -70,12 +71,12 @@ class RouterNotifier extends ChangeNotifier {
         GoRoute(
           name: "home",
           path: "/",
-          // builder: (context, state) => const HomeStudentPage(),
-          pageBuilder: (context, state) => buildPageWithDefaultTransition(
-            context: context, 
-            state: state, 
-            child: const HomePage(),
-          ),
+          builder: (context, state) => MainPage(key: state.pageKey, path: '/'),
+          // pageBuilder: (context, state) => buildPageWithDefaultTransition(
+          //   context: context, 
+          //   state: state, 
+          //   child: const HomePage(),
+          // ),
           routes: [
             GoRoute(
               name: "diary-edit-add",
@@ -125,12 +126,12 @@ class RouterNotifier extends ChangeNotifier {
         GoRoute(
           name: "settings",
           path: "/settings",
-          // builder: (context, state) => const HomeStudentPage(),
-          pageBuilder: (context, state) => buildPageWithDefaultTransition(
-            context: context, 
-            state: state, 
-            child: const SettingsPage(),
-          ),
+          builder: (context, state) => MainPage(key: state.pageKey, path: '/settings'),
+          // pageBuilder: (context, state) => buildPageWithDefaultTransition(
+          //   context: context, 
+          //   state: state, 
+          //   child: const SettingsPage(),
+          // ),
           routes: [
             GoRoute(
               name: "settings-edit",
@@ -142,21 +143,22 @@ class RouterNotifier extends ChangeNotifier {
         GoRoute(
           name: "action",
           path: "/action",
-          pageBuilder: (context, state) => buildPageWithDefaultTransition(
-            context: context, 
-            state: state, 
-            child: const ActionPage(),
-          ),
+          builder: (context, state) => MainPage(key: state.pageKey, path: '/action'),
+          // pageBuilder: (context, state) => buildPageWithDefaultTransition(
+          //   context: context, 
+          //   state: state, 
+          //   child: const ActionPage(),
+          // ),
         ),
         GoRoute(
           name: "expert",
           path: "/expert",
-          // builder: (context, state) => const ExpertPage(),
-          pageBuilder: (context, state) => buildPageWithDefaultTransition(
-            context: context, 
-            state: state, 
-            child: const ExpertPage(),
-          ),
+          builder: (context, state) => MainPage(key: state.pageKey, path: '/expert'),
+          // pageBuilder: (context, state) => buildPageWithDefaultTransition(
+          //   context: context, 
+          //   state: state, 
+          //   child: const ExpertPage(),
+          // ),
           routes: [
             GoRoute(
               name: "topic-add",

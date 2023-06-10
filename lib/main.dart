@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:so_hoa_vung_trong/firebase_options.dart';
@@ -10,20 +11,20 @@ import 'package:so_hoa_vung_trong/controllers/router_controller.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  final container = ProviderContainer();
-  // 2. Use it to read the provider 
-  container.read(firebaseCloudMessagingServiceProvider);
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp(
+  //   options: DefaultFirebaseOptions.currentPlatform,
+  // );
+  // final container = ProviderContainer();
+  // // 2. Use it to read the provider 
+  // container.read(firebaseCloudMessagingServiceProvider);
 
-  runApp(UncontrolledProviderScope(
-    container: container,
-    child: const MyApp(),
-  ));
+  // runApp(UncontrolledProviderScope(
+  //   container: container,
+  //   child: const MyApp(),
+  // ));
 
-  // runApp(const ProviderScope(child: MyApp()));
+  runApp(const ProviderScope(child: MyApp()));
   // initializeDateFormatting()
   //   .then((value) => runApp(const ProviderScope(child: MyApp())));
 }
@@ -37,7 +38,7 @@ class MyApp extends ConsumerWidget {
     final appTheme = ref.watch(appThemeProvider);
     return MaterialApp.router(
       title: 'Flutter Chat App',
-      scrollBehavior: const MaterialScrollBehavior().copyWith(
+      scrollBehavior: const CupertinoScrollBehavior().copyWith(
         dragDevices: {PointerDeviceKind.mouse, PointerDeviceKind.touch, PointerDeviceKind.stylus, PointerDeviceKind.unknown},
       ),
       localizationsDelegates: const [

@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:so_hoa_vung_trong/utils/colors.dart';
 
@@ -13,6 +14,9 @@ class AppTheme {
 
 final appThemeProvider = Provider<AppTheme>((ref) {
   return AppTheme(themeData: ThemeData(
+    cupertinoOverrideTheme: const CupertinoThemeData(
+      primaryColor: primary
+    ),
     pageTransitionsTheme: const PageTransitionsTheme(
       builders: {
         TargetPlatform.android: CupertinoPageTransitionsBuilder(),

@@ -27,47 +27,50 @@ class _ActionPageState extends ConsumerState<ActionPage> {
   @override
   Widget build(BuildContext context) {
     // return Container();
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Danh mục"),
-        leading: IconButton(
-          onPressed: () => context.go('/'),
-          icon: const Icon(CupertinoIcons.back),
+    return Column(
+      children: [
+        AppBar(
+          title: const Text("Danh mục"),
+          leading: IconButton(
+            onPressed: () => context.go('/'),
+            icon: const Icon(CupertinoIcons.back),
+          ),
         ),
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
-        child: AlignedGridView.count(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          crossAxisCount: 2,
-          itemCount: list.length,
-          mainAxisSpacing: 20,
-          crossAxisSpacing: 20,
-          itemBuilder: (context, index) {
-            return AspectRatio(
-              aspectRatio: 1/1,
-              child: Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: list[index]['color'],
-                  borderRadius: BorderRadius.circular(6)
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Icon(list[index]['icon'], size: 30, color: Colors.white,),
-                    const SizedBox(height: 5,),
-                    Text(list[index]['label'], style: const TextStyle(fontSize: 16, color: Colors.white), textAlign: TextAlign.center,)
-                  ],
-                ),
-              ),
-            );
-          },
-        )
-      ),
-      bottomNavigationBar: const BottomBar(),
+        Expanded(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(20),
+            child: AlignedGridView.count(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              crossAxisCount: 2,
+              itemCount: list.length,
+              mainAxisSpacing: 20,
+              crossAxisSpacing: 20,
+              itemBuilder: (context, index) {
+                return AspectRatio(
+                  aspectRatio: 1/1,
+                  child: Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: list[index]['color'],
+                      borderRadius: BorderRadius.circular(6)
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(list[index]['icon'], size: 30, color: Colors.white,),
+                        const SizedBox(height: 5,),
+                        Text(list[index]['label'], style: const TextStyle(fontSize: 16, color: Colors.white), textAlign: TextAlign.center,)
+                      ],
+                    ),
+                  ),
+                );
+              },
+            )
+          ),
+        ),
+      ],
     );
   }
 }
