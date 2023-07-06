@@ -37,7 +37,7 @@ class _BottomBarState extends ConsumerState<BottomBar> {
 
   @override
   Widget build(BuildContext context) {
-    final location = "/${"${ref.watch(routerProvider).location}/".split("/")[1]}";
+    final location = "/${"${GoRouterState.of(context).location}/".split("/")[1]}";
     final currentPageIndex = menu.indexWhere((v) => v['path'] == location);
     final selectedIndex = currentPageIndex < 0 ? 0 : currentPageIndex;
 
