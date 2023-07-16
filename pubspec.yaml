@@ -63,6 +63,7 @@ dependencies:
   dio: ^5.1.2
   dropdown_button2: ^2.1.3
   flutter_animate: ^4.2.0
+  easy_localization: ^3.0.2
 
 flutter_launcher_icons:
   ios: true
@@ -106,6 +107,7 @@ flutter:
     - assets/lotties/
     - assets/img/
     - assets/
+    - assets/translations/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

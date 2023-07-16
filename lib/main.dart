@@ -9,9 +9,13 @@ import 'package:so_hoa_vung_trong/services/firebase_cloud_messaging.dart';
 import 'package:so_hoa_vung_trong/services/theme_data.dart';
 import 'package:so_hoa_vung_trong/controllers/router_controller.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 void main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await EasyLocalization.ensureInitialized();
+
   // await Firebase.initializeApp(
   //   options: DefaultFirebaseOptions.currentPlatform,
   // );
@@ -24,7 +28,12 @@ void main() async {
   //   child: const MyApp(),
   // ));
 
-  runApp(const ProviderScope(child: MyApp()));
+  runApp(ProviderScope(child: EasyLocalization(
+    supportedLocales: const [Locale('en', 'US'), Locale('vi', 'VN')],
+    path: 'assets/translations', // <-- change the path of the translation files 
+    fallbackLocale: Locale('en', 'US'),
+    child: const MyApp()
+  )));
   // initializeDateFormatting()
   //   .then((value) => runApp(const ProviderScope(child: MyApp())));
 }
@@ -41,15 +50,18 @@ class MyApp extends ConsumerWidget {
       scrollBehavior: const CupertinoScrollBehavior().copyWith(
         dragDevices: {PointerDeviceKind.mouse, PointerDeviceKind.touch, PointerDeviceKind.stylus, PointerDeviceKind.unknown},
       ),
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('en'), 
-        Locale('vi'), // arabic, no country code
-      ],
+      // localizationsDelegates: const [
+      //   GlobalMaterialLocalizations.delegate,
+      //   GlobalWidgetsLocalizations.delegate,
+      //   GlobalCupertinoLocalizations.delegate,
+      // ],
+      // supportedLocales: const [
+      //   Locale('en'), 
+      //   Locale('vi'), // arabic, no country code
+      // ],
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
       theme: appTheme.themeData,
       debugShowCheckedModeBanner: false,
       routerConfig: router,
