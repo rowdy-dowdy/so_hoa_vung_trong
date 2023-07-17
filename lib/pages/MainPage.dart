@@ -17,37 +17,12 @@ class MainPage extends ConsumerStatefulWidget {
 }
 
 class _MainPageState extends ConsumerState<MainPage> {
-  static const menu = <Map>[
-    {
-      "icon": CupertinoIcons.home,
-      "label": "Trang chủ",
-      "path": "/",
-      "page": HomePage(),
-    },
-    {
-      "icon": CupertinoIcons.person_2,
-      "label": "Chuyên gia",
-      "path": "/expert",
-      "page": ExpertPage(),
-    },
-    {
-      "icon": CupertinoIcons.list_bullet_below_rectangle,
-      "label": "Tác vụ",
-      "path": "/action",
-      "page": ActionPage(),
-    },
-    {
-      "icon": CupertinoIcons.settings,
-      "label": "Cá nhân",
-      "path": "/settings",
-      "page": SettingsPage(),
-    }
-  ];
-
   int currentPageIndex = 0;
 
-  void changePage() {
-    int index = menu.indexWhere((element) => element['path'] == widget.path);
+  late List<Map<String, dynamic>> menu;
+
+  void changePage(String? path) {
+    int index = menu.indexWhere((element) => element['path'] == (path ?? widget.path));
     if (index < 0) {
       index = 0;
     }
@@ -60,14 +35,40 @@ class _MainPageState extends ConsumerState<MainPage> {
   @override
   void initState() {
     super.initState();
-    print(currentPageIndex);
-    changePage();
+
+    menu = [
+      {
+        "icon": CupertinoIcons.home,
+        "label": "Trang chủ",
+        "path": "/",
+        "page": HomePage(),
+      },
+      {
+        "icon": CupertinoIcons.person_2,
+        "label": "Chuyên gia",
+        "path": "/expert",
+        "page": ExpertPage(),
+      },
+      {
+        "icon": CupertinoIcons.list_bullet_below_rectangle,
+        "label": "Tác vụ",
+        "path": "/action",
+        "page": ActionPage(changePageCallback: changePage),
+      },
+      {
+        "icon": CupertinoIcons.settings,
+        "label": "Cá nhân",
+        "path": "/settings",
+        "page": SettingsPage(),
+      }
+    ];
+
+    changePage(null);
   }
 
   void didUpdateWidget(MainPage oldWidget) {
     super.didUpdateWidget(oldWidget);
-    
-    changePage();
+    // changePage();
   }
 
   @override

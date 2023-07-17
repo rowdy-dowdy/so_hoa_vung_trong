@@ -15,7 +15,7 @@ class AppTheme {
 final appThemeProvider = Provider<AppTheme>((ref) {
   return AppTheme(themeData: ThemeData(
     cupertinoOverrideTheme: const CupertinoThemeData(
-      primaryColor: primary
+      primaryColor: primary,
     ),
     pageTransitionsTheme: const PageTransitionsTheme(
       builders: {

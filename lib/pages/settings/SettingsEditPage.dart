@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,7 +18,7 @@ class _SettingsEditPageState extends ConsumerState<SettingsEditPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Chỉnh sửa thông tin cá nhân"),
+        title: const Text("Edit information").tr(),
         leading: IconButton(
           onPressed: () => context.go('/settings'),
           icon: const Icon(CupertinoIcons.back),
@@ -54,10 +55,10 @@ class _SettingsEditPageState extends ConsumerState<SettingsEditPage> {
                 ),
               ),
               const SizedBox(height: 20,),
-              Text("Thông tin cơ bản", style: TextStyle(
+              Text("Basic information", style: TextStyle(
                 color: Colors.grey[700],
                 fontWeight: FontWeight.w600
-              ),),
+              ),).tr(),
               const SizedBox(height: 5,),
               Container(
                 // padding: const EdgeInsets.only(left: 15),
@@ -80,14 +81,14 @@ class _SettingsEditPageState extends ConsumerState<SettingsEditPage> {
                     )),
                     child: TextFormField(
                       // controller: nameController,
-                      decoration: const InputDecoration(
-                        hintText: 'Họ tên',
+                      decoration: InputDecoration(
+                        hintText: 'Name'.tr(),
                         border: InputBorder.none,
                         enabledBorder: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 13),
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 13),
                       ),
                       validator: (value) =>
-                        value!.isEmpty ? 'Họ tên không được để trống' : null,
+                        value!.isEmpty ? "Name can't be left blank".tr() : null,
                     ),
                   ),
                   Container(
@@ -97,15 +98,15 @@ class _SettingsEditPageState extends ConsumerState<SettingsEditPage> {
                     child: SizedBox(
                       width: double.infinity,
                       child: DropdownButtonFormField(
-                        decoration: const InputDecoration(
-                          hintText: 'Giới tính',
+                        decoration: InputDecoration(
+                          hintText: 'Gender'.tr(),
                           border: InputBorder.none,
                           enabledBorder: InputBorder.none,
-                          contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 13),
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 13),
                         ),
-                        items: const [
-                          DropdownMenuItem(value: "nam",child: Text("Nam")),
-                          DropdownMenuItem(value: "nu",child: Text("Nữ")),
+                        items: [
+                          DropdownMenuItem(value: "nam",child: const Text("Man").tr()),
+                          DropdownMenuItem(value: "nu",child: const Text("Woman").tr()),
                         ],
                         // value: genderValue,
                         onChanged: (value) {
@@ -120,12 +121,12 @@ class _SettingsEditPageState extends ConsumerState<SettingsEditPage> {
                     decoration: BoxDecoration(border: Border(
                       bottom: BorderSide(color: Colors.grey[300]!)
                     )),
-                    child: const TextField(
+                    child: TextField(
                       // controller: dateController,
                       readOnly: true,
                       // onTap: () => _selectDate(context),
                       decoration: InputDecoration(
-                        hintText: 'Ngày sinh',
+                        hintText: 'Birthday'.tr(),
                         border: InputBorder.none,
                         enabledBorder: InputBorder.none,
                         contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 13),
@@ -136,24 +137,24 @@ class _SettingsEditPageState extends ConsumerState<SettingsEditPage> {
                     decoration: BoxDecoration(border: Border(
                       bottom: BorderSide(color: Colors.grey[300]!)
                     )),
-                    child: const TextField(
+                    child: TextField(
                       // controller: addressController,
                       decoration: InputDecoration(
-                        hintText: 'Địa chỉ',
+                        hintText: 'Address'.tr(),
                         border: InputBorder.none,
                         enabledBorder: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 13),
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 13),
                       ),
                     ),
                   ),
                   Container(
-                    child: const TextField(
+                    child: TextField(
                       // controller: phoneController,
                       decoration: InputDecoration(
-                        hintText: 'Số điện thoại',
+                        hintText: 'Phone'.tr(),
                         border: InputBorder.none,
                         enabledBorder: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 13),
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 13),
                       ),
                     ),
                   )
@@ -161,10 +162,10 @@ class _SettingsEditPageState extends ConsumerState<SettingsEditPage> {
               ),
         
               const SizedBox(height: 20,),
-              Text("Nâng cao", style: TextStyle(
+              Text("Advanced", style: TextStyle(
                 color: Colors.grey[700],
                 fontWeight: FontWeight.w600
-              ),),
+              ),).tr(),
               const SizedBox(height: 5,),
               Container(
                 // padding: const EdgeInsets.only(left: 15),
@@ -185,10 +186,10 @@ class _SettingsEditPageState extends ConsumerState<SettingsEditPage> {
                     decoration: BoxDecoration(border: Border(
                       bottom: BorderSide(color: Colors.grey[300]!)
                     )),
-                    child: const TextField(
+                    child: TextField(
                       // controller: emailController,
                       decoration: InputDecoration(
-                        hintText: 'Tài khoản',
+                        hintText: 'Account'.tr(),
                         border: InputBorder.none,
                         enabledBorder: InputBorder.none,
                         contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 13),
@@ -196,11 +197,11 @@ class _SettingsEditPageState extends ConsumerState<SettingsEditPage> {
                     ),
                   ),
                   Container(
-                    child: const TextField(
+                    child: TextField(
                       // controller: passwordController,
                       // obscureText: !showPassword,
                       decoration: InputDecoration(
-                        hintText: 'Mật khẩu',
+                        hintText: 'Password'.tr(),
                         // suffixIcon: IconButton(
                           // onPressed: () => setState(() {showPassword = !showPassword;}),
                           // icon: Icon(showPassword ? CupertinoIcons.lock_open : CupertinoIcons.lock)

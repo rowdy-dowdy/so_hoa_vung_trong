@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class HomePage extends ConsumerStatefulWidget {
 class _NotificationsPageState extends ConsumerState<HomePage> {
 
   String getCurrentDay() {
-    return DateFormat.EEEE('vi').format(DateTime.now());
+    return DateFormat.EEEE(context.locale.toString()).format(DateTime.now());
   }
 
   String getCurrentDate() {
@@ -307,7 +308,7 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                                         children: [
                                           Text(item.TenNguyenLieu?? "", style: const TextStyle(color: Colors.white), overflow: TextOverflow.ellipsis,),
                                           const SizedBox(height: 2,),
-                                          Text(formatCurrency(item.Gia), style: const TextStyle(
+                                          Text(formatCurrency(context, item.Gia), style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 12
                                           ),),
@@ -407,7 +408,7 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                                         children: [
                                           Text(item.TenPhanBon?? "", style: const TextStyle(color: Colors.white), overflow: TextOverflow.ellipsis,),
                                           const SizedBox(height: 2,),
-                                          Text(formatCurrency(item.Gia), style: const TextStyle(
+                                          Text(formatCurrency(context, item.Gia), style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 12
                                           ),),
@@ -580,7 +581,7 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                                           children: [
                                             Text(item.TenThuoc ?? "", style: const TextStyle(color: Colors.white), overflow: TextOverflow.ellipsis,),
                                             const SizedBox(height: 2,),
-                                            Text(formatCurrency(item.Gia), style: const TextStyle(
+                                            Text(formatCurrency(context, item.Gia), style: const TextStyle(
                                               color: Colors.white,
                                               fontSize: 12
                                             ),),

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,13 +21,13 @@ String toImage(String image) {
   return "https://$BASE_URL/storage/$image";
 }
 
-String formatCurrency(int? price) {
-  final currencyFormatter = NumberFormat.currency(locale: 'vi');
+String formatCurrency(BuildContext context, int? price) {
+  final currencyFormatter = NumberFormat.currency(locale: context.locale.toString());
   return currencyFormatter.format(price ?? 0);
 }
 
-String formatCurrencyDouble(double price) {
-  final currencyFormatter = NumberFormat.currency(locale: 'vi');
+String formatCurrencyDouble(BuildContext context, double price) {
+  final currencyFormatter = NumberFormat.currency(locale: context.locale.toString());
   return currencyFormatter.format(price);
 }
 
@@ -238,7 +239,7 @@ selectDate(BuildContext context, [DateTime? initialDate, bool selectTime = false
 buildMaterialDatePicker(BuildContext context, DateTime initialDate) async {
   final DateTime? picked = await showDatePicker(
     context: context,
-    locale: const Locale("vi"),
+    locale: context.locale,
     initialDate: initialDate,
     firstDate: DateTime(1900),
     lastDate: DateTime(DateTime.now().year + 5),

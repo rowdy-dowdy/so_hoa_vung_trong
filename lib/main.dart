@@ -29,9 +29,10 @@ void main() async {
   // ));
 
   runApp(ProviderScope(child: EasyLocalization(
-    supportedLocales: const [Locale('en', 'US'), Locale('vi', 'VN')],
+    supportedLocales: const [Locale('vi'), Locale('en')],
     path: 'assets/translations', // <-- change the path of the translation files 
-    fallbackLocale: Locale('en', 'US'),
+    fallbackLocale: const Locale('vi'),
+    // startLocale: const Locale('vi'),
     child: const MyApp()
   )));
   // initializeDateFormatting()
@@ -46,7 +47,7 @@ class MyApp extends ConsumerWidget {
     final router = ref.watch(routerProvider);
     final appTheme = ref.watch(appThemeProvider);
     return MaterialApp.router(
-      title: 'Flutter Chat App',
+      // title: 'Flutter Chat App',
       scrollBehavior: const CupertinoScrollBehavior().copyWith(
         dragDevices: {PointerDeviceKind.mouse, PointerDeviceKind.touch, PointerDeviceKind.stylus, PointerDeviceKind.unknown},
       ),

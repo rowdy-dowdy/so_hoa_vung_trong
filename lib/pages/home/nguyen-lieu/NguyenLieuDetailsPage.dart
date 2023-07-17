@@ -145,7 +145,7 @@ class _NguyenLieuDetailsPageState extends ConsumerState<NguyenLieuDetailsPage> {
                   const SizedBox(height: 10,),
                   Row(
                     children: [
-                      Text(formatCurrency(item.Gia), style: const TextStyle(
+                      Text(formatCurrency(context, item.Gia), style: const TextStyle(
                         color: Colors.red,
                         fontSize: 20,
                         fontWeight: FontWeight.w500

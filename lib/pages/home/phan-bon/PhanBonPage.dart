@@ -99,7 +99,7 @@ class _PhanBonPageState extends ConsumerState<PhanBonPage> {
                                 children: [
                                   Text(item.TenPhanBon?? "", style: const TextStyle(color: Colors.white), overflow: TextOverflow.ellipsis,),
                                   const SizedBox(height: 2,),
-                                  Text(formatCurrency(item.Gia), style: const TextStyle(
+                                  Text(formatCurrency(context, item.Gia), style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 12
                                   ),),

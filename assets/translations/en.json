@@ -1,3 +1,6 @@
 {
-  "Hello": "Hello"
+  "country_names": {
+    "vi": "Vietnamese",
+    "en": "United States"
+  }
 }

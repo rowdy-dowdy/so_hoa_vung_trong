@@ -143,7 +143,7 @@ class _PhanBonDetailsPageState extends ConsumerState<PhanBonDetailsPage> {
                   const SizedBox(height: 10,),
                   Row(
                     children: [
-                      Text(formatCurrency(item.Gia), style: const TextStyle(
+                      Text(formatCurrency(context, item.Gia), style: const TextStyle(
                         color: Colors.red,
                         fontSize: 20,
                         fontWeight: FontWeight.w500
@@ -152,7 +152,7 @@ class _PhanBonDetailsPageState extends ConsumerState<PhanBonDetailsPage> {
                       //   fontSize: 20,
                       //   fontWeight: FontWeight.w500
                       // ),),
-                      // Text(formatCurrency(item.Gia), style: const TextStyle(
+                      // Text(formatCurrency(context, item.Gia), style: const TextStyle(
                       //   fontSize: 16,
                       //   fontWeight: FontWeight.w500
                       // ),),

@@ -6,7 +6,8 @@ import 'package:so_hoa_vung_trong/components/BottomBar.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class ActionPage extends ConsumerStatefulWidget {
-  const ActionPage({super.key});
+  final void Function(String?) changePageCallback;
+  const ActionPage({required this.changePageCallback, super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _ActionPageState();
@@ -32,7 +33,7 @@ class _ActionPageState extends ConsumerState<ActionPage> {
         AppBar(
           title: const Text("Danh mục"),
           leading: IconButton(
-            onPressed: () => context.go('/'),
+            onPressed: () => widget.changePageCallback('/'),
             icon: const Icon(CupertinoIcons.back),
           ),
         ),
