@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -53,8 +54,8 @@ class _TopicDetailsState extends ConsumerState<TopicDetails> {
     final commentsData = ref.watch(commentsControllerProvider(widget.id));
 
     if (topic == null) {
-      return const Scaffold(
-        body: Center(child: Text("Câu hỏi không tồn tại")),
+      return Scaffold(
+        body: Center(child: const Text("The question does not exist").tr()),
       );
     }
 
@@ -87,10 +88,10 @@ class _TopicDetailsState extends ConsumerState<TopicDetails> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(topic.NguoiTao?.Ten ?? "Nông hộ", style: const TextStyle(
+                  Text(topic.NguoiTao?.Ten ?? "Farming households".tr(), style: const TextStyle(
                     fontWeight: FontWeight.w500
                   ),),
-                  Text(formatTimeToString(topic.NgayTao), style: const TextStyle(
+                  Text(formatTimeToString(context, topic.NgayTao), style: const TextStyle(
                     fontSize: 12,
                     color: grey
                   ),)
@@ -145,13 +146,13 @@ class _TopicDetailsState extends ConsumerState<TopicDetails> {
                             if (commentsData.loading) {
                               return const CommentCountLoading();
                             }
-                            return Text("${commentsData.data.length} thảo luận");
+                            return Text("${commentsData.data.length} ${"comments".tr()}");
                           }
                         ),
                         const Spacer(),
                         TextButton(
                           onPressed: () => unitCodeCtrlFocusNode.requestFocus(), 
-                          child: const Text("Bắt đầu thảo luận")
+                          child: const Text("Start the discussion").tr()
                         )
                       ],
                     ),
@@ -164,9 +165,9 @@ class _TopicDetailsState extends ConsumerState<TopicDetails> {
                         }
 
                         if (commentsData.data.isEmpty) {
-                          return const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 12),
-                            child: Center(child: Text("Không có thảo luận nào"))
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 12),
+                            child: Center(child: const Text("No questions asked").tr())
                           );
                         }
 
@@ -206,7 +207,7 @@ class _TopicDetailsState extends ConsumerState<TopicDetails> {
                                           child: Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              Text(comment.NguoiTao?.Ten ?? "Nông hộ", style: TextStyle(fontWeight: FontWeight.w500),),
+                                              Text(comment.NguoiTao?.Ten ?? "Farming households".tr(), style: const TextStyle(fontWeight: FontWeight.w500),),
                                               const SizedBox(height: 3,),
                                               Text(comment.NoiDung ?? "")
                                             ],
@@ -215,7 +216,7 @@ class _TopicDetailsState extends ConsumerState<TopicDetails> {
                                         const SizedBox(height: 3,),
                                         Padding(
                                           padding: const EdgeInsets.symmetric(horizontal: 8),
-                                          child: Text(formatTimeToString(comment.NgayTao), style: const TextStyle(fontSize: 12, color: grey),),
+                                          child: Text(formatTimeToString(context, comment.NgayTao), style: const TextStyle(fontSize: 12, color: grey),),
                                         )
                                       ],
                                     ),
@@ -327,11 +328,11 @@ class MessageBottomBarState extends ConsumerState<MessageBottomBar> {
                         });
                       }
                     },
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       focusedBorder: InputBorder.none,
                       enabledBorder: InputBorder.none,
-                      contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8.0),
-                      hintText: "Nội dung"
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8.0),
+                      hintText: "Content".tr()
                     ),
                   ),
                 ),

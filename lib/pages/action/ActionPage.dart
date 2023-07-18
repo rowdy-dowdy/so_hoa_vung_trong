@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,14 +16,14 @@ class ActionPage extends ConsumerStatefulWidget {
 
 class _ActionPageState extends ConsumerState<ActionPage> {
   static const list = <Map>[
-    { "icon": CupertinoIcons.archivebox_fill, "label": 'Phân bón', "color": Color(0xffFF4858), "path": '/phan-bon' },
-    { "icon": CupertinoIcons.ant, "label": 'Thuốc BVTV', "color": Color(0xffBD2A2E), "path": '/' },
-    { "icon": CupertinoIcons.arrow_3_trianglepath, "label": 'Nguyên vật liệu', "color": Color.fromARGB(255, 216, 122, 59), "path": '/' },
-    { "icon": CupertinoIcons.tree, "label": 'Loại cây trồng', "color": Color(0xFFDDAA33), "path": '/' },
-    { "icon": CupertinoIcons.briefcase_fill, "label": 'Công việc - Tình trạng', "color": Color(0xFF44803F), "path": '/' },
-    { "icon": CupertinoIcons.bolt_circle, "label": 'Quy trình sản xuất', "color": Color(0xFF146152), "path": '/' },
-    { "icon": CupertinoIcons.arrow_2_circlepath_circle, "label": 'Đất - Cơ sở', "color": Color(0xff284F8F), "path": '/' },
-    { "icon": CupertinoIcons.gamecontroller_fill, "label": 'Thiết bị - Máy móc', "color": Color(0xff592F64), "path": '/' },
+    { "icon": CupertinoIcons.archivebox_fill, "label": 'Fertilizer', "color": Color(0xffFF4858), "path": '/phan-bon' },
+    { "icon": CupertinoIcons.ant, "label": 'Plant protection products', "color": Color(0xffBD2A2E), "path": '/' },
+    { "icon": CupertinoIcons.arrow_3_trianglepath, "label": 'Materials', "color": Color.fromARGB(255, 216, 122, 59), "path": '/' },
+    { "icon": CupertinoIcons.tree, "label": 'Type tree', "color": Color(0xFFDDAA33), "path": '/' },
+    { "icon": CupertinoIcons.briefcase_fill, "label": 'Job - Status', "color": Color(0xFF44803F), "path": '/' },
+    { "icon": CupertinoIcons.bolt_circle, "label": 'Production process', "color": Color(0xFF146152), "path": '/' },
+    { "icon": CupertinoIcons.arrow_2_circlepath_circle, "label": 'Soil - Base', "color": Color(0xff284F8F), "path": '/' },
+    { "icon": CupertinoIcons.gamecontroller_fill, "label": 'Equipment', "color": Color(0xff592F64), "path": '/' },
   ];
 
   @override
@@ -31,7 +32,7 @@ class _ActionPageState extends ConsumerState<ActionPage> {
     return Column(
       children: [
         AppBar(
-          title: const Text("Danh mục"),
+          title: const Text("Category").tr(),
           leading: IconButton(
             onPressed: () => widget.changePageCallback('/'),
             icon: const Icon(CupertinoIcons.back),
@@ -62,7 +63,7 @@ class _ActionPageState extends ConsumerState<ActionPage> {
                       children: [
                         Icon(list[index]['icon'], size: 30, color: Colors.white,),
                         const SizedBox(height: 5,),
-                        Text(list[index]['label'], style: const TextStyle(fontSize: 16, color: Colors.white), textAlign: TextAlign.center,)
+                        Text(tr(list[index]['label']), style: const TextStyle(fontSize: 16, color: Colors.white), textAlign: TextAlign.center,)
                       ],
                     ),
                   ),

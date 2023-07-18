@@ -1,6 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:so_hoa_vung_trong/config/app.dart';
 import 'package:so_hoa_vung_trong/utils/colors.dart';
 
 class Logo extends ConsumerWidget {
@@ -23,17 +23,17 @@ class Logo extends ConsumerWidget {
           ),
         ),
         const SizedBox(width: 5,),
-        const Column(
+        Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(APP_NAME, style: TextStyle(
+            const Text("Bac Ha", style: TextStyle(
               fontSize: 14, fontWeight: FontWeight.w600, color: primary,
-            ),),
-            Text('Số hóa vùng trồng', style: TextStyle(
+            ),).tr(),
+            const Text('Digitizing planting areas', style: TextStyle(
               fontSize: 10,
               color: primary
-            ),),
+            ),).tr(),
           ],
         )
       ],

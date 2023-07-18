@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -123,7 +124,7 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                                         ),
                                       ),
                                       TextButton.icon(
-                                        onPressed: () => context.go('/diary/edit-add'), 
+                                        onPressed: () => context.push('/diary/edit-add'), 
                                         icon: const Icon(CupertinoIcons.add, color: Colors.white,),
                                         label: const Text("Thêm mới", style: TextStyle(color: Colors.white),),
                                       ),
@@ -147,7 +148,7 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                               itemBuilder: (context, index) {
                                 if (index == 0) {
                                   return InkWell(
-                                    onTap: () => context.go('/diary/edit-add'),
+                                    onTap: () => context.push('/diary/edit-add'),
                                     child: Container(
                                       width: 140,
                                       decoration: BoxDecoration(
@@ -167,13 +168,13 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                                         ],
                                       ),
                                     ),
-                                  );
+                                  ).animate().fade().slideY();
                                 }
                   
                                 final diary = diaryData.data[index - 1];
                   
                                 return InkWell(
-                                  onTap: () => context.go('/diary/${diary.Oid}'),
+                                  onTap: () => context.push('/diary/${diary.Oid}'),
                                   child: Container(
                                     width: 140,
                                     decoration: BoxDecoration(
@@ -217,11 +218,12 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                                       ),
                                     ),
                                   ),
-                                );
+                                ).animate().fade(delay: (index * 100).ms, duration: 500.ms).slideY();
                               },
                             ),
                           );
                         },),
+                        
                         const SizedBox(height: 10,),
                   
                         // nguyen lieu
@@ -231,10 +233,10 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text("Nguyên vật liệu", style: TextStyle(fontWeight: FontWeight.w500),),
+                              const Text("Materials", style: TextStyle(fontWeight: FontWeight.w500),).tr(),
                               TextButton(
-                                onPressed: () => context.go('/nguyen-lieu'), 
-                                child: const Text("Xem thêm")
+                                onPressed: () => context.push('/nguyen-lieu'), 
+                                child: const Text("Read more").tr()
                               )
                             ],
                           ),
@@ -248,7 +250,7 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                             return Container(
                               color: Colors.white,
                               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                              child: const Text("Không có nguyên liệu nào")
+                              child: const Text("No ingredients available").tr()
                             );
                           }
         
@@ -331,10 +333,10 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text("Phân bón", style: TextStyle(fontWeight: FontWeight.w500),),
+                              const Text("Fertilizer", style: TextStyle(fontWeight: FontWeight.w500),).tr(),
                               TextButton(
-                                onPressed: () => context.go('/phan-bon'), 
-                                child: const Text("Xem thêm")
+                                onPressed: () => context.push('/phan-bon'), 
+                                child: const Text("Read more").tr()
                               )
                             ],
                           ),
@@ -348,7 +350,7 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                             return Container(
                               color: Colors.white,
                               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                              child: const Text("Không có phân bón nào")
+                              child: const Text("No fertilizer").tr()
                             );
                           }
         
@@ -428,7 +430,7 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                         Container(
                           color: Colors.white,
                           padding: const EdgeInsets.only(left: 12, right:12, top: 10),
-                          child: const Text("Thiết bị - Máy móc", style: TextStyle(fontWeight: FontWeight.w500),),
+                          child: const Text("Equipment", style: TextStyle(fontWeight: FontWeight.w500),).tr(),
                         ),
                         thietBiData.when(
                           skipLoadingOnRefresh: false,
@@ -437,7 +439,7 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                               return Container(
                                 color: Colors.white,
                                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                                child: const Text("Không có thiết bị - máy móc nào")
+                                child: const Text("No equipment").tr()
                               );
                             }
         
@@ -454,7 +456,7 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                                 itemBuilder: (context, index) {
                                   final item = data[index];
                                   return InkWell(
-                                    // onTap: () => context.go('/${item.Oid}'),
+                                    // onTap: () => context.push('/${item.Oid}'),
                                     child: Container(
                                       width: 140,
                                       decoration: BoxDecoration(
@@ -491,7 +493,7 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                                           children: [
                                             Text(item.TenThietBi?? "", style: const TextStyle(color: Colors.white), overflow: TextOverflow.ellipsis,),
                                             const SizedBox(height: 2,),
-                                            Text("Hạn sử dụng: ${formatTimeToString2(item.ThoiHanSuDung)}", style: const TextStyle(
+                                            Text("${"Expiry".tr()}: ${item.ThoiHanSuDung != null ? formatTimeToString2(item.ThoiHanSuDung) : "not available".tr()}", style: const TextStyle(
                                               color: Colors.white,
                                               fontSize: 12
                                             ),),
@@ -508,7 +510,7 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                           error: (_, __) => Container(
                             color: Colors.white,
                             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                            child: const Text("Không thể tải thiết bị - máy móc")
+                            child: const Text("Unable to load device - machine").tr()
                           )
                         ),
         
@@ -518,7 +520,7 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                         Container(
                           color: Colors.white,
                           padding: const EdgeInsets.only(left: 12, right:12, top: 10),
-                          child: const Text("Thuốc bảo vệ thực vật", style: TextStyle(fontWeight: FontWeight.w500),),
+                          child: const Text("Plant protection products", style: TextStyle(fontWeight: FontWeight.w500),).tr(),
                         ),
                         thuocData.when(
                           skipLoadingOnRefresh: false,
@@ -527,7 +529,7 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                               return Container(
                                 color: Colors.white,
                                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                                child: const Text("Không có thuốc BVTV nào")
+                                child: const Text("No plant protection products").tr()
                               );
                             }
         
@@ -544,7 +546,7 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                                 itemBuilder: (context, index) {
                                   final item = data[index];
                                   return InkWell(
-                                    // onTap: () => context.go('/${item.Oid}'),
+                                    // onTap: () => context.push('/${item.Oid}'),
                                     child: Container(
                                       width: 140,
                                       decoration: BoxDecoration(
@@ -598,7 +600,7 @@ class _NotificationsPageState extends ConsumerState<HomePage> {
                           error: (_, __) => Container(
                             color: Colors.white,
                             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                            child: const Text("Không thể tải thuốc BVTV")
+                            child: const Text("Unable to load plant protection products").tr()
                           )
                         ),
                       ],

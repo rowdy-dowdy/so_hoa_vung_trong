@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:so_hoa_vung_trong/controllers/landing_controller.dart';
 import 'package:so_hoa_vung_trong/utils/colors.dart';
@@ -39,10 +41,10 @@ class _LandingState extends ConsumerState<Landing> {
                 decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage('assets/img/landing.png'),
-                    fit: BoxFit.cover,
+                    fit: BoxFit.contain,
                   ),
                 ),
-              ),
+              ).animate().fade(duration: 500.ms).scale(),
             ),
             Expanded(
               child: Padding(
@@ -52,13 +54,13 @@ class _LandingState extends ConsumerState<Landing> {
                   children: [
                     const SizedBox(height: 10,),
                     // const Spacer(flex: 1,),
-                    const Text("Hãy bắt đầu", style: TextStyle(
+                    Text("Let's start".tr(), style: const TextStyle(
                       fontSize: 40,
                       color: Colors.white,
                       fontWeight: FontWeight.w600
-                    ),),
+                    ),).animate().fade(duration: 500.ms).slideY(),
                     const SizedBox(height: 10,),
-                    const Text('Đến với Bắc Hà không phải là cuộc rong chơi lướt qua mà là một hành trình tận hưởng cảnh đẹp núi rừng.', style: TextStyle(color: Colors.white),),
+                    Text('Coming to Bac Ha is not a passing tour but a journey to enjoy the beautiful scenery of the mountains.'.tr(), style: const TextStyle(color: Colors.white),).animate().fade(delay: 300.ms).slideY(),
                     const Spacer(flex: 2,),
                     const SizedBox(height: 20,),
                     ElevatedButton(
@@ -72,19 +74,19 @@ class _LandingState extends ConsumerState<Landing> {
                         ),
                         shadowColor: Colors.transparent,
                       ),
-                      child: const Text("Tham gia ngay", style: TextStyle(color: primary),),
-                    ),
+                      child: Text("Join now".tr(), style: const TextStyle(color: primary),),
+                    ).animate().fade(delay: 600.ms, duration: 500.ms).slideY(),
                     const SizedBox(height: 20,),
                     Row(
                       children: [
-                        const Text("Bạn đã có tài khoản?", style: TextStyle(color: Colors.white),),
+                        const Text("Do you already have an account?", style: TextStyle(color: Colors.white),).tr(),
                         const SizedBox(width: 5,),
                         InkWell(
                           onTap: () => ref.read(landingControllerProvider.notifier).gotoLogin(),
-                          child: const Text("Đăng nhập", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),)
+                          child: const Text("Login", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),).tr()
                         ),
                       ],
-                    ),
+                    ).animate().fade(delay: 900.ms, duration: 500.ms).slideY(),
                     const SizedBox(height: 20,),
                   ],
                 ),

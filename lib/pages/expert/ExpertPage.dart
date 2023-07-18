@@ -1,9 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:so_hoa_vung_trong/components/BottomBar.dart';
 import 'package:so_hoa_vung_trong/components/expert/ItemTopic.dart';
 import 'package:so_hoa_vung_trong/components/loading/TopicsLoading.dart';
 import 'package:so_hoa_vung_trong/controllers/expert/topic_controller.dart';
@@ -51,7 +50,7 @@ class _ExpertPageState extends ConsumerState<ExpertPage> {
                   colors: <Color>[primary, second]),
               ),
             ),
-            title: const Text("Trao đổi với chuyên gia", style: TextStyle(color: Colors.white),),
+            title: const Text("Talk to an expert", style: TextStyle(color: Colors.white),).tr(),
             actions: [
               IconButton(
                 onPressed: () => Navigator.of(context).push(
@@ -93,7 +92,7 @@ class _ExpertPageState extends ConsumerState<ExpertPage> {
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                         isDense: true,
-                        hintText: 'Tìm kiếm',
+                        hintText: 'Search'.tr(),
                         contentPadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12.0),
                         suffixIcon: IconButton(onPressed: () {}, icon: const Icon(CupertinoIcons.search, color: primary,)),
                       ),
@@ -105,7 +104,7 @@ class _ExpertPageState extends ConsumerState<ExpertPage> {
                       context: context,
                       builder: (context) => topicCategories.when(
                         data: (data) => ListCategory(items: data), 
-                        error: (_,__) => const Text("Không thể tải danh mục"), 
+                        error: (_,__) => const Text("Unable to load catalog").tr(), 
                         loading: () => const Center(child: CircularProgressIndicator())
                       ),
                     ), 
@@ -144,7 +143,7 @@ class _ExpertPageState extends ConsumerState<ExpertPage> {
                             if (topics.isEmpty && !topicsData.loading) ...[
                               SizedBox(
                                 height: constraints.maxHeight,
-                                child: const Center(child: Text("Không có câu hỏi nào"))
+                                child: Center(child: const Text("No questions asked").tr())
                               )
                             ]
                           ],

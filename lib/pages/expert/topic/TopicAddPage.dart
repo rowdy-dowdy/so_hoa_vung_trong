@@ -1,4 +1,5 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -49,35 +50,35 @@ class _TopicAddPageState extends ConsumerState<TopicAddPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text("Tạo câu hỏi mới"),
+        title: const Text("Create a new question").tr(),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Row(
+            Row(
               children: [
-                Text("Tiêu đề", style: TextStyle(fontWeight: FontWeight.w500),),
-                SizedBox(width: 3,),
-                Text("*", style: TextStyle(color: Colors.red),),
+                const Text("Title", style: TextStyle(fontWeight: FontWeight.w500),).tr(),
+                const SizedBox(width: 3,),
+                const Text("*", style: TextStyle(color: Colors.red),),
               ],
             ),
             const SizedBox(height: 5,),
             TextFormField(
               controller: _tieuDeController,
-              decoration: const InputDecoration(
-                hintText: 'Nhập tiêu đề'
+              decoration: InputDecoration(
+                hintText: 'Enter title'.tr()
               ),
             ),
 
             const SizedBox(height: 20,),
 
-            const Row(
+            Row(
               children: [
-                Text("Nội dung", style: TextStyle(fontWeight: FontWeight.w500),),
-                SizedBox(width: 3,),
-                Text("*", style: TextStyle(color: Colors.red),),
+                const Text("Content", style: TextStyle(fontWeight: FontWeight.w500),).tr(),
+                const SizedBox(width: 3,),
+                const Text("*", style: TextStyle(color: Colors.red),),
               ],
             ),
             const SizedBox(height: 5,),
@@ -85,18 +86,18 @@ class _TopicAddPageState extends ConsumerState<TopicAddPage> {
               controller: _noiDungController,
               maxLines: null,
               minLines: 4,
-              decoration: const InputDecoration(
-                hintText: 'Nhập nội dung'
+              decoration: InputDecoration(
+                hintText: 'Enter content'.tr()
               ),
             ),
 
             const SizedBox(height: 20,),
 
-            const Row(
+            Row(
               children: [
-                Text("Danh mục", style: TextStyle(fontWeight: FontWeight.w500),),
-                SizedBox(width: 3,),
-                Text("*", style: TextStyle(color: Colors.red),),
+                const Text("Category", style: TextStyle(fontWeight: FontWeight.w500),).tr(),
+                const SizedBox(width: 3,),
+                const Text("*", style: TextStyle(color: Colors.red),),
               ],
             ),
             const SizedBox(height: 5,),
@@ -109,9 +110,9 @@ class _TopicAddPageState extends ConsumerState<TopicAddPage> {
                 ),
               ),
               // isExpanded: true,
-              hint: const Text(
-                'Chọn danh mục',
-                style: TextStyle(fontSize: 14),
+              hint: Text(
+                'Choose category'.tr(),
+                style: const TextStyle(fontSize: 14),
               ),
               items: categories.map((e) => 
                 DropdownMenuItem<String>(
@@ -126,7 +127,7 @@ class _TopicAddPageState extends ConsumerState<TopicAddPage> {
               ).toList(),
               validator: (value) {
                 if (value == null) {
-                  return 'Vui lòng chọn danh mục.';
+                  return 'Please select a category.'.tr();
                 }
                 return null;
               },
@@ -144,11 +145,11 @@ class _TopicAddPageState extends ConsumerState<TopicAddPage> {
 
             const SizedBox(height: 20,),
 
-            const Row(
+            Row(
               children: [
-                Text("Trạng thái", style: TextStyle(fontWeight: FontWeight.w500),),
-                SizedBox(width: 3,),
-                Text("*", style: TextStyle(color: Colors.red),),
+                const Text("Status", style: TextStyle(fontWeight: FontWeight.w500),).tr(),
+                const SizedBox(width: 3,),
+                const Text("*", style: TextStyle(color: Colors.red),),
               ],
             ),
             const SizedBox(height: 5,),
@@ -173,7 +174,7 @@ class _TopicAddPageState extends ConsumerState<TopicAddPage> {
         ),
         child: ElevatedButton(
           onPressed: () {},
-          child: const Text("Tạo câu hỏi"),
+          child: const Text("Create question").tr(),
         ),
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -61,10 +62,10 @@ class _ItemTopicState extends ConsumerState<ItemTopic> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(widget.topic.NguoiTao?.Ten ?? "Nông hộ", style: const TextStyle(
+                            Text(widget.topic.NguoiTao?.Ten ?? "Farming households".tr(), style: const TextStyle(
                               fontWeight: FontWeight.w500
                             ),),
-                            Text(formatTimeToString(widget.topic.NgayTao), style: const TextStyle(
+                            Text(formatTimeToString(context, widget.topic.NgayTao), style: const TextStyle(
                               fontSize: 12,
                               color: grey
                             ),)
@@ -102,7 +103,7 @@ class _ItemTopicState extends ConsumerState<ItemTopic> {
                     if (commentsData.loading) {
                       return const CommentCountLoading();
                     }
-                    return Text("${commentsData.data.length} thảo luận");
+                    return Text("${commentsData.data.length} ${"comments".tr()}");
                   }
                 ),
                 const Spacer(),
@@ -111,7 +112,7 @@ class _ItemTopicState extends ConsumerState<ItemTopic> {
                     context,
                     CupertinoPageRoute(builder: (context) => TopicDetails(id: widget.topic.Oid,)),
                   ),
-                  child: const Text("Tham gia Thảo luận")
+                  child: const Text("Join the Discussion").tr()
                 )
               ],
             ),

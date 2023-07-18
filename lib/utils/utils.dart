@@ -22,26 +22,27 @@ String toImage(String image) {
 }
 
 String formatCurrency(BuildContext context, int? price) {
-  final currencyFormatter = NumberFormat.currency(locale: context.locale.toString());
+  final currencyFormatter = NumberFormat.simpleCurrency(locale: context.locale.toString());
   return currencyFormatter.format(price ?? 0);
 }
 
 String formatCurrencyDouble(BuildContext context, double price) {
-  final currencyFormatter = NumberFormat.currency(locale: context.locale.toString());
+  final currencyFormatter = NumberFormat.simpleCurrency(locale: context.locale.toString());
   return currencyFormatter.format(price);
 }
 
-String formatTimeToString(DateTime? time) {
+String formatTimeToString(BuildContext context, DateTime? time) {
   if (time == null) {
     return "";
   }
+  
   timeago.setLocaleMessages('vi', timeago.ViMessages());
   timeago.setLocaleMessages('vi_short', timeago.ViShortMessages());
   
   final now = DateTime.now();
   // time = DateTime.now().subtract(Duration(minutes: 15));
   final difference  = now.difference(time);
-  return timeago.format(now.subtract(difference), locale: 'vi');
+  return timeago.format(now.subtract(difference), locale: context.locale.toString());
 }
 
 String formatTimeToString2(DateTime? time, [String text = ""]) {

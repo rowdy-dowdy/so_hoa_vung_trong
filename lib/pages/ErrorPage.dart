@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -13,11 +14,11 @@ class ErrorPage extends ConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text("Không tìm thấy trang hiện tại"),
+            const Text("Page not found").tr(),
             Consumer(builder: (context, ref, child) {
               return TextButton(onPressed: () {
                 context.go('/');
-              }, child: const Text("Về trang chủ"));
+              }, child: const Text("Go home").tr());
             },)
           ]
         ),

@@ -32,7 +32,7 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
           centerTitle: false,
           actions: [
             IconButton(
-              onPressed: () => context.go('/settings/edit'), 
+              onPressed: () => context.push('/settings/edit'), 
               icon: const Icon(CupertinoIcons.pencil_ellipsis_rectangle)
             )
           ],
@@ -246,7 +246,9 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                     ),
                     child: const Text("Logout").tr()
                   )
-                )
+                ),
+
+                const SizedBox(height: 20,),
               ],
             )
           ),

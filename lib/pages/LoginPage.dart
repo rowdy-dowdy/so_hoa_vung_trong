@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:so_hoa_vung_trong/components/Landing.dart';
 import 'package:so_hoa_vung_trong/controllers/auth_controller.dart';
@@ -75,21 +77,21 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // const SizedBox(height: 50,),
-                  const Text("Chào mừng quay trở lại! 👋", style: TextStyle(
+                  const Text("Welcome back! 👋", style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w600
-                  ),),
+                  ),).tr().animate().fade(duration: 500.ms).slideY(begin: 2),
                   const SizedBox(height: 5,),
-                  const Text("Xin chào một lần nữa, bạn có bị bỏ lỡ", style: TextStyle(
+                  const Text("Hello again, did you miss", style: TextStyle(
                     color: grey,
-                  ),),
+                  ),).tr().animate().fade(delay: 200.ms, duration: 500.ms).slideY(begin: 2),
+                  const SizedBox(height: 20),
                   Expanded(
                     child: Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const SizedBox(height: 20),
                           Expanded(
                             child: Center(
                               child: SizedBox(
@@ -97,82 +99,106 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                 child: Lottie.asset(
                                   'assets/lotties/login.json',
                                 ),
-                              ),
+                              ).animate().fade(delay: 400.ms, duration: 500.ms).scale(),
                             ),
                           ),
-                          const SizedBox(height: 20),
-                          const Text("Tài khoản", style: TextStyle(
-                            fontWeight: FontWeight.w500
-                          ),),
-                          const SizedBox(height: 5),
-                          TextField(
-                            controller: emailController,
-                            decoration: const InputDecoration(
-                              hintText: 'Nhập tài khoản của bạn'
-                            ),
-                          ),
-                          const SizedBox(height: 20),
-                          const Text("Mật khẩu", style: TextStyle(
-                            fontWeight: FontWeight.w500
-                          ),),
-                          const SizedBox(height: 5),
-                          TextField(
-                            controller: passwordController,
-                            obscureText: !showPassword,
-                            decoration: InputDecoration(
-                              hintText: 'Nhập mật khẩu',
-                              suffixIcon: IconButton(
-                                icon: Icon(showPassword ? Icons.visibility : Icons.visibility_off,
-                                  color: primary,
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    showPassword = !showPassword;
-                                  });
-                                },
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 20),
-                          Row(
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              SizedBox(
-                                width: 24,
-                                height: 24,
-                                child: CupertinoCheckbox(
-                                  activeColor: primary,
-                                  // title: Text("title text"),
-                                  value: rememberMe,
-                                  onChanged: (newValue) {
-                                    setState(() {
-                                      rememberMe = newValue ?? false;
-                                    });
-                                  },
-                                  
+                              const SizedBox(height: 20),
+                              const Text("Account", style: TextStyle(
+                                fontWeight: FontWeight.w500
+                              ),).tr(),
+                              const SizedBox(height: 5),
+                              TextField(
+                                controller: emailController,
+                                decoration: InputDecoration(
+                                  hintText: 'Enter your account'.tr()
                                 ),
                               ),
-                              const SizedBox(width: 5,),
-                              const Text("Ghi nhớ tôi", style: TextStyle(fontWeight: FontWeight.w500),),
-                              const Spacer(),
-                              TextButton(
-                                onPressed: () {},
-                                child: const Text("Quên mật khẩu?")
-                              )
                             ],
                           ),
-                          const SizedBox(height: 20),
-                          ElevatedButton(
-                            onPressed: loading ? null : signInWithPassword,
-                            child: loading ? const CircularProgressIndicator() : const Text("Login"),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(height: 20),
+                              const Text("Password", style: TextStyle(
+                                fontWeight: FontWeight.w500
+                              ),).tr(),
+                              const SizedBox(height: 5),
+                              TextField(
+                                controller: passwordController,
+                                obscureText: !showPassword,
+                                decoration: InputDecoration(
+                                  hintText: 'Enter password'.tr(),
+                                  suffixIcon: IconButton(
+                                    icon: Icon(showPassword ? Icons.visibility : Icons.visibility_off,
+                                      color: primary,
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        showPassword = !showPassword;
+                                      });
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                          const SizedBox(height: 20),
-                        ],
+
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(height: 20),
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 24,
+                                    height: 24,
+                                    child: CupertinoCheckbox(
+                                      activeColor: primary,
+                                      // title: Text("title text"),
+                                      value: rememberMe,
+                                      onChanged: (newValue) {
+                                        setState(() {
+                                          rememberMe = newValue ?? false;
+                                        });
+                                      },
+                                      
+                                    ),
+                                  ),
+                                  const SizedBox(width: 5,),
+                                  const Text("Remember me", style: TextStyle(fontWeight: FontWeight.w500),).tr(),
+                                  const Spacer(),
+                                  TextButton(
+                                    onPressed: () {},
+                                    child: const Text("Forgot password?").tr()
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+
+                          Column(
+                            children: [
+                              const SizedBox(height: 20),
+                              ElevatedButton(
+                                onPressed: loading ? null : signInWithPassword,
+                                child: loading ? const CircularProgressIndicator() : const Text("Login"),
+                              ),
+                              const SizedBox(height: 20),
+                            ],
+                          ),
+                        ].animate(interval: 100.ms, delay: 600.ms).fade(duration: 500.ms).slideY(begin: 2),
                       ),
                     ),
                   ),
-                  const SizedBox(
+                  SizedBox(
                     width: double.infinity,
-                    child: Text("Số hóa vùng trồng", textAlign: TextAlign.center, style: TextStyle(color: grey),)
+                    child: const Text("Digitizing planting areas", 
+                      textAlign: TextAlign.center, 
+                      style: TextStyle(color: grey),
+                    ).tr().animate().fade(delay: 800.ms, duration: 500.ms).slideY(begin: 2),
                   ),
                   const SizedBox(height: 20,)
                 ],

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -39,27 +40,27 @@ class _MainPageState extends ConsumerState<MainPage> {
     menu = [
       {
         "icon": CupertinoIcons.home,
-        "label": "Trang chủ",
+        "label": "Home",
         "path": "/",
-        "page": HomePage(),
+        "page": const HomePage(),
       },
       {
         "icon": CupertinoIcons.person_2,
-        "label": "Chuyên gia",
+        "label": "Expert",
         "path": "/expert",
-        "page": ExpertPage(),
+        "page": const ExpertPage(),
       },
       {
         "icon": CupertinoIcons.list_bullet_below_rectangle,
-        "label": "Tác vụ",
+        "label": "Action",
         "path": "/action",
         "page": ActionPage(changePageCallback: changePage),
       },
       {
         "icon": CupertinoIcons.settings,
-        "label": "Cá nhân",
+        "label": "Personal",
         "path": "/settings",
-        "page": SettingsPage(),
+        "page": const SettingsPage(),
       }
     ];
 
@@ -88,7 +89,7 @@ class _MainPageState extends ConsumerState<MainPage> {
           destinations: menu.mapIndexed((i, e) => 
             NavigationDestination(
               icon: Icon(e['icon'], color: currentPageIndex == i ? Colors.white : Colors.grey[800],), 
-              label: e['label']
+              label: tr(e['label'])
             )
           ).toList(),
           selectedIndex: currentPageIndex,

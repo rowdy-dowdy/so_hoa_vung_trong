@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -25,10 +26,10 @@ class _PhanBonDetailsPageState extends ConsumerState<PhanBonDetailsPage> {
     scrollController = ScrollController();
     scrollController.addListener(() {
       final topDistance = (height - kToolbarHeight) - scrollController.offset;
-      top = topDistance > 0 ? topDistance : 0;
-      setState(() {
-        opacity = 1 - (top / (height - kToolbarHeight));
-      });
+      // top = topDistance > 0 ? topDistance : 0;
+      // setState(() {
+      //   opacity = 1 - (top / (height - kToolbarHeight));
+      // });
     });
   }
   @override
@@ -52,6 +53,7 @@ class _PhanBonDetailsPageState extends ConsumerState<PhanBonDetailsPage> {
             backgroundColor: Colors.green,
             leadingWidth: 42,
             titleSpacing: 10,
+            title: const Text("Fertilizer").tr(),
             leading: InkWell(
               onTap: () => context.pop(),
               child: Container(
@@ -82,52 +84,17 @@ class _PhanBonDetailsPageState extends ConsumerState<PhanBonDetailsPage> {
             pinned: true,
             expandedHeight: height,
             flexibleSpace: FlexibleSpaceBar(
-              background: Stack(
-                children: [
-                  Container(
-                    width: double.infinity,
-                    // height: 40,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      image: DecorationImage(
-                        image: item.HinhAnh != null ? MemoryImage(item.HinhAnh!) : const AssetImage("assets/img/phan_bon.jpg") as ImageProvider,
-                        fit: BoxFit.fitHeight,
-                      )
-                    ),
-                  ),
-                  Positioned.fill(
-                    child: Container(
-                      color: Colors.black.withOpacity(0.3),
-                      // decoration: BoxDecoration(
-                      //   gradient: LinearGradient(
-                      //     begin: Alignment.bottomCenter,
-                      //     end: Alignment.topCenter,
-                      //     colors: [
-                      //       Colors.black.withOpacity(0.8),
-                      //       Colors.black.withOpacity(0.6),
-                      //       Colors.black.withOpacity(0.2),
-                      //       Colors.black.withOpacity(0),
-                      //       Colors.black.withOpacity(0),
-                      //     ],
-                      //   )
-                      // ),
-                    )
+              background: Container(
+                width: double.infinity,
+                // height: 40,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  image: DecorationImage(
+                    image: item.HinhAnh != null ? MemoryImage(item.HinhAnh!) : const AssetImage("assets/img/phan_bon.jpg") as ImageProvider,
+                    fit: BoxFit.fitHeight,
                   )
-                ],
-              ),
-              title: SizedBox(
-                width: ((width - 0) * opacity) + 0,
-                height: AppBar().preferredSize.height,
-                child: const Center(
-                  child: Text("Phân bón", style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700
-                  ), softWrap: false, overflow: TextOverflow.visible),
                 ),
-              ),
-              titlePadding: const EdgeInsetsDirectional.symmetric(horizontal: 20),
-              // centerTitle: true,
+              )
             )
           ),
           SliverToBoxAdapter(
